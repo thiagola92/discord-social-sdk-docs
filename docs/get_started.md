@@ -183,9 +183,9 @@ DiscordClientStatus.Enum
 
 1. Transform enum type
     - `::Status` => `Status.Enum`
-1. Transform class
+2. Transform class
     - `::Client` => `Client`
-2. Transform namespace
+3. Transform namespace
     - `discordpp` => `Discord`
 
 ??? note "Why not `DiscordClient.Status`?"
@@ -257,12 +257,97 @@ DiscordClientStatus.READY
 
 1. Transform enum value
     - `::Ready` => `.READY`
-1. Transform enum name
+2. Transform enum name
     - `::Status` => `Status`
-1. Transform class
+3. Transform class
     - `::Client` => `Client`
-2. Transform namespace
+4. Transform namespace
     - `discordpp` => `Discord`
+
+### Unsigned 64-bit Integer
+```c++ title="C++"
+uint64_t
+```
+
+```gdscript title="GDScript"
+int
+```
+
+1. Transform unsigned 64-bit integer
+    - `uint64_t` => `int`
+
+??? danger "Don't operate over it"
+
+    Godot only works with `int64`, so we always convert `uint64` to `int64` when receiving from SDK and the opposite when sending to SDK.  
+
+    It's not a problem if you **don't** intend to change the data, because converting between them is just copying the bytes without changing them.  
+
+    **But** if you intend to change the data, you should study the operations that can corrupt it.  
+
+    Reference: [godot-proposals/issues/9740](https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346)
+
+### Optional
+```c++ title="C++"
+std::optional<T>
+```
+
+```gdscript title="GDScript"
+Variant
+```
+
+1. Transform optional
+    - `std::optional<T>` => `Variant`
+
+??? warning "Rework needed"
+
+    As counterpart of C++ [`std::optional<T>`](https://en.cppreference.com/w/cpp/utility/optional), we use GDScript [`Variant`](https://docs.godotengine.org/en/stable/classes/class_variant.html). The idea was:  
+
+    | Type               | Possible Values       |
+    | ------------------ | --------------------- |
+    | `std::optional<T>` | `T` or `std::nullopt` |
+    | `Variant`          | `T` or `null`         |
+
+    This design has a problem... What if `T` is actually a pointer? For example:  
+
+    ```c++ title="C++"
+    std::optional<int*> f(int mode) {
+        if (mode == 0)
+            return std::nullopt;
+
+        if (mode == 1)
+            return nullptr;
+
+        static int x = 42;
+        return &x;
+    }
+    ```
+
+    Now we can't see he difference between "the value is null" and "there is no value".  
+
+    | Return             | Converted to          |
+    | ------------------ | --------------------- |
+    | `std::nullopt`     | `null`                |
+    | `nullptr`          | `null`                |
+    | `T`                | `T`                   |
+
+    
+    To solve this I would need to create another class, to actually represent `std::optional<T>`.  
+
+### Lambda Function
+
+### Callback
+
+### Others
+
+|                  | C++                        | GDScript           |
+| ---------------- | -------------------------- | ------------------ |
+| Parameter Name   | `apiBase`                  | `api_base`         |
+| Bool             | `bool`                     | `bool`             |
+| Integer          | `int32_t`                  | `int`              |
+| Float            | `float`                    | `float`            |
+| String           | `std::string`              | `String`           |
+| Vector           | `std::vector<T>`           | `Array[T]`         |
+| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]` |
 
 ### Signals
 You probably already noticed, but their SDK makes **heavy** use of callbacks and we just replicate their behaviour in this GDExtension.  
