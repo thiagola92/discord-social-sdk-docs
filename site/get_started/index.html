@@ -1,0 +1,923 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="thiagola92">
+      
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../security/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.30">
+    
+    
+      
+        <title>Get Started - Discord Social SDK</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.3b031116.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#get-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="Discord Social SDK" class="md-header__button md-logo" aria-label="Discord Social SDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discord Social SDK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Get Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/thiagola92/discord-social-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    thiagola92/discord-social-sdk
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="Discord Social SDK" class="md-nav__button md-logo" aria-label="Discord Social SDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Discord Social SDK
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/thiagola92/discord-social-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    thiagola92/discord-social-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-download" viewBox="0 0 24 24"><path d="M12 15V3M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-shield-alert" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1zM12 8v4M12 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../good_bad_ugly/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-laugh" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5zM9 9h.01M15 9h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    The Good, The Bad, The Ugly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markdown/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.27 19.385H1.73A1.73 1.73 0 0 1 0 17.655V6.345a1.73 1.73 0 0 1 1.73-1.73h20.54A1.73 1.73 0 0 1 24 6.345v11.308a1.73 1.73 0 0 1-1.73 1.731zM5.769 15.923v-4.5l2.308 2.885 2.307-2.885v4.5h2.308V8.078h-2.308l-2.307 2.885-2.308-2.885H3.46v7.847zM21.232 12h-2.309V8.077h-2.307V12h-2.308l3.461 4.039z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown in 5min
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                    <div class="md-sidebar-button__wrapper">
+                      <label class="md-sidebar-button" for="__toc"></label>
+                    </div>
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-to-gdscript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ to GDScript
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C++ to GDScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#namespace-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespace Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum Value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="get-started">Get Started</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before starting, you need to follow 3 steps from <a href="https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++"><em>Getting Started with C++</em></a>:  </p>
+<ul>
+<li>Step 1: Create a Discord Developer Team.  </li>
+<li>Step 2: Create a Discord Application.  </li>
+<li>Step 3: Enable Discord Social SDK for Your App.  </li>
+</ul>
+<p>That's it, you don't need any other step to start using the GDExtension in GDScript.  </p>
+</div>
+<h2 id="usage">Usage</h2>
+<p>This GDExtension is a wrapper around the C++ SDK, which means that each GDScript method it's just calling the C++ counterpart.  </p>
+<p>All that you need to do is read the C++ documentation and convert the code to GDScript. For example, I was able to convert their conclusion code from <a href="https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++"><em>Getting Started with C++</em></a> to:  </p>
+<div class="highlight"><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Control</span>
+
+<span class="c1"># Replace with your Discord Application ID</span>
+<span class="k">var</span><span class="w"> </span><span class="n">APPLICATION_ID</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1349146942634065960</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationCodeVerifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚀 Initializing Discord SDK...&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">(</span><span class="n">_on_log_message</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">code_verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">create_authorization_code_verifier</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">APPLICATION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorized</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_log_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">message</span><span class="p">])</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Status changed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">status</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Client is ready! You can now call SDK functions.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;👥 Friends Count: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_relationships</span><span class="p">()</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">        </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Competitive Match&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Rank: Diamond II&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Connection Error: </span><span class="si">%s</span><span class="s2"> - Details: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">error_detail</span><span class="p">])</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Rich Presence updated successfully!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Rich Presence update failed&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_authorized</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Authentication Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Authorization successful! Getting access token...&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">get_token</span><span class="p">(</span><span class="n">APPLICATION_ID</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">code_verifier</span><span class="o">.</span><span class="n">verifier</span><span class="p">(),</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
+<span class="w">        </span><span class="n">_result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
+<span class="w">        </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_refresh_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_token_type</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_expires_in</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_scopes</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔓 Access token received! Establishing connection...&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_token</span><span class="p">(</span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">BEARER</span><span class="p">,</span><span class="w"> </span><span class="n">access_token</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔑 Token updated, connecting to Discord...&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">connect_discord</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="c-to-gdscript"><code>C++</code> to <code>GDScript</code></h2>
+<p>At first it may sound confuse when I tell you to "<strong>convert</strong>" C++ to GDSCript, but get easier once you see examples.  </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong><code>F1</code> is your best friend!</strong></p>
+<p>You can probably find the class that you are looking for by searching for part of it name.  </p>
+<hr />
+<p>I extracted their official documentation to classes/methods using <a href="https://www.doxygen.nl/">Doxygen</a>, so you probably don't need to check <a href="https://discord.com/developers/docs/social-sdk/index.html">Discord Social SDK Reference</a> to know how they work.  </p>
+<hr />
+<p>It's good to know that we attempt to follow <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html">GDScript style guide</a>, so it probably help guessing the names of methods/properties/enums/methods/params.  </p>
+</div>
+<h3 id="namespace-function">Namespace Function</h3>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">RunCallbacks</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform function call<ul>
+<li><code>::RunCallbacks()</code> =&gt; <code>.run_callbacks()</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="class">Class</h3>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClient</span>
+</code></pre></div>
+<ol>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="method">Method</h3>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">client</span><span class="o">-&gt;</span><span class="n">AddLogCallback</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform method call<ul>
+<li><code>-&gt;AddLogCallback()</code> =&gt; <code>.add_log_callback()</code></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">args</span><span class="p">.</span><span class="n">SetClientId</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform method call<ul>
+<li><code>.SetClientId()</code> =&gt; <code>.set_client_id()</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="enum-type">Enum Type</h3>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span>
+</code></pre></div>
+<ol>
+<li>Transform enum type<ul>
+<li><code>::Status</code> =&gt; <code>Status.Enum</code></li>
+</ul>
+</li>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Why not <code>DiscordClient.Status</code>?</summary>
+<p>Each enum has it own class, this happened because the <strong>Godot C++</strong> doesn't let me use the same name in different enums.  </p>
+<p>Let's look at <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a28fc5199b9211c24124c06f30c1d0cbb"><code>discordpp::RelationshipType</code></a> and <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a12b04d48d8ea98ec007270a10e0c88ba"><code>discordpp::HttpStatusCode</code></a>, they have an enum called <code>None</code>. So I could represent they in GDScript like:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">class_name</span><span class="w"> </span><span class="n">Discord</span>
+<span class="c1"># ...</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">RelationshipType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">HttpStatusCode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This doesn't work in Godot C++ because every time that you register a constant inside an enum, you also register it in the class.  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Discord::_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define Discord.RelationshipType.NONE</span>
+<span class="w">    </span><span class="c1">// Define Discord.NONE</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_integer_constant</span><span class="p">(</span><span class="n">get_class_static</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;RelationshipType&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NONE&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Error because Discord.NONE is already defined.</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_integer_constant</span><span class="p">(</span><span class="n">get_class_static</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;HttpStatusCode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NONE&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The solution that I came was to create a class for each enum, which would be something like this in GDScript:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">class_name</span><span class="w"> </span><span class="n">DiscordRelationshipType</span>
+<span class="c1"># ...</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">Enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">FRIEND</span><span class="p">,</span>
+<span class="w">    </span><span class="n">BLOCKED</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As I said before, Godot C++ always register constants in the class, so you can know get the enum value through both:</p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">Enum</span><span class="o">.</span><span class="n">NONE</span>
+<span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">NONE</span>
+</code></pre></div>
+<p>Reference: <a href="https://github.com/godotengine/godot-cpp/issues/1910">godot-cpp/issues/1910</a>  </p>
+</details>
+<h3 id="enum-value">Enum Value</h3>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="n">Ready</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span>
+</code></pre></div>
+<ol>
+<li>Transform enum value<ul>
+<li><code>::Ready</code> =&gt; <code>.READY</code></li>
+</ul>
+</li>
+<li>Transform enum name<ul>
+<li><code>::Status</code> =&gt; <code>Status</code></li>
+</ul>
+</li>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="signals">Signals</h3>
+<p>You probably already noticed, but their SDK makes <strong>heavy</strong> use of callbacks and we just replicate their behaviour in this GDExtension.  </p>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../security/" class="md-footer__link md-footer__link--next" aria-label="Next: Security">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Security
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.66be65ca.min.js"></script>
+      
+    
+  </body>
+</html>
