@@ -36,6 +36,3 @@ In theory, everything that the SDK can do!
 !!! warning
     **Did I test if everything is working?** No.  
     **Will I test if everything is working?** No.  
-
-# Development
-For development details go to [DEVELOPMENT.md](./DEVELOPMENT.md).  

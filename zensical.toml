@@ -62,6 +62,9 @@ nav = [
     { "Security" = "security.md" },
     { "Development" = [
         "development/index.md",
+        {"Setup" = "development/setup.md"},
+        {"CD" = "development/cd.md"},
+        {"Publish" = "development/publish.md"},
     ]},
     { "Donation" = "donation.md" },
     { "The Good, The Bad, The Ugly" = "good_bad_ugly.md" },
@@ -332,3 +335,6 @@ toggle.name = "Switch to light mode"
 [project.markdown_extensions.admonition]
 [project.markdown_extensions.pymdownx.details]
 [project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }
+]
