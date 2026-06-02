@@ -11,10 +11,10 @@
       
       
       
-        <link rel="prev" href="./..">
+        <link rel="prev" href="../examples/lobbies_voice/">
       
       
-        <link rel="next" href="../get_started/">
+        <link rel="next" href="../security/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Installation - Discord Social SDK</title>
+        <title>C++ to GDScript - Discord Social SDK</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#c-to-gdscript" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              C++ to GDScript
             
           </span>
         </div>
@@ -262,13 +262,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <a href="././" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -286,7 +283,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -619,10 +615,13 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../cpp_to_gdscript/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
         
   
   
@@ -640,6 +639,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -831,10 +831,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recommended" class="md-nav__link">
+  <a href="#namespace-function" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recommended
+        Namespace Function
       
     </span>
   </a>
@@ -842,10 +842,109 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#not-recommended-manual-installation" class="md-nav__link">
+  <a href="#class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Not recommended (manual installation)
+        Class
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum Type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum Value
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsigned-64-bit-integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsigned 64-bit Integer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambda Function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Others
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signals
       
     </span>
   </a>
@@ -878,29 +977,282 @@
   
 
 
-<h1 id="installation">Installation</h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>These are the currently supported platforms:  </p>
-<ul>
-<li>Linux (x86_64)</li>
-<li>Windows</li>
-</ul>
-<p>If you want to request support for other build, make an <a href="https://github.com/thiagola92/discord-social-sdk/issues">issue</a>.<br />
-If you already knows how to make other build, feel free to make a <a href="https://github.com/thiagola92/discord-social-sdk/pulls">pull request</a>.  </p>
-</div>
-<h2 id="recommended">Recommended</h2>
-<p>It's available in <a href="https://godotengine.org/asset-library/asset/3988">Godot Asset Library</a>, so you can search and install through Godot.  </p>
-<h2 id="not-recommended-manual-installation">Not recommended (manual installation)</h2>
-<ul>
-<li>Go to <a href="https://github.com/thiagola92/discord-social-sdk/releases">releases</a> from Github.  </li>
-<li>Download latest release ZIP.  </li>
-<li>Extract <code>addons</code> directory from ZIP (It will be inside a <code>demo</code> directory).  </li>
-<li>Move <code>addons</code> directory to your project directory.  <ul>
-<li>If your project already have an <code>addons</code> directory, copy <code>addons/discord_social_sdk</code> to your project <code>addons</code>.  </li>
+<h1 id="c-to-gdscript"><code>C++</code> to <code>GDScript</code></h1>
+<h2 id="namespace-function">Namespace Function</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">RunCallbacks</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform function call<ul>
+<li><code>::RunCallbacks()</code> =&gt; <code>.run_callbacks()</code></li>
 </ul>
 </li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
 </ul>
+</li>
+</ol>
+<h2 id="class">Class</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClient</span>
+</code></pre></div>
+<ol>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="method">Method</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">client</span><span class="o">-&gt;</span><span class="n">AddLogCallback</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform method call<ul>
+<li><code>-&gt;AddLogCallback()</code> =&gt; <code>.add_log_callback()</code></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">args</span><span class="p">.</span><span class="n">SetClientId</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">()</span>
+</code></pre></div>
+<ol>
+<li>Transform method call<ul>
+<li><code>.SetClientId()</code> =&gt; <code>.set_client_id()</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="enum-type">Enum Type</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span>
+</code></pre></div>
+<ol>
+<li>Transform enum type<ul>
+<li><code>::Status</code> =&gt; <code>Status.Enum</code></li>
+</ul>
+</li>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Why not <code>DiscordClient.Status</code>?</summary>
+<p>Each enum has it own class, this happened because the <strong>Godot C++</strong> doesn't let me use the same name in different enums.  </p>
+<p>Let's look at <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a28fc5199b9211c24124c06f30c1d0cbb"><code>discordpp::RelationshipType</code></a> and <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a12b04d48d8ea98ec007270a10e0c88ba"><code>discordpp::HttpStatusCode</code></a>, they have an enum called <code>None</code>. So I could represent they in GDScript like:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">class_name</span><span class="w"> </span><span class="n">Discord</span>
+<span class="c1"># ...</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">RelationshipType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">HttpStatusCode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This doesn't work in Godot C++ because every time that you register a constant inside an enum, you also register it in the class.  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Discord::_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define Discord.RelationshipType.NONE</span>
+<span class="w">    </span><span class="c1">// Define Discord.NONE</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_integer_constant</span><span class="p">(</span><span class="n">get_class_static</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;RelationshipType&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NONE&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Error because Discord.NONE is already defined.</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_integer_constant</span><span class="p">(</span><span class="n">get_class_static</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;HttpStatusCode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NONE&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The solution that I came was to create a class for each enum, which would be something like this in GDScript:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">class_name</span><span class="w"> </span><span class="n">DiscordRelationshipType</span>
+<span class="c1"># ...</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="n">Enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">NONE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">FRIEND</span><span class="p">,</span>
+<span class="w">    </span><span class="n">BLOCKED</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As I said before, Godot C++ always register constants in the class, so you can know get the enum value through both:</p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">Enum</span><span class="o">.</span><span class="n">NONE</span>
+<span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">NONE</span>
+</code></pre></div>
+<p>Reference: <a href="https://github.com/godotengine/godot-cpp/issues/1910">godot-cpp/issues/1910</a>  </p>
+</details>
+<h2 id="enum-value">Enum Value</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="n">Ready</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span>
+</code></pre></div>
+<ol>
+<li>Transform enum value<ul>
+<li><code>::Ready</code> =&gt; <code>.READY</code></li>
+</ul>
+</li>
+<li>Transform enum name<ul>
+<li><code>::Status</code> =&gt; <code>Status</code></li>
+</ul>
+</li>
+<li>Transform class<ul>
+<li><code>::Client</code> =&gt; <code>Client</code></li>
+</ul>
+</li>
+<li>Transform namespace<ul>
+<li><code>discordpp</code> =&gt; <code>Discord</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="unsigned-64-bit-integer">Unsigned 64-bit Integer</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">uint64_t</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
+</code></pre></div>
+<ol>
+<li>Transform unsigned 64-bit integer<ul>
+<li><code>uint64_t</code> =&gt; <code>int</code></li>
+</ul>
+</li>
+</ol>
+<details class="danger">
+<summary>Don't operate over it</summary>
+<p>Godot only works with <code>int64</code>, so we always convert <code>uint64</code> to <code>int64</code> when receiving from SDK and the opposite when sending to SDK.  </p>
+<p>It's not a problem if you <strong>don't</strong> intend to change the data, because converting between them is just copying the bytes without changing them.  </p>
+<p><strong>But</strong> if you intend to change the data, you should study the operations that can corrupt it.  </p>
+<p>Reference: <a href="https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346">godot-proposals/issues/9740</a></p>
+</details>
+<h2 id="optional">Optional</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Variant</span>
+</code></pre></div>
+<ol>
+<li>Transform optional<ul>
+<li><code>std::optional&lt;T&gt;</code> =&gt; <code>Variant</code></li>
+</ul>
+</li>
+</ol>
+<details class="warning">
+<summary>Rework needed</summary>
+<p>As counterpart of C++ <a href="https://en.cppreference.com/w/cpp/utility/optional"><code>std::optional&lt;T&gt;</code></a>, we use GDScript <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html"><code>Variant</code></a>. The idea was:  </p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>std::optional&lt;T&gt;</code></td>
+<td><code>T</code> or <code>std::nullopt</code></td>
+</tr>
+<tr>
+<td><code>Variant</code></td>
+<td><code>T</code> or <code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>This design has a problem... What if <code>T</code> is actually a pointer? For example:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now we can't see he difference between "the value is null" and "there is no value".  </p>
+<table>
+<thead>
+<tr>
+<th>Return</th>
+<th>Converted to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>std::nullopt</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>nullptr</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td><code>T</code></td>
+</tr>
+</tbody>
+</table>
+<p>To solve this I would need to create another class, to actually represent <code>std::optional&lt;T&gt;</code>.  </p>
+</details>
+<h2 id="lambda-function">Lambda Function</h2>
+<h2 id="callback">Callback</h2>
+<h2 id="others">Others</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parameter Name</td>
+<td><code>apiBase</code></td>
+<td><code>api_base</code></td>
+</tr>
+<tr>
+<td>Bool</td>
+<td><code>bool</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td>Integer</td>
+<td><code>int32_t</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td>Float</td>
+<td><code>float</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>std::string</code></td>
+<td><code>String</code></td>
+</tr>
+<tr>
+<td>Vector</td>
+<td><code>std::vector&lt;T&gt;</code></td>
+<td><code>Array[T]</code></td>
+</tr>
+<tr>
+<td>Map</td>
+<td><code>std::unordered_map&lt;K, T&gt;</code></td>
+<td><code>Dictionary[K, T]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="signals">Signals</h2>
+<p>You probably already noticed, but their SDK makes <strong>heavy</strong> use of callbacks and we just replicate their behaviour in this GDExtension.  </p>
 
 
 
@@ -943,7 +1295,7 @@ If you already knows how to make other build, feel free to make a <a href="https
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="./.." class="md-footer__link md-footer__link--prev" aria-label="Previous: About">
+          <a href="../examples/lobbies_voice/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lobbies &amp; Voice">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
@@ -953,20 +1305,20 @@ If you already knows how to make other build, feel free to make a <a href="https
                 Previous
               </span>
               <div class="md-ellipsis">
-                About
+                Lobbies & Voice
               </div>
             </div>
           </a>
         
         
           
-          <a href="../get_started/" class="md-footer__link md-footer__link--next" aria-label="Next: Get started">
+          <a href="../security/" class="md-footer__link md-footer__link--next" aria-label="Next: Security">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Get started
+                Security
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -8,7 +8,7 @@ icon: lucide/store
 ![Logo](./assets/thumbnail.png)  
 
 ## What is this GDExtension?
-It's a wrapper around the [Discord Social SDK](https://discord.com/developers/docs/discord-social-sdk/overview), so you can interact with the SDK through GDScript (instead of C++).  
+It's a wrapper around the [Discord Social SDK](https://discord.com/developers/social-sdk), so you can interact with the SDK through GDScript (instead of C++).  
 
 ## What is Discord Social SDK?
 It's a way to use Discord infrastructure in your game. Instead of developing a text/voice chat for your game, you could just request Discord to create one of them for you.  
@@ -36,9 +36,6 @@ In theory, everything that the SDK can do!
 !!! warning
     **Did I test if everything is working?** No.  
     **Will I test if everything is working?** No.  
-
-# Donation
-![](https://raw.githubusercontent.com/thiagola92/thiagola92/refs/heads/main/profile-donation/donation.png)  
 
 # Development
 For development details go to [DEVELOPMENT.md](./DEVELOPMENT.md).  
