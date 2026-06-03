@@ -997,10 +997,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#method" class="md-nav__link">
+  <a href="#method-call" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Method
+        Method Call
       
     </span>
   </a>
@@ -1123,8 +1123,13 @@
 <tbody>
 <tr>
 <td>Parameter Name</td>
-<td><code>apiBase</code></td>
-<td><code>api_base</code></td>
+<td><code>paramExample</code></td>
+<td><code>param_example</code></td>
+</tr>
+<tr>
+<td>Method Name</td>
+<td><code>MethodExample</code></td>
+<td><code>method_example</code> or <br> <code>method_example_discord</code></td>
 </tr>
 <tr>
 <td>Bool</td>
@@ -1188,7 +1193,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="method">Method</h2>
+<h2 id="method-call">Method Call</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">client</span><span class="o">-&gt;</span><span class="n">AddLogCallback</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">()</span>
@@ -1209,6 +1214,17 @@
 </ul>
 </li>
 </ol>
+<details class="warning">
+<summary>Conflict with existing names</summary>
+<p>There is cases where the method name is already being used by Godot <a href="https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-connect">Object</a>:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Connect</span><span class="p">()</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Disconnect</span><span class="p">()</span>
+</code></pre></div>
+<p>In this cases, my solution was to add the suffix <code>_discord()</code> to their name:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">DiscordClient</span><span class="p">.</span><span class="n">connect_discord</span><span class="p">()</span>
+<span class="n">DiscordClient</span><span class="p">.</span><span class="n">disconnect_discord</span><span class="p">()</span>
+</code></pre></div>
+</details>
 <h2 id="enum-type">Enum Type</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
 </code></pre></div>

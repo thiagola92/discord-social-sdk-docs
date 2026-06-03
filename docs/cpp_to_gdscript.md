@@ -6,15 +6,16 @@ icon: lucide/arrow-right-left
 
 ## Basics
 
-|                  | C++                        | GDScript                |
-| ---------------- | -------------------------- | ----------------------- |
-| Parameter Name   | `apiBase`                  | `api_base`              |
-| Bool             | `bool`                     | `bool`                  |
-| Float            | `float`                    | `float`                 |
-| String           | `std::string`              | `String`                |
-| Vector           | `std::vector<T>`           | `Array[T]`              |
-| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]`      |
-| Auto             | `auto`                     | `Variant` or remove it  |
+|                  | C++                        | GDScript                                     |
+| ---------------- | -------------------------- | -------------------------------------------- |
+| Parameter Name   | `paramExample`             | `param_example`                              |
+| Method Name      | `MethodExample`            | `method_example` or <br> `method_example_discord` |
+| Bool             | `bool`                     | `bool`                                       |
+| Float            | `float`                    | `float`                                      |
+| String           | `std::string`              | `String`                                     |
+| Vector           | `std::vector<T>`           | `Array[T]`                                   |
+| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]`                           |
+| Auto             | `auto`                     | `Variant` or remove it                       |
 
 ## Namespace Function
 ```c++ title="C++"
@@ -44,7 +45,7 @@ DiscordClient
 2. Transform namespace
     - `discordpp` => `Discord`
 
-## Method
+## Method Call
 ```c++ title="C++"
 client->AddLogCallback()
 ```
@@ -66,6 +67,22 @@ args.set_client_id()
 
 1. Transform method call
     - `.SetClientId()` => `.set_client_id()`
+
+??? warning "Conflict with existing names"
+
+    There is cases where the method name is already being used by Godot [Object](https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-connect):  
+
+	```c++ title="C++"
+	discordpp::Client::Connect()
+	discordpp::Client::Disconnect()
+	```
+
+    In this cases, my solution was to add the suffix `_discord()` to their name:  
+
+	```c++ title="C++"
+	DiscordClient.connect_discord()
+	DiscordClient.disconnect_discord()
+	```
 
 ## Enum Type
 ```c++ title="C++"
