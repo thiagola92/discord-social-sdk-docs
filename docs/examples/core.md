@@ -9,7 +9,7 @@ This is the minimum that you will need for every single example:
 extends Node
 
 
-const APPLICATION_ID := 123456789012345678
+var application_id: int = 123456789012345678
 
 var client := DiscordClient.new()
 
@@ -31,4 +31,5 @@ Every step is very important:
 
 ## References
 - [`DiscordClient`](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html)
+- [`client.set_application_id()`](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#ad452335c06b28be0406dab824acccc49)
 - [`Discord.run_callbacks()`](https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#ab5dd8cf274f581ee1885de5816be3c29)  

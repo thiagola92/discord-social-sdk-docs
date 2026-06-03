@@ -7,7 +7,6 @@ One of the first things you should do is add a log callback, otherwise you will 
 
 ```gdscript title="GDScript"
 func _ready() -> void:
-    # ...
 	client.add_log_callback(_on_log, DiscordLoggingSeverity.INFO)
 
 

@@ -972,17 +972,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#the-ugly" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Ugly
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1025,41 +1014,6 @@
 <li>If the function name is <code>set_xxx_callback</code>: You know that will call you function when "xxx" happens.  </li>
 <li>If the function name is <code>do_xxx</code>: You know that will do "xxx" and call you function when it's done.  </li>
 <li>The first case can be transformed to signal, while the second can't... Analysing the function name and deciding what to do is a bit too much for me.  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="the-ugly">The Ugly</h3>
-<ol>
-<li>There is no <a href="https://www.w3schools.com/cpp/cpp_function_overloading.asp">function overloading</a> in GDScript, so I had to change the function signature in any way possible to tell me which function to call.<ul>
-<li>These functions will have an extra performance cost.  <ul>
-<li>In compiled languages, the identification of the right function can be done during compilation.  </li>
-<li>In interpreted languages that use <a href="https://en.wikipedia.org/wiki/Duck_typing">Duck typing</a> (like GDScript), this happens during execution.  </li>
-</ul>
-</li>
-<li>For example:<ul>
-<li><a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a0fd967a23d2d106ced3d6669b9a810ad"><code>discordpp::EnumToString()</code></a> receives 1 argument which can be many enums:  <ul>
-<li><code>discordpp::ActivityActionTypes value</code></li>
-<li><code>discordpp::ActivityGamePlatforms value</code></li>
-<li><code>discordpp::ActivityPartyPrivacy value</code></li>
-<li><code>discordpp::ActivityTypes value</code></li>
-<li>...</li>
-</ul>
-</li>
-<li><code>Discord.enum_to_string()</code> receives 2 arguements, where the second identify which enum:  <ul>
-<li><code>value: int, enum_id: int</code><ul>
-<li>Where <code>enum_id</code> is a constant in the enum class:<ul>
-<li><code>DiscordActivityActionTypes.id</code></li>
-<li><code>DiscordActivityGamePlatforms.id</code></li>
-<li><code>DiscordActivityPartyPrivacy.id</code></li>
-<li><code>DiscordActivityTypes.id</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
