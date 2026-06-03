@@ -932,6 +932,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#namespace-function" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -987,6 +998,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#signed-32-bit-integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signed 32-bit Integer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsigned-32-bit-integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsigned 32-bit Integer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#unsigned-64-bit-integer" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1013,39 +1046,6 @@
     <span class="md-ellipsis">
       
         Lambda Function
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#callback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Callback
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#others" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Others
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#signals" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Signals
       
     </span>
   </a>
@@ -1079,6 +1079,53 @@
 
 
 <h1 id="c-to-gdscript"><code>C++</code> to <code>GDScript</code></h1>
+<h2 id="basics">Basics</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parameter Name</td>
+<td><code>apiBase</code></td>
+<td><code>api_base</code></td>
+</tr>
+<tr>
+<td>Bool</td>
+<td><code>bool</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td>Float</td>
+<td><code>float</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>std::string</code></td>
+<td><code>String</code></td>
+</tr>
+<tr>
+<td>Vector</td>
+<td><code>std::vector&lt;T&gt;</code></td>
+<td><code>Array[T]</code></td>
+</tr>
+<tr>
+<td>Map</td>
+<td><code>std::unordered_map&lt;K, T&gt;</code></td>
+<td><code>Dictionary[K, T]</code></td>
+</tr>
+<tr>
+<td>Auto</td>
+<td><code>auto</code></td>
+<td><code>Variant</code> or remove it</td>
+</tr>
+</tbody>
+</table>
 <h2 id="namespace-function">Namespace Function</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">RunCallbacks</span><span class="p">()</span>
 </code></pre></div>
@@ -1216,6 +1263,48 @@
 </ul>
 </li>
 </ol>
+<h2 id="signed-32-bit-integer">Signed 32-bit Integer</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">int32_t</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
+</code></pre></div>
+<ol>
+<li>Transform signed 32-bit integer<ul>
+<li><code>int32_t</code> =&gt; <code>int</code></li>
+</ul>
+</li>
+</ol>
+<details class="danger">
+<summary>Read if you intend to operating over it</summary>
+<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
+<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
+<hr />
+<p>Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds <strong>32-bit integer</strong> range.  </p>
+<p>To make sure that it's between the range, you can clamp it:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MAX</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h2 id="unsigned-32-bit-integer">Unsigned 32-bit Integer</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">uint32_t</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
+</code></pre></div>
+<ol>
+<li>Transform unsigned 32-bit integer<ul>
+<li><code>uint32_t</code> =&gt; <code>int</code></li>
+</ul>
+</li>
+</ol>
+<details class="danger">
+<summary>Read if you intend to operating over it</summary>
+<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
+<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
+<hr />
+<p>Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds <strong>32-bit unsigned integer</strong> range.  </p>
+<p>To make sure that it's between the range, you can clamp it:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <h2 id="unsigned-64-bit-integer">Unsigned 64-bit Integer</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">uint64_t</span>
 </code></pre></div>
@@ -1228,11 +1317,42 @@
 </li>
 </ol>
 <details class="danger">
-<summary>Don't operate over it</summary>
-<p>Godot only works with <code>int64</code>, so we always convert <code>uint64</code> to <code>int64</code> when receiving from SDK and the opposite when sending to SDK.  </p>
-<p>It's not a problem if you <strong>don't</strong> intend to change the data, because converting between them is just copying the bytes without changing them.  </p>
-<p><strong>But</strong> if you intend to change the data, you should study the operations that can corrupt it.  </p>
-<p>Reference: <a href="https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346">godot-proposals/issues/9740</a></p>
+<summary>Read if you intend to operating over it</summary>
+<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
+<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
+<hr />
+<p><strong>You should study which operations can corrupt your data.</strong>  </p>
+<p>For example, these both have the same bits:  </p>
+<table>
+<thead>
+<tr>
+<th><code>int64_t</code></th>
+<th><code>uint64_t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<p>Adding 1 to them would reflect in different values:    </p>
+<table>
+<thead>
+<tr>
+<th><code>int64_t</code></th>
+<th><code>uint64_t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>18446744073709551616</td>
+</tr>
+</tbody>
+</table>
+<p>Reference: <a href="https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346">godot-proposals/issues/9740</a>  </p>
 </details>
 <h2 id="optional">Optional</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
@@ -1278,7 +1398,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Now we can't see he difference between "the value is null" and "there is no value".  </p>
+<p>Now we can't see the difference between "the value is null" and "there is no value".  </p>
 <table>
 <thead>
 <tr>
@@ -1304,56 +1424,73 @@
 <p>To solve this I would need to create another class, to actually represent <code>std::optional&lt;T&gt;</code>.  </p>
 </details>
 <h2 id="lambda-function">Lambda Function</h2>
-<h2 id="callback">Callback</h2>
-<h2 id="others">Others</h2>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>C++</th>
-<th>GDScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Parameter Name</td>
-<td><code>apiBase</code></td>
-<td><code>api_base</code></td>
-</tr>
-<tr>
-<td>Bool</td>
-<td><code>bool</code></td>
-<td><code>bool</code></td>
-</tr>
-<tr>
-<td>Integer</td>
-<td><code>int32_t</code></td>
-<td><code>int</code></td>
-</tr>
-<tr>
-<td>Float</td>
-<td><code>float</code></td>
-<td><code>float</code></td>
-</tr>
-<tr>
-<td>String</td>
-<td><code>std::string</code></td>
-<td><code>String</code></td>
-</tr>
-<tr>
-<td>Vector</td>
-<td><code>std::vector&lt;T&gt;</code></td>
-<td><code>Array[T]</code></td>
-</tr>
-<tr>
-<td>Map</td>
-<td><code>std::unordered_map&lt;K, T&gt;</code></td>
-<td><code>Dictionary[K, T]</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="signals">Signals</h2>
-<p>You probably already noticed, but their SDK makes <strong>heavy</strong> use of callbacks and we just replicate their behaviour in this GDExtension.  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">):</span>
+<span class="w">    </span><span class="k">pass</span>
+</code></pre></div>
+<ol>
+<li>Transform scope block<ul>
+<li><code>{}</code> =&gt; <code>\t</code></li>
+</ul>
+</li>
+<li>Transform variables<ul>
+<li><code>auto message</code> =&gt; <code>message</code></li>
+<li><code>auto severity</code> =&gt; <code>severity</code></li>
+</ul>
+</li>
+<li>Transform function declaration<ul>
+<li><code>[](...)</code> =&gt; <code>func(...)</code></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">discordpp</span><span class="o">::</span><span class="n">LoggingSeverity</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="k">pass</span>
+</code></pre></div>
+<ol>
+<li>Transform scope block<ul>
+<li><code>{}</code> =&gt; <code>\t</code></li>
+</ul>
+</li>
+<li>Transform variables<ul>
+<li><code>std::string message</code> =&gt; <code>message: String</code></li>
+<li><code>discordpp::LoggingSeverity severity</code> =&gt; <code>severity: DiscordLoggingSeverity.Enum</code></li>
+</ul>
+</li>
+<li>Transform function declaration<ul>
+<li><code>[](...)</code> =&gt; <code>func(...)</code></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="p">(</span><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">client</span><span class="p">):</span>
+<span class="w">    </span><span class="k">pass</span>
+<span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>Transform scope block<ul>
+<li><code>{}</code> =&gt; <code>\t</code></li>
+</ul>
+</li>
+<li>Transform variables<ul>
+<li><code>auto message</code> =&gt; <code>message</code></li>
+<li><code>auto severity</code> =&gt; <code>severity</code></li>
+</ul>
+</li>
+<li>Transform function declaration with capture<ul>
+<li><code>[...](...)</code> =&gt; <code>(func(...)).bind(...)</code></li>
+</ul>
+</li>
+</ol>
 
 
 

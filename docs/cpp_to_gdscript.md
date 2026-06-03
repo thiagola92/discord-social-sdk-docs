@@ -4,6 +4,18 @@ icon: lucide/arrow-right-left
 
 # `C++` to `GDScript`
 
+## Basics
+
+|                  | C++                        | GDScript                |
+| ---------------- | -------------------------- | ----------------------- |
+| Parameter Name   | `apiBase`                  | `api_base`              |
+| Bool             | `bool`                     | `bool`                  |
+| Float            | `float`                    | `float`                 |
+| String           | `std::string`              | `String`                |
+| Vector           | `std::vector<T>`           | `Array[T]`              |
+| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]`      |
+| Auto             | `auto`                     | `Variant` or remove it  |
+
 ## Namespace Function
 ```c++ title="C++"
 discordpp::RunCallbacks()
@@ -147,6 +159,62 @@ DiscordClientStatus.READY
 4. Transform namespace
     - `discordpp` => `Discord`
 
+## Signed 32-bit Integer
+```c++ title="C++"
+int32_t
+```
+
+```gdscript title="GDScript"
+int
+```
+
+1. Transform signed 32-bit integer
+    - `int32_t` => `int`
+
+??? danger "Read if you intend to operating over it"
+
+    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
+
+    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
+
+    ---
+
+    Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds **32-bit integer** range.  
+
+    To make sure that it's between the range, you can clamp it:  
+    
+    ```gdscript title="GDScript"
+    value = clampi(value, INT32_MIN, INT32_MAX)
+    ```
+
+## Unsigned 32-bit Integer
+```c++ title="C++"
+uint32_t
+```
+
+```gdscript title="GDScript"
+int
+```
+
+1. Transform unsigned 32-bit integer
+    - `uint32_t` => `int`
+
+??? danger "Read if you intend to operating over it"
+
+    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
+
+    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
+
+    ---
+
+    Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds **32-bit unsigned integer** range.  
+
+    To make sure that it's between the range, you can clamp it:  
+    
+    ```gdscript title="GDScript"
+    value = clampi(value, 0, UINT32_MAX)
+    ```
+
 ## Unsigned 64-bit Integer
 ```c++ title="C++"
 uint64_t
@@ -159,15 +227,29 @@ int
 1. Transform unsigned 64-bit integer
     - `uint64_t` => `int`
 
-??? danger "Don't operate over it"
+??? danger "Read if you intend to operating over it"
 
-    Godot only works with `int64`, so we always convert `uint64` to `int64` when receiving from SDK and the opposite when sending to SDK.  
+    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
 
-    It's not a problem if you **don't** intend to change the data, because converting between them is just copying the bytes without changing them.  
+    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
 
-    **But** if you intend to change the data, you should study the operations that can corrupt it.  
+    ---
 
-    Reference: [godot-proposals/issues/9740](https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346)
+    **You should study which operations can corrupt your data.**  
+    
+    For example, these both have the same bits:  
+
+    | `int64_t` | `uint64_t`           |
+    | --------- | -------------------- |
+    | -1        | 18446744073709551615 |
+
+    Adding 1 to them would reflect in different values:    
+
+    | `int64_t` | `uint64_t`           |
+    | --------- | -------------------- |
+    | 0         | 18446744073709551616 |
+
+    Reference: [godot-proposals/issues/9740](https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346)  
 
 ## Optional
 ```c++ title="C++"
@@ -205,7 +287,7 @@ Variant
     }
     ```
 
-    Now we can't see he difference between "the value is null" and "there is no value".  
+    Now we can't see the difference between "the value is null" and "there is no value".  
 
     | Return             | Converted to          |
     | ------------------ | --------------------- |
@@ -217,20 +299,60 @@ Variant
     To solve this I would need to create another class, to actually represent `std::optional<T>`.  
 
 ## Lambda Function
+```c++ title="C++"
+[](auto message, auto severity) {
+  //
+}
+```
 
-## Callback
+```gdscript title="GDScript"
+func(message, severity):
+    pass
+```
 
-## Others
+1. Transform scope block
+    - `{}` => `\t`
+2. Transform variables
+    - `auto message` => `message`
+    - `auto severity` => `severity`
+3. Transform function declaration
+    - `[](...)` => `func(...)`
 
-|                  | C++                        | GDScript           |
-| ---------------- | -------------------------- | ------------------ |
-| Parameter Name   | `apiBase`                  | `api_base`         |
-| Bool             | `bool`                     | `bool`             |
-| Integer          | `int32_t`                  | `int`              |
-| Float            | `float`                    | `float`            |
-| String           | `std::string`              | `String`           |
-| Vector           | `std::vector<T>`           | `Array[T]`         |
-| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]` |
+```c++ title="C++"
+[](std::string message, discordpp::LoggingSeverity severity) {
+  //
+}
+```
 
-## Signals
-You probably already noticed, but their SDK makes **heavy** use of callbacks and we just replicate their behaviour in this GDExtension.  
+```gdscript title="GDScript"
+func(message: String, severity: DiscordLoggingSeverity.Enum):
+    pass
+```
+
+1. Transform scope block
+    - `{}` => `\t`
+2. Transform variables
+    - `std::string message` => `message: String`
+    - `discordpp::LoggingSeverity severity` => `severity: DiscordLoggingSeverity.Enum`
+3. Transform function declaration
+    - `[](...)` => `func(...)`
+
+```c++ title="C++"
+[client](auto message, auto severity) {
+  //
+}
+```
+
+```gdscript title="GDScript"
+(func(message, severity, client):
+    pass
+).bind(client)
+```
+
+1. Transform scope block
+    - `{}` => `\t`
+2. Transform variables
+    - `auto message` => `message`
+    - `auto severity` => `severity`
+3. Transform function declaration with capture
+    - `[...](...)` => `(func(...)).bind(...)`
