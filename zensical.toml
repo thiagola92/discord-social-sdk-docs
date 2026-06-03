@@ -58,6 +58,7 @@ nav = [
         {"Game Invites" = "examples/game_invites.md"},
         {"Direct Messages" = "examples/direct_messages.md"},
         {"Lobbies & Voice" = "examples/lobbies_voice.md"},
+        {"More" = "examples/more.md"},
     ]},
     {"C++ to GDScript" = "cpp_to_gdscript.md"},
     { "Security" = "security.md" },

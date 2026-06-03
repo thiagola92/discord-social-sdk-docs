@@ -347,6 +347,8 @@
       
         
       
+        
+      
     
     
     
@@ -629,6 +631,36 @@
     
   
     Lobbies & Voice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../more/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    More
   
 
     
@@ -1126,20 +1158,7 @@
 <p><img alt="Example of how permission will be requested" src="../assets/account_linking_00.png" />  </p>
 <p>After this the chain reaction continues without needing user interaction.  </p>
 <p>It's highly recommended to store when the access token expires and the refresh token so you can update your access token without requesting permissions for the user again.  </p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
 <span class="w">    </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
 <span class="w">    </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
 <span class="hll"><span class="w">    </span><span class="n">refresh_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
@@ -1153,7 +1172,7 @@
 
 <span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔓 Access token received! Establishing connection...&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_token</span><span class="p">(</span><span class="n">token_type</span><span class="p">,</span><span class="w"> </span><span class="n">access_token</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Is <code>client.connect_discord()</code> instead of <code>client.connect()</code></p>
 </div>
