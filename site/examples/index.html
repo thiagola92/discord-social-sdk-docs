@@ -988,6 +988,64 @@
 
 
 <h1 id="examples">Examples</h1>
+<p>I'm always following <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html">GDScript style guide</a> but you may find my examples a little weird when comparing to C++ documentation. For example, let's take the following callback chain:  </p>
+<div class="highlight"><pre><span></span><code>main()
+└── client-&gt;Authorize()
+    └── client-&gt;GetToken()
+        └── client-&gt;UpdateToken()
+</code></pre></div>
+<p>Their example chain the calls in a way that I don't like to read:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">client</span><span class="o">-&gt;</span><span class="n">Authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">codeVerifier</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">redirectUri</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">client</span><span class="o">-&gt;</span><span class="n">GetToken</span><span class="p">(</span><span class="n">APPLICATION_ID</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">codeVerifier</span><span class="p">.</span><span class="n">Verifier</span><span class="p">(),</span><span class="w"> </span><span class="n">redirectUri</span><span class="p">,</span>
+<span class="w">            </span><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ClientResult</span><span class="w"> </span><span class="n">result</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">accessToken</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">refreshToken</span><span class="p">,</span>
+<span class="w">            </span><span class="n">discordpp</span><span class="o">::</span><span class="n">AuthorizationTokenType</span><span class="w"> </span><span class="n">tokenType</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">expiresIn</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">scope</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">client</span><span class="o">-&gt;</span><span class="n">UpdateToken</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">AuthorizationTokenType</span><span class="o">::</span><span class="n">Bearer</span><span class="p">,</span><span class="w">  </span><span class="n">accessToken</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ClientResult</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Last call.</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>So I prefer to create the functions instead:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">client</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorized</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_authorized</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">get_token</span><span class="p">(</span>
+<span class="w">        </span><span class="n">APPLICATION_ID</span><span class="p">,</span>
+<span class="w">        </span><span class="n">code</span><span class="p">,</span>
+<span class="w">        </span><span class="n">code_verifier</span><span class="o">.</span><span class="n">verifier</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">redirect_uri</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_on_token_received</span>
+<span class="w">    </span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
+<span class="w">        </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
+<span class="w">        </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">        </span><span class="n">refresh_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">        </span><span class="n">token_type</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span>
+<span class="w">        </span><span class="n">expires_in</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">scopes</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_token</span><span class="p">(</span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">BEARER</span><span class="p">,</span><span class="w"> </span><span class="n">access_token</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">pass</span><span class="w"> </span><span class="c1"># Last call.</span>
+</code></pre></div>
 
 
 
