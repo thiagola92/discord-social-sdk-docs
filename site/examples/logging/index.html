@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../core/">
       
       
         <link rel="next" href="../account_linking/">
@@ -345,6 +345,8 @@
       
         
       
+        
+      
     
     
     
@@ -394,6 +396,36 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-cpu" viewBox="0 0 24 24"><path d="M12 20v2M12 2v2M17 20v2M17 2v2M2 12h2M2 17h2M2 7h2M20 12h2M20 17h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -927,6 +959,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -992,6 +1043,42 @@
 
 
 <h1 id="logging">Logging</h1>
+<p>One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with Discord.  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">(</span><span class="n">_on_log</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_log</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">enum_str</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">])</span>
+</code></pre></div>
+<details class="warning">
+<summary><code>discordpp::EnumToString()</code> != <code>Discord.enum_to_string()</code></summary>
+<p>In case you didn't know, there is more than 20 functions <code>discordpp::EnumToString()</code> in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityActionTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityGamePlatforms</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityPartyPrivacy</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p>GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  </p>
+<p>My <a href="https://pt.wikipedia.org/wiki/Gambiarra">gambiarra</a> to solve the problem was to add an extra parameter that identifies the type of the first parameter.  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">enum_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span>
+</code></pre></div>
+<p>Every single enum has this identifier:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordActivityActionTypes</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityGamePlatforms</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityPartyPrivacy</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">id</span>
+</code></pre></div>
+<p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
+</details>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#af78996cff24a40f5dc7066beed16692c">client.add_log_callback()</a></li>
+<li><a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a0fd967a23d2d106ced3d6669b9a810ad">Discord.enum_to_string()</a></li>
+</ul>
 
 
 
@@ -1034,7 +1121,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Examples">
+          <a href="../core/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Core">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
@@ -1044,7 +1131,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Examples
+                Core
               </div>
             </div>
           </a>

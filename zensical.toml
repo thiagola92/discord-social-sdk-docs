@@ -50,6 +50,7 @@ nav = [
     { "Get started" = "get_started.md" },
     { "Examples" = [
         "examples/index.md",
+        {"Core" = "examples/core.md"},
         {"Logging" = "examples/logging.md"},
         {"Account Linking" = "examples/account_linking.md"},
         {"Friends & Relationship" = "examples/friends_relationship.md"},
@@ -333,8 +334,13 @@ toggle.name = "Switch to light mode"
 # Extensions.
 # ----------------------------------------------------------------------------
 [project.markdown_extensions.admonition]
+
 [project.markdown_extensions.pymdownx.details]
+
 [project.markdown_extensions.pymdownx.superfences]
 custom_fences = [
   { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }
 ]
+
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
