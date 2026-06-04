@@ -1023,6 +1023,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#details-and-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Details and State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timestamps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timestamps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field URLs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buttons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buttons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Text
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#party" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Party
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#party-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Party Secret
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1088,6 +1195,711 @@
 
 
 <h1 id="rich-presence">Rich Presence</h1>
+<div class="admonition warning">
+<p class="admonition-title">Rich Presence without <a href="../account_linking/">Account linking</a></p>
+<p>You will not need account linking to use Rich Presence if the SDK find Discord running in your desktop.  </p>
+<hr />
+<p><strong>Note for Linux developers:</strong> SDK doesn't seem to find Discord running when using Flatpak/Snap.  </p>
+</div>
+<h2 id="details-and-state">Details and State</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="timestamps">Timestamps</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="assets">Assets</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="field-urls">Field URLs</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/tree/main&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state_url</span><span class="p">(</span><span class="s2">&quot;https://store.godotengine.org/asset/thiagola92/discord-social-sdk/&quot;</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="buttons">Buttons</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/tree/main&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state_url</span><span class="p">(</span><span class="s2">&quot;https://store.godotengine.org/asset/thiagola92/discord-social-sdk/&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">issue_button</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityButton</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Report bugs&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/issues&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">issue_button</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="status-text">Status Text</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/tree/main&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state_url</span><span class="p">(</span><span class="s2">&quot;https://store.godotengine.org/asset/thiagola92/discord-social-sdk/&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">issue_button</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityButton</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Report bugs&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/issues&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">issue_button</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_status_display_type</span><span class="p">(</span><span class="n">DiscordStatusDisplayTypes</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="party">Party</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/tree/main&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state_url</span><span class="p">(</span><span class="s2">&quot;https://store.godotengine.org/asset/thiagola92/discord-social-sdk/&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">issue_button</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityButton</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Report bugs&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">issue_button</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/issues&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">issue_button</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_status_display_type</span><span class="p">(</span><span class="n">DiscordStatusDisplayTypes</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">party</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityParty</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="s2">&quot;party1234&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_current_size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_max_size</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_party</span><span class="p">(</span><span class="n">party</span><span class="p">)</span>
+</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="party-secret">Party Secret</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivity</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">PLAYING</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details</span><span class="p">(</span><span class="s2">&quot;Learning to Use&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;In Godot&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timestamps</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityTimestamps</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="o">.</span><span class="n">set_start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_timestamps</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityAssets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_image</span><span class="p">(</span><span class="s2">&quot;surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_large_text</span><span class="p">(</span><span class="s2">&quot;Surprise&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_image</span><span class="p">(</span><span class="s2">&quot;happy-face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_small_text</span><span class="p">(</span><span class="s2">&quot;Happy face&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">assets</span><span class="o">.</span><span class="n">set_invite_cover_image</span><span class="p">(</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_assets</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_details_url</span><span class="p">(</span><span class="s2">&quot;https://github.com/thiagola92/discord-social-sdk/tree/main&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_state_url</span><span class="p">(</span><span class="s2">&quot;https://store.godotengine.org/asset/thiagola92/discord-social-sdk/&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Doesn&#39;t work while using party secrets.</span>
+<span class="w">    </span><span class="c1">#var issue_button := DiscordActivityButton.new()</span>
+<span class="w">    </span><span class="c1">#issue_button.set_label(&quot;Report bugs&quot;)</span>
+<span class="w">    </span><span class="c1">#issue_button.set_url(&quot;https://github.com/thiagola92/discord-social-sdk/issues&quot;)</span>
+<span class="w">    </span><span class="c1">#activity.add_button(issue_button)</span>
+
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_status_display_type</span><span class="p">(</span><span class="n">DiscordStatusDisplayTypes</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">party</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivityParty</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="s2">&quot;party1234&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_current_size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">party</span><span class="o">.</span><span class="n">set_max_size</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_party</span><span class="p">(</span><span class="n">party</span><span class="p">)</span>
+<span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">secrets</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordActivitySecrets</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="hll"><span class="w">    </span><span class="n">secrets</span><span class="o">.</span><span class="n">set_join</span><span class="p">(</span><span class="s2">&quot;your-join-secret&quot;</span><span class="p">)</span>
+</span><span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="n">set_secrets</span><span class="p">(</span><span class="n">secrets</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_rich_presence</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_rich_presence_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Rich presence updated!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Buttons doesn't work while using party secrets</p>
+</div>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/setting-rich-presence">Setting Rich Presence</a></li>
+</ul>
 
 
 

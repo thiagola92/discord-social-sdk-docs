@@ -98,6 +98,7 @@ func _on_status_ready() -> void:
 ```
 
 ## Get relationship changes
+If you already got all the relationships once, there is no reason to get everything again so it's better just to listen for changes.  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38"
 extends Node
@@ -139,3 +140,9 @@ func _on_relationship_updated(user_id: int) -> void:
 		
 		print(display_str)
 ```
+
+## References
+- [Creating a Unified Friends List](https://docs.discord.com/developers/discord-social-sdk/development-guides/creating-a-unified-friends-list)
+- SDK Documentation
+	- [client.get_relationships_by_group()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a9f7898d3f3d1ec92b06c662df70746d5)
+	- [client.set_relationship_groups_updated_callback()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#af12441ef091298f968075b7190851098)
