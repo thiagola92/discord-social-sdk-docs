@@ -5,9 +5,22 @@ icon: lucide/scroll
 # Logging
 One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with Discord.  
 
-```gdscript title="GDScript"
+```gdscript title="GDScript" linenums="1" hl_lines="11 18 19 20 21"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
 func _ready() -> void:
+	client.set_application_id(application_id)
 	client.add_log_callback(_on_log, DiscordLoggingSeverity.INFO)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
 
 
 func _on_log(message: String, severity: DiscordLoggingSeverity.Enum) -> void:

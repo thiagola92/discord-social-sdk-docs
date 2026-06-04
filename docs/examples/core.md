@@ -15,7 +15,6 @@ var client := DiscordClient.new()
 
 
 func _ready() -> void:
-	print("🚀 Initializing Discord SDK...")
 	client.set_application_id(application_id)
 
 

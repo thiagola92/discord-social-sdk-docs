@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../logging/">
+        <link rel="prev" href="../status/">
       
       
         <link rel="next" href="../friends_relationship/">
@@ -349,6 +349,8 @@
       
         
       
+        
+      
     
     
     
@@ -447,6 +449,36 @@
     
   
     Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../status/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-ethernet-port" viewBox="0 0 24 24"><path d="m15 20 3-3h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2l3 3zM6 8v1M10 8v1M14 8v1M18 8v1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Status
   
 
     
@@ -998,6 +1030,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#from-your-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From your game
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From your game">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refresh-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refresh token
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1075,8 +1135,134 @@
 
 
 <h1 id="account-linking">Account Linking</h1>
-<p>We need to pass some extra information to be authorizated in Discord, so we use <code>DiscordAuthorizationArgs</code> to hold everything.  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I highly recommend you to setup <a href="../logging/">Logging</a> and <a href="../status/">Status</a> before linking.  </p>
+<ul>
+<li>Logging will notify you about problems</li>
+<li>Status will notify when the websocket is ready</li>
+</ul>
+</div>
+<h2 id="from-your-game">From your game</h2>
+<p>Linking the user account to your application require the user permission, so we will need to provide details when requesting permission. We will use <code>DiscordAuthorizationArgs</code> for this.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+</span><span class="hll"><span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<details class="question">
+<summary><code>client.set_application_id()</code> vs <code>args.set_client_id()</code></summary>
+<p>Did you noticed that I didn't use <code>client.set_application_id()</code>? Instead, I used <code>args.set_client_id()</code>.  </p>
+<p>Later we will call <code>client.connect_discord()</code>, then Discord will look for the Application ID in <code>client</code> and <code>args</code>.  </p>
+<p>If you <strong>don't</strong> intend to call <code>client.connect_discord()</code> but still wants to use others features from the SDK, then <code>client.set_application_id()</code> is very useful (I don't know when is better to use <code>args.set_client_id()</code>).  </p>
+</details>
+<p>I will not cover security details, so you just need to know that later we will use <code>DiscordAuthorizationCodeVerifier</code> to verify the response from Discord.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+<span class="hll"><span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationCodeVerifier</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="hll"><span class="w">    </span><span class="n">code_verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">create_authorization_code_verifier</span><span class="p">()</span>
+</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>To request the user for permission we use <code>client.authorize()</code>, which should prompt the user for permissions. Browser or Discord will open so the user can accept/refuse the application.  </p>
+<p><img alt="Example of how permission will be requested" src="../assets/account_linking_00.png" />  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
 
 
 <span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
@@ -1094,7 +1280,85 @@
 <span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
 <span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
 
-<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">(</span><span class="n">_on_log</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Authorization Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</span><span class="hll"><span class="w">        </span><span class="k">return</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Authorization successful! Next step: exchange code for an access token&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Now that we got permission from the user, we can continue with the security procedures to gain our token.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationCodeVerifier</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">code_verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">create_authorization_code_verifier</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">)</span>
 
 
@@ -1102,10 +1366,222 @@
 <span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
 
 
-<span class="k">func</span><span class="w"> </span><span class="n">_on_log</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Authorization Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span>
 
-<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">enum_str</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">])</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Authorization successful! Next step: exchange code for an access token&quot;</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">get_token</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">code_verifier</span><span class="o">.</span><span class="n">verifier</span><span class="p">(),</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">)</span>
+</span>
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
+</span><span class="hll"><span class="w">    </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">_refresh_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">token_type</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">_expires_in</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">_scopes</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+</span><span class="hll"><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Token Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</span><span class="hll"><span class="w">        </span><span class="k">return</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔓 Access token received! Establishing connection...&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Finally we will update our Discord client with the new token.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationCodeVerifier</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">code_verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">create_authorization_code_verifier</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Authorization Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Authorization successful! Next step: exchange code for an access token&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">get_token</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">code_verifier</span><span class="o">.</span><span class="n">verifier</span><span class="p">(),</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
+<span class="w">    </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
+<span class="w">    </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">_refresh_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">token_type</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationTokenType</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span>
+<span class="w">    </span><span class="n">_expires_in</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">_scopes</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Token Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔓 Access token received! Establishing connection...&quot;</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">update_token</span><span class="p">(</span><span class="n">token_type</span><span class="p">,</span><span class="w"> </span><span class="n">access_token</span><span class="p">,</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">)</span>
+</span>
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_token_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Token Update Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</span><span class="hll"><span class="w">        </span><span class="k">return</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔑 Token updated, connecting to Discord...&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Now that we setup our client with a valid token, we can finally start connecting to Discord.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">code_verifier</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordAuthorizationCodeVerifier</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordAuthorizationArgs</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">code_verifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">create_authorization_code_verifier</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_scopes</span><span class="p">(</span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">get_default_presence_scopes</span><span class="p">())</span>
+<span class="w">    </span><span class="n">args</span><span class="o">.</span><span class="n">set_code_challenge</span><span class="p">(</span><span class="n">code_verifier</span><span class="o">.</span><span class="n">challenge</span><span class="p">())</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
 
 
 <span class="k">func</span><span class="w"> </span><span class="n">_on_authorization_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
@@ -1139,25 +1615,17 @@
 <span class="w">        </span><span class="k">return</span>
 
 <span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔑 Token updated, connecting to Discord...&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">connect_discord</span><span class="p">()</span>
-</code></pre></div>
-<p>Did you noticed that I didn't use <code>client.set_application_id()</code>? It was unnecessary because we used <code>args.set_client_id()</code>, later Discord will extract the application id from the <code>args</code> and set it for us.  </p>
-<details class="question">
-<summary><code>client.set_application_id()</code> vs <code>args.set_client_id()</code></summary>
-<p>If you don't intend to call <code>client.connect_discord()</code> but still wants to use others features from the SDK, then <code>client.set_application_id()</code> is very useful.  </p>
-<p>What's the advantages of <code>args.set_client_id()</code>? I don't know...</p>
-</details>
-<p>Reading the example, you can see that is a chain of reaction until you are fully connected to Discord:  </p>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">connect_discord</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<p>After reading everything, you can see that is a chain of reaction until you can connect to Discord:  </p>
 <div class="highlight"><pre><span></span><code>_ready()
 └── client.authorize()
     └── client.get_token()
         └── client.update_token()
             └── client.connect_discord()
 </code></pre></div>
-<p>The first step is getting user permission through <code>client.authorize()</code>, which opens the browser (or Discord) to request the necessary permissions.  </p>
-<p><img alt="Example of how permission will be requested" src="../assets/account_linking_00.png" />  </p>
-<p>After this the chain reaction continues without needing user interaction.  </p>
-<p>It's highly recommended to store when the access token expires and the refresh token so you can update your access token without requesting permissions for the user again.  </p>
+<h3 id="refresh-token">Refresh token</h3>
+<p>It's highly recommended to store when the access token expires (<code>expires_in</code>) and the refresh token (<code>refresh_token</code>) so you can update your access token without requesting permissions for the user again.  </p>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_on_token_received</span><span class="p">(</span>
 <span class="w">    </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span>
 <span class="w">    </span><span class="n">access_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span>
@@ -1231,7 +1699,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../logging/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Logging">
+          <a href="../status/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Status">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
@@ -1241,7 +1709,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Logging
+                Status
               </div>
             </div>
           </a>

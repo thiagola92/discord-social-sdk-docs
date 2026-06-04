@@ -52,6 +52,7 @@ nav = [
         "examples/index.md",
         {"Core" = "examples/core.md"},
         {"Logging" = "examples/logging.md"},
+        {"Status" = "examples/status.md"},
         {"Account Linking" = "examples/account_linking.md"},
         {"Friends & Relationship" = "examples/friends_relationship.md"},
         {"Rich Presence" = "examples/rich_presence.md"},

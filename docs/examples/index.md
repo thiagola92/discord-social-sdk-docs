@@ -3,6 +3,14 @@ icon: lucide/square-terminal
 ---
 
 # Examples
+The minimum that I recommend you to read is:  
+
+- [Core](core.md)
+- [Logging](logging.md)
+- [Status](status.md)
+- [Account Linking](account_linking.md)
+
+## Code Style
 I'm always following [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) but you may find my examples a little weird when comparing to C++ documentation. For example, let's take the following callback chain:  
 
 ```
