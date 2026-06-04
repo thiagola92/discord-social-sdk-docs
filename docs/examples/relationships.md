@@ -2,7 +2,7 @@
 icon: lucide/users
 ---
 
-# Friends & Relationship
+# Relationships
 !!! warning "[Account linking](account_linking.md) is necessary."
 
 ## Get all relationships
