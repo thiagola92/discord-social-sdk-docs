@@ -5,7 +5,7 @@ icon: lucide/scroll
 # Logging
 One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with your client.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="11 18 19 20 21"
+```gdscript title="GDScript" linenums="1" hl_lines="11 18-21"
 extends Node
 
 

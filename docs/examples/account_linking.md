@@ -13,7 +13,7 @@ icon: lucide/link
 ## From your game
 Linking the user account to your application require the user permission, so we will need to provide details when requesting permission. We will use `DiscordAuthorizationArgs` for this.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="10 12 13 14"
+```gdscript title="GDScript" linenums="1" hl_lines="10 12-14"
 extends Node
 
 
@@ -72,7 +72,7 @@ To request the user for permission we use `client.authorize()`, which should pro
 
 ![Example of how permission will be requested](assets/account_linking_00.png)  
 
-```gdscript title="GDScript" linenums="1" hl_lines="19 26 27 28 29 30 31"
+```gdscript title="GDScript" linenums="1" hl_lines="19 26-31"
 extends Node
 
 
@@ -108,7 +108,7 @@ func _on_authorization_response(result: DiscordClientResult, code: String, redir
 
 Now that we got permission from the user, we can continue with the security procedures to gain our token.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="32 35 36 37 38 39 40 41 42 43 44 44 45 46 47"
+```gdscript title="GDScript" linenums="1" hl_lines="32 35-47"
 extends Node
 
 
@@ -160,7 +160,7 @@ func _on_token_received(
 
 Finally we will update our Discord client with the new token.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="48 51 52 53 54 55 56"
+```gdscript title="GDScript" linenums="1" hl_lines="48 51-56"
 extends Node
 
 

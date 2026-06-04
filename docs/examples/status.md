@@ -12,7 +12,7 @@ Monitoring the status of your connection with the Discord is important because s
 
 Running the following code will not provide any output (even if you setup logging) because your status start as `DISCONNECTED` and only change when you attempt to connect to Discord, which we will cover in [Account Linking](account_linking.md).  
 
-```gdscript title="GDScript" linenums="1" hl_lines="11 18 19 20 21"
+```gdscript title="GDScript" linenums="1" hl_lines="11 18-21"
 extends Node
 
 
