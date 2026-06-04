@@ -1065,14 +1065,6 @@
 <h1 id="the-good-the-bad-the-ugly">The Good, The Bad, The Ugly</h1>
 <h3 id="the-bad">The Bad</h3>
 <ol>
-<li>Some functions were renamed because their name was already being used in Godot class. I just added a <code>_discord</code> to their name.  <ul>
-<li>For example, the class <code>DiscordClient</code> will have these two methods:  <ul>
-<li><code>connect()</code>: Godot method <a href="https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-connect"><code>Object.connect()</code></a>.  </li>
-<li><code>connect_discord()</code>: Discord method <a href="https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a873a844c7c4c72e9e693419bb3e290aa"><code>discordpp:Client::Connect()</code></a>.  </li>
-</ul>
-</li>
-</ul>
-</li>
 <li>No signals usage.  <ul>
 <li>I would love to transform some of these callbacks into signals (♥️), but is not possible to identify when can it be done just by looking at functions signature. For example: <code>void xxxxx(Callback cb);</code>  <ul>
 <li>If the function name is <code>set_xxx_callback</code>: You know that will call you function when "xxx" happens.  </li>
