@@ -1107,7 +1107,7 @@
 
 
 <h1 id="logging">Logging</h1>
-<p>One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with Discord.  </p>
+<p>One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with your client.  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1150,26 +1150,6 @@
 </span><span class="hll">
 </span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">enum_str</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">])</span>
 </span></code></pre></div></td></tr></table></div>
-<details class="warning">
-<summary><code>discordpp::EnumToString()</code> != <code>Discord.enum_to_string()</code></summary>
-<p>In case you didn't know, there is more than 20 functions <code>discordpp::EnumToString()</code> in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  </p>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityActionTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityGamePlatforms</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityPartyPrivacy</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
-<p>GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  </p>
-<p>My <a href="https://pt.wikipedia.org/wiki/Gambiarra">gambiarra</a> to solve the problem was to add an extra parameter that identifies the type of the first parameter.  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">enum_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span>
-</code></pre></div>
-<p>Every single enum has this identifier:  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordActivityActionTypes</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityGamePlatforms</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityPartyPrivacy</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">id</span>
-</code></pre></div>
-<p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
-</details>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://docs.discord.com/developers/discord-social-sdk/how-to/debug-log">Debug &amp; Log</a></li>

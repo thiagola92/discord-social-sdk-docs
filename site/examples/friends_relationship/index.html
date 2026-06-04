@@ -1023,6 +1023,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-all-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get all relationships
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-relationship-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get relationship changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1088,6 +1118,260 @@
 
 
 <h1 id="friends-relationship">Friends &amp; Relationship</h1>
+<div class="admonition warning">
+<p class="admonition-title"><a href="../account_linking/">Account linking</a> is necessary.</p>
+</div>
+<h2 id="get-all-relationships">Get all relationships</h2>
+<p>The best way to get all relationships is to listen for status changes and wait for the status <code>READY</code>.  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="n">_on_status_ready</span><span class="p">()</span>
+</span>
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_status_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">online_in_game</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="n">DiscordRelationshipHandle</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_relationships_by_group</span><span class="p">(</span>
+</span><span class="hll"><span class="w">        </span><span class="n">DiscordRelationshipGroupType</span><span class="o">.</span><span class="n">ONLINE_PLAYING_GAME</span>
+</span><span class="hll"><span class="w">    </span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Online - In Game (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">online_in_game</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">relationship</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">online_in_game</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">user</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordUserHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">display_str</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;🟣 </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">display_name</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">discord_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 👾&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">game_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🎮&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="n">display_str</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">online_elsewhere</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="n">DiscordRelationshipHandle</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_relationships_by_group</span><span class="p">(</span>
+</span><span class="hll"><span class="w">        </span><span class="n">DiscordRelationshipGroupType</span><span class="o">.</span><span class="n">ONLINE_ELSEWHERE</span>
+</span><span class="hll"><span class="w">    </span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Online - Elsewhere (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">online_elsewhere</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">relationship</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">online_elsewhere</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">user</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordUserHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">display_str</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;🟢 </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">display_name</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">discord_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 👾&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">game_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🎮&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="n">display_str</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">offline</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="n">DiscordRelationshipHandle</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_relationships_by_group</span><span class="p">(</span>
+</span><span class="hll"><span class="w">        </span><span class="n">DiscordRelationshipGroupType</span><span class="o">.</span><span class="n">OFFLINE</span>
+</span><span class="hll"><span class="w">    </span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Online - Elsewhere (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">offline</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">relationship</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">offline</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">user</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordUserHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">display_str</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;⚫ </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">display_name</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">discord_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 👾&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">game_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🎮&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="n">display_str</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="get-relationship-changes">Get relationship changes</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_relationship_groups_updated_callback</span><span class="p">(</span><span class="n">_on_relationship_updated</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_relationship_updated</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordUserHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">display_str</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;User </span><span class="si">%s</span><span class="s2"> status changed to&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">display_name</span><span class="p">()</span>
+</span><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">relationship</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordRelationshipHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">relationship</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordStatusType</span><span class="o">.</span><span class="n">OFFLINE</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; ⚫&quot;</span>
+</span><span class="hll"><span class="w">        </span><span class="k">elif</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">game_activity</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🟢&quot;</span>
+</span><span class="hll"><span class="w">        </span><span class="k">elif</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">game_activity</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🟣&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">discord_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 👾&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">relationship</span><span class="o">.</span><span class="n">game_relationship_type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordRelationshipType</span><span class="o">.</span><span class="n">FRIEND</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="n">display_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; 🎮&quot;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">display_str</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
 
 
 

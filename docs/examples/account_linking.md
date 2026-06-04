@@ -312,8 +312,6 @@ func _on_token_received(
 	client.update_token(token_type, access_token, _on_token_updated)
 ```
 
-!!! warning "Is `client.connect_discord()` instead of `client.connect()`"
-
 ## References
 - [Account Linking from Your Game](https://docs.discord.com/developers/discord-social-sdk/development-guides/account-linking-with-discord)
 - SDK Documentation
