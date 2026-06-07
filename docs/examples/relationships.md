@@ -3,7 +3,7 @@ icon: lucide/users
 ---
 
 # Relationships
-!!! warning "[Account linking](account_linking.md) is necessary."
+!!! warning [Account linking](account_linking.md) is necessary.  
 
 ## Get all relationships
 The best way to get all relationships is to listen for status changes and wait for the status `READY`.  

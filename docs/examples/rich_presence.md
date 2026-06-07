@@ -11,8 +11,13 @@ icon: lucide/sparkles
 
     **Note for Linux developers:** SDK doesn't seem to find Discord running when using Flatpak/Snap.  
 
-## Details and State
-```gdscript title="GDScript" linenums="1" hl_lines="12-15 17 24-26"
+The [official documentation](https://docs.discord.com/developers/discord-social-sdk/development-guides/setting-rich-presence#understanding-rich-presence) explain which field. This is their image that summary the location of wich field:  
+![](assets/rich_presence_summary.png)  
+
+## Type
+Define the type of your activity (playing, streaming, watching, ...):  
+
+```gdscript title="GDScript" linenums="1" hl_lines="12 13 15 22-24"
 extends Node
 
 
@@ -26,8 +31,6 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
 
 	client.update_rich_presence(activity, _on_rich_presence_updated)
 
@@ -41,8 +44,12 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
-## Timestamps
-```gdscript title="GDScript" linenums="1" hl_lines="17-19"
+![](assets/rich_presence_00.png)  
+
+## Details and State
+Details is the main description of what the player is doing in the game (Quick Match, Ranked, ARAM) and state is a secondary description inside that context (In Queue, In Match, In a group).  
+
+```gdscript title="GDScript" linenums="1" hl_lines="15 16"
 extends Node
 
 
@@ -56,11 +63,48 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
+
+	client.update_rich_presence(activity, _on_rich_presence_updated)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
+
+
+func _on_rich_presence_updated(result: DiscordClientResult) -> void:
+	if result.successful():
+		print("✅ Rich presence updated!")
+```
+
+![](assets/rich_presence_01.png)  
+
+## Timestamps
+Can be used to tell others for how long the user is doing that activity or when it will end (`set_end()`).  
+
+```gdscript title="GDScript" linenums="1" hl_lines="18-21"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
+func _ready() -> void:
+	client.set_application_id(application_id)
+	
+	var activity := DiscordActivity.new()
+	activity.set_type(DiscordActivityTypes.PLAYING)
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 
 	client.update_rich_presence(activity, _on_rich_presence_updated)
@@ -75,8 +119,15 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
+!!! note
+	Discord expects the time in milliseconds, while Godot `Time` gives you in seconds.  
+
+![](assets/rich_presence_02.png)  
+
 ## Assets
-```gdscript title="GDScript" linenums="1" hl_lines="21-27"
+If you setted assets through the Discord Developer Portal, you can use them here to change some images as you need.  
+
+```gdscript title="GDScript" linenums="1" hl_lines="23-29"
 extends Node
 
 
@@ -90,11 +141,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -117,8 +170,12 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
+![](assets/rich_presence_03.png)  
+
 ## Field URLs
-```gdscript title="GDScript" linenums="1" hl_lines="29 30"
+Some fields can be turned in links.  
+
+```gdscript title="GDScript" linenums="1" hl_lines="31 32"
 extends Node
 
 
@@ -132,11 +189,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -162,8 +221,12 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
+![](assets/rich_presence_04.png)  
+
 ## Buttons
-```gdscript title="GDScript" linenums="1" hl_lines="32-35"
+It's possible to add up to two buttons (normally they are links like "Buy on Steam!").  
+
+```gdscript title="GDScript" linenums="1" hl_lines="34-37"
 extends Node
 
 
@@ -177,11 +240,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -212,8 +277,13 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
+![](assets/rich_presence_05.png)  
+
+!!! note "Buttons are only visible to others"
+	Use a secondary account to see or ask a friend to print screen (which one is easier for you).  
+
 ## Status Text
-```gdscript title="GDScript" linenums="1" hl_lines="37"
+```gdscript title="GDScript" linenums="1" hl_lines="39"
 extends Node
 
 
@@ -227,11 +297,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -265,7 +337,11 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 ```
 
 ## Party
-```gdscript title="GDScript" linenums="1" hl_lines="39-43"
+Inform others about your party/group state. 
+
+Do not forget that you can change the message that appears before the party size through `set_state()`.  
+
+```gdscript title="GDScript" linenums="1" hl_lines="41-45"
 extends Node
 
 
@@ -279,11 +355,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -322,8 +400,15 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 		print("✅ Rich presence updated!")
 ```
 
+![](assets/rich_presence_07.png)  
+
 ## Party Secret
-```gdscript title="GDScript" linenums="1" hl_lines="45-47"
+Secrets are used to pass information to people that want to join you in the game/party/group.  
+The section [Game Invites](game_invites.md) will show how is used.  
+
+!!! warning "At the moment buttons doesn't work while you are using party secrets."
+
+```gdscript title="GDScript" linenums="1" hl_lines="34-37 47-50"
 extends Node
 
 
@@ -337,11 +422,13 @@ func _ready() -> void:
 	
 	var activity := DiscordActivity.new()
 	activity.set_type(DiscordActivityTypes.PLAYING)
-	activity.set_details("Learning to Use")
-	activity.set_state("In Godot")
+
+	activity.set_details("Tutorial")
+	activity.set_state("In Group")
 	
 	var timestamps := DiscordActivityTimestamps.new()
-	timestamps.set_start(0)
+	var ten_minutes_ago: int = int(Time.get_unix_time_from_system() - 600)
+	timestamps.set_start(ten_minutes_ago * 1000)
 	activity.set_timestamps(timestamps)
 	
 	var assets := DiscordActivityAssets.new()
@@ -355,7 +442,6 @@ func _ready() -> void:
 	activity.set_details_url("https://github.com/thiagola92/discord-social-sdk/tree/main")
 	activity.set_state_url("https://store.godotengine.org/asset/thiagola92/discord-social-sdk/")
 	
-    # Doesn't work while using party secrets.
 	#var issue_button := DiscordActivityButton.new()
 	#issue_button.set_label("Report bugs")
 	#issue_button.set_url("https://github.com/thiagola92/discord-social-sdk/issues")
@@ -369,6 +455,7 @@ func _ready() -> void:
 	party.set_max_size(5)
 	activity.set_party(party)
 
+	# Cannot be used with buttons.
 	var secrets := DiscordActivitySecrets.new()
 	secrets.set_join("your-join-secret")
 	activity.set_secrets(secrets)
@@ -384,8 +471,6 @@ func _on_rich_presence_updated(result: DiscordClientResult) -> void:
 	if result.successful():
 		print("✅ Rich presence updated!")
 ```
-
-!!! note "Buttons doesn't work while using party secrets"
 
 ## References
 - [Setting Rich Presence](https://docs.discord.com/developers/discord-social-sdk/development-guides/setting-rich-presence)
