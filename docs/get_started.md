@@ -104,7 +104,7 @@ func _on_token_updated(result: DiscordClientResult) -> void:
         client.connect_discord()
 ```
 
-At first it may sound confuse when I tell you to "convert" C++ to GDSCript, but get easier once you see the examples. When in doubt, you can look at section [`C++` to `GDScript`](cpp_to_gdscript.md).  
+At first it may sound confuse when I tell you to "convert" C++ to GDSCript, but get easier once you see the [examples](examples/index.md). When in doubt, you can look at section [`C++` to `GDScript`](cpp_to_gdscript.md).  
 
 !!! tip
 
