@@ -1038,17 +1038,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#application-id" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Application ID
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1090,14 +1079,6 @@
 <li>Add an app tester using his account username</li>
 <li>He will receive an email asking to accept</li>
 </ul>
-<h2 id="application-id">Application ID</h2>
-<p>At first you may think that your Application ID is public information... But it's not!  </p>
-<p>Reading <a href="https://support-dev.discord.com/hc/en-us/articles/8562894815383-Discord-Developer-Terms-of-Service">Discord Developer Terms of Service section 2.d</a>, you will find:  </p>
-<blockquote>
-<p>You will use any developer credentials (such as your <strong>Application ID</strong>, passwords, keys, tokens, and client secrets) we assign to you solely with your Application and the applicable APIs (and will not permit or enable any other Application to use them) and will <strong>treat them as Discord confidential information</strong>...  </p>
-</blockquote>
-<p>This security is needed because Application ID is all that is needed to interact with the Discord Social SDK... In other words, is all that is needed to impersonate other application.  </p>
-<p>If your game runs everything locally, that means that you need to put your Application ID in the binary and this means that someone can reverse engineer to get it (even if you <a href="https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_with_script_encryption_key.html">compile with PCK encryption key</a>).  </p>
 
 
 
