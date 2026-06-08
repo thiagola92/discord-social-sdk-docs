@@ -6,8 +6,6 @@ icon: lucide/shield-alert
 !!! danger
     **Work-in-progress**  
 
-    Anything read here is **not** to take as true because I didn't confirm it. Treat it as speculation.  
-
 ## App Testers
 During development, only your account and accounts added as **Application Testers** can interact with your application.  
 
