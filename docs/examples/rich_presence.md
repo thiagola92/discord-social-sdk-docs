@@ -3,13 +3,12 @@ icon: lucide/sparkles
 ---
 
 # Rich Presence
-!!! warning "Rich Presence without [Account linking](account_linking.md)"
+!!! warning
+	Prerequisites:
 
-    You will not need account linking to use Rich Presence if the SDK find Discord running in your desktop.  
+	- [Account linking](account_linking.md) if Discord is not running in the desktop
 
-    ---
-
-    **Note for Linux developers:** SDK doesn't seem to find Discord running when using Flatpak/Snap.  
+	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
 The [official documentation](https://docs.discord.com/developers/discord-social-sdk/development-guides/setting-rich-presence#understanding-rich-presence) explain which field. This is their image that summary the location of wich field:  
 ![](assets/rich_presence_summary.png)  

@@ -1230,8 +1230,11 @@
 <span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-<p>To request the user for permission we use <code>client.authorize()</code>, which should prompt the user for permissions. Browser or Discord will open so the user can accept/refuse the application.  </p>
-<p><img alt="Example of how permission will be requested" src="../assets/account_linking_00.png" />  </p>
+<p>To request the user for permission we use <code>client.authorize()</code>, which should prompt the user for permissions in Discord (or browser if Discord is not open).  </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Linux:</strong> The SDK doesn't find the Discord from Flatpak/Snap, so it will always open the browser.</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1294,6 +1297,7 @@
 </span><span class="hll">
 </span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Authorization successful! Next step: exchange code for an access token&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
+<p><img alt="Example of how permission will be requested" src="../assets/account_linking_00.png" />  </p>
 <p>Now that we got permission from the user, we can continue with the security procedures to gain our token.  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>

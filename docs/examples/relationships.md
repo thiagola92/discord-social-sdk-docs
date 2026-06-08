@@ -3,7 +3,12 @@ icon: lucide/users
 ---
 
 # Relationships
-!!! warning [Account linking](account_linking.md) is necessary.  
+!!! warning
+	Prerequisites:
+
+	- [Account linking](account_linking.md) is mandatory
+
+	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
 ## Get all relationships
 The best way to get all relationships is to listen for status changes and wait for the status `READY`.  

@@ -68,9 +68,10 @@ func _process(_delta: float) -> void:
 	Discord.run_callbacks()
 ```
 
-To request the user for permission we use `client.authorize()`, which should prompt the user for permissions. Browser or Discord will open so the user can accept/refuse the application.  
+To request the user for permission we use `client.authorize()`, which should prompt the user for permissions in Discord (or browser if Discord is not open).  
 
-![Example of how permission will be requested](assets/account_linking_00.png)  
+!!! warning
+	**Linux:** The SDK doesn't find the Discord from Flatpak/Snap, so it will always open the browser.
 
 ```gdscript title="GDScript" linenums="1" hl_lines="19 26-31"
 extends Node
@@ -105,6 +106,8 @@ func _on_authorization_response(result: DiscordClientResult, code: String, redir
 	
 	print("✅ Authorization successful! Next step: exchange code for an access token")
 ```
+
+![Example of how permission will be requested](assets/account_linking_00.png)  
 
 Now that we got permission from the user, we can continue with the security procedures to gain our token.  
 

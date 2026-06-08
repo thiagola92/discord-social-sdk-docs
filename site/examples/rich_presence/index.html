@@ -1207,10 +1207,12 @@
 
 <h1 id="rich-presence">Rich Presence</h1>
 <div class="admonition warning">
-<p class="admonition-title">Rich Presence without <a href="../account_linking/">Account linking</a></p>
-<p>You will not need account linking to use Rich Presence if the SDK find Discord running in your desktop.  </p>
-<hr />
-<p><strong>Note for Linux developers:</strong> SDK doesn't seem to find Discord running when using Flatpak/Snap.  </p>
+<p class="admonition-title">Warning</p>
+<p>Prerequisites:</p>
+<ul>
+<li><a href="../account_linking/">Account linking</a> if Discord is not running in the desktop</li>
+</ul>
+<p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
 </div>
 <p>The <a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/setting-rich-presence#understanding-rich-presence">official documentation</a> explain which field. This is their image that summary the location of wich field:<br />
 <img alt="" src="../assets/rich_presence_summary.png" />  </p>
