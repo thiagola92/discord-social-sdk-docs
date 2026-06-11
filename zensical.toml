@@ -47,7 +47,7 @@ Copyright &copy; 2026 The authors
 nav = [
     { "About" = "index.md" },
     { "Installation" = "installation.md" },
-    { "Get started" = "get_started.md" },
+    { "Get Started" = "get_started.md" },
     { "Examples" = [
         "examples/index.md",
         {"Core" = "examples/core.md"},
@@ -56,6 +56,7 @@ nav = [
         {"Account Linking" = "examples/account_linking.md"},
         {"Relationships" = "examples/relationships.md"},
         {"Rich Presence" = "examples/rich_presence.md"},
+        {"Launch" = "examples/launch.md"},
         {"Game Invites" = "examples/game_invites.md"},
         {"Direct Messages" = "examples/direct_messages.md"},
         {"Lobbies" = "examples/lobbies.md"},

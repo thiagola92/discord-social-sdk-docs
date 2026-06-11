@@ -6,7 +6,8 @@ icon: lucide/sparkles
 !!! warning
 	Prerequisites:
 
-	- [Account linking](account_linking.md) if Discord is not running in the desktop
+	- [Account linking](account_linking.md)
+		- If Discord is not running in the desktop
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
