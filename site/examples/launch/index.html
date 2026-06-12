@@ -1150,13 +1150,29 @@
 
 
 <h1 id="launch">Launch</h1>
-<p>There is situations that you want the Discord launching the game for you. For example, when you accept your friend invite to play the game.  </p>
+<p>There is situations where you want Discord to launch your game. For example, when you accept your friend invite to play the game.  </p>
+<p>To solve that, you need to register inside Discord client how to launch your game (at least once).  </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It's recommended to do that as soon as possible (e.g. when the game open).</p>
+</div>
 <h2 id="launch-command">Launch Command</h2>
-<p>Register inside Discord client the command that it must use to launch your game.  </p>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/my/game/path&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/the/for/the/game/executable&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>We never know where the user will install the executable, so you should use some logic to find out. For example, registering the current path at runtime:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_executable_path</span><span class="p">())</span>
+</code></pre></div>
+<p>Discord <a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites#registering-a-launch-command-2">example</a> use <a href="https://en.wikipedia.org/wiki/Mobile_deep_linking">deep link</a> (also knows as custom URI scheme in desktops):  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yourgame://&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="launch-steam-game">Launch Steam Game</h2>
+<p>In case your game was installed through <a href="https://store.steampowered.com/">Steam</a>, Discord knows how to make Steam launch your game just by using the <a href="https://partner.steamgames.com/doc/store/application">Steam App ID</a>.  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_steam_application</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">steam_app_id</span><span class="p">)</span>
+</code></pre></div>
 
 
 
