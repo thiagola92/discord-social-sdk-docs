@@ -1160,7 +1160,7 @@
 </ul>
 <p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
 </div>
-<p>Given that you made all prerequisites, sending an invite is quite simple:  </p>
+<p>Given that you made all prerequisites and your client status is ready, you can send an invite at any moment:  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1205,8 +1205,8 @@
 
 <span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
-<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
-</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
 
 <span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
@@ -1279,7 +1279,7 @@
 </span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">message</span><span class="p">:</span>
 </span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invite Message: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">())</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Combining with the ability to accept invites, the player could do everything through your game:  </p>
+<p>Combining with the ability to accept invites, the user could do everything through your game:  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1348,7 +1348,7 @@
 </span></code></pre></div></td></tr></table></div>
 <h2 id="joining">Joining</h2>
 <p>You can be notified whenever the user joined a party.  </p>
-<p>The advantage of configuring this, is that you will be notified whenever the player accepted through the SDK (e.g. <code>client.accept_activity_invite()</code>) or Discord client (e.g. direct message).  </p>
+<p>The advantage of configuring this, is that you will be notified whenever the user accept through the SDK (e.g. <code>client.accept_activity_invite()</code>) or Discord client (e.g. direct message).  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1387,16 +1387,9 @@
 <span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_activity_joined</span><span class="p">(</span><span class="n">join_secret</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Joined activity! Secret: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">join_secret</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Prerequisites:</p>
-<ul>
-<li><a href="../launch/">Launch</a><ul>
-<li>If the game is closed</li>
-</ul>
-</li>
-</ul>
-<p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Configure your game to be <a href="../launch/">launchable</a> and set this callback before running <code>Discord.run_callbacks()</code>. This way you can be notified that you joined right after the game finished opening.  </p>
 </div>
 <h2 id="references">References</h2>
 <ul>

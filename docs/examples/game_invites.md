@@ -16,9 +16,9 @@ icon: lucide/mail
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
-Given that you made all prerequisites, sending an invite is quite simple:  
+Given that you made all prerequisites and your client status is ready, you can send an invite at any moment:  
 
-```gdscript title="GDScript" linenums="1" hl_lines="6 13 26-28 31-33"
+```gdscript title="GDScript" linenums="1" hl_lines="6 26-28 31-33"
 extends Node
 
 
@@ -88,7 +88,7 @@ func _on_activity_invite_created(invite: DiscordActivityInvite) -> void:
 		print("Invite Message: %s" % message.content())
 ```
 
-Combining with the ability to accept invites, the player could do everything through your game:  
+Combining with the ability to accept invites, the user could do everything through your game:  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="26 29-33"
 extends Node
@@ -129,7 +129,7 @@ func _on_activity_invite_accepted(result: DiscordClientResult, join_secret: Stri
 ## Joining
 You can be notified whenever the user joined a party.  
 
-The advantage of configuring this, is that you will be notified whenever the player accepted through the SDK (e.g. `client.accept_activity_invite()`) or Discord client (e.g. direct message).  
+The advantage of configuring this, is that you will be notified whenever the user accept through the SDK (e.g. `client.accept_activity_invite()`) or Discord client (e.g. direct message).  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18 19"
 extends Node
@@ -153,13 +153,9 @@ func _on_activity_joined(join_secret: String) -> void:
 	print("Joined activity! Secret: %s" % join_secret)
 ```
 
-!!! warning
-	Prerequisites:
+!!! tip
 
-	- [Launch](launch.md)
-		- If the game is closed
-
-	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
+	Configure your game to be [launchable](launch.md) and set this callback before running `Discord.run_callbacks()`. This way you can be notified that you joined right after the game finished opening.  
 
 ## References
 - [Managing Game Invites](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites)
