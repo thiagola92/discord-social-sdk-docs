@@ -999,35 +999,6 @@
   
 
     
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../good_bad_ugly/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-laugh" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5zM9 9h.01M15 9h.01"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-    The Good, The Bad, The Ugly
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -1077,6 +1048,17 @@
     <span class="md-ellipsis">
       
         Launch Steam Game
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -1164,6 +1146,10 @@
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_executable_path</span><span class="p">())</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>During development (inside Godot Editor) the <code>OS.get_executable_path()</code> will result in the Godot path.  </p>
+</div>
 <p>Discord <a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites#registering-a-launch-command-2">example</a> use <a href="https://en.wikipedia.org/wiki/Mobile_deep_linking">deep link</a> (also knows as custom URI scheme in desktops):  </p>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_command</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yourgame://&quot;</span><span class="p">)</span>
@@ -1173,6 +1159,10 @@
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">register_launch_steam_application</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span><span class="w"> </span><span class="n">steam_app_id</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites#registering-a-launch-command">Registering a Launch Command</a></li>
+</ul>
 
 
 

@@ -23,6 +23,9 @@ func _ready() -> void:
 	client.register_launch_command(application_id, OS.get_executable_path())
 ```
 
+!!! warning
+	During development (inside Godot Editor) the `OS.get_executable_path()` will result in the Godot path.  
+
 Discord [example](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites#registering-a-launch-command-2) use [deep link](https://en.wikipedia.org/wiki/Mobile_deep_linking) (also knows as custom URI scheme in desktops):  
 
 ```gdscript title="GDScript"
@@ -37,3 +40,6 @@ In case your game was installed through [Steam](https://store.steampowered.com/)
 func _ready() -> void:
 	client.register_launch_steam_application(application_id, steam_app_id)
 ```
+
+## References
+- [Registering a Launch Command](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-game-invites#registering-a-launch-command)
