@@ -1137,6 +1137,7 @@
 <p>Prerequisites:</p>
 <ul>
 <li><a href="../account_linking/">Account linking</a></li>
+<li><a href="../status/">Status</a></li>
 </ul>
 <p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
 </div>
@@ -1237,8 +1238,8 @@
 
 <span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
-<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
-</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
 
 <span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
@@ -1249,8 +1250,8 @@
 
 <span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
 
-<span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
-</span><span class="hll"><span class="w">        </span><span class="n">_on_status_ready</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="hll"><span class="w">        </span><span class="n">_on_status_ready</span><span class="p">()</span>
 </span>
 
 <span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_status_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>

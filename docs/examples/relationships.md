@@ -7,13 +7,14 @@ icon: lucide/users
 	Prerequisites:
 
 	- [Account linking](account_linking.md)
+	- [Status](status.md)
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
 ## Get all relationships
 The best way to get all relationships is to listen for status changes and wait for the status `READY`.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="11 23 24 27-86"
+```gdscript title="GDScript" linenums="1" hl_lines="24 27-86"
 extends Node
 
 

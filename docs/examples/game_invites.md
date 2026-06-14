@@ -13,6 +13,7 @@ icon: lucide/mail
 	- [Rich Presence](rich_presence.md)
 		- Using party
 		- Using party secret
+	- [Status](status.md)
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
