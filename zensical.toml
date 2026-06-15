@@ -60,7 +60,6 @@ nav = [
         {"Game Invites" = "examples/game_invites.md"},
         {"Direct Messages" = "examples/direct_messages.md"},
         {"Lobbies" = "examples/lobbies.md"},
-        {"More" = "examples/more.md"},
     ]},
     {"C++ to GDScript" = "cpp_to_gdscript.md"},
     { "Security" = "security.md" },
@@ -346,3 +345,6 @@ custom_fences = [
 
 [project.markdown_extensions.pymdownx.tasklist]
 custom_checkbox = true
+
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true

@@ -353,8 +353,6 @@
       
         
       
-        
-      
     
     
     
@@ -693,36 +691,6 @@
     
   
     Lobbies
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../examples/more/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-    More
   
 
     
@@ -1092,8 +1060,9 @@
 <h2 id="usage">Usage</h2>
 <p>This GDExtension is a wrapper around the C++ SDK, which means that each GDScript method it's just calling the C++ counterpart.  </p>
 <p>All that you need to do is read the official C++ documentation and convert the code to GDScript. For example, I was able to convert their conclusion code from <a href="https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++"><em>Getting Started with C++</em></a> to GDScript:  </p>
-<details class="example">
-<summary>C++</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">GDScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
@@ -1308,9 +1277,8 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-</details>
-<details class="example">
-<summary>GDScript</summary>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1477,7 +1445,9 @@
 
 <span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">connect_discord</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-</details>
+</div>
+</div>
+</div>
 <h2 id="thats-it">That's it!</h2>
 <ul>
 <li>Read the official documentation</li>

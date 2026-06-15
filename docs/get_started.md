@@ -18,7 +18,8 @@ This GDExtension is a wrapper around the C++ SDK, which means that each GDScript
 
 All that you need to do is read the official C++ documentation and convert the code to GDScript. For example, I was able to convert their conclusion code from [*Getting Started with C++*](https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++) to GDScript:  
 
-??? example "C++"
+=== "C++"
+
     ```c++ linenums="1"
     #define DISCORDPP_IMPLEMENTATION
     #include "discordpp.h"
@@ -129,7 +130,8 @@ All that you need to do is read the official C++ documentation and convert the c
     }
     ```
 
-??? example "GDScript"
+=== "GDScript"
+
     ```gdscript linenums="1"
     extends Control
 
