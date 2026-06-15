@@ -1001,10 +1001,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-or-join" class="md-nav__link">
+  <a href="#createjoin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create or Join
+        Create/Join
       
     </span>
   </a>
@@ -1038,6 +1038,17 @@
     <span class="md-ellipsis">
       
         Receive Message
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message History
       
     </span>
   </a>
@@ -1149,7 +1160,7 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 </li>
 </ul>
 </details>
-<h2 id="create-or-join">Create or Join</h2>
+<h2 id="createjoin">Create/Join</h2>
 <p>It will create the lobby if doesn't exist and join if it does.  </p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -1254,7 +1265,9 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
 
 
 <span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
@@ -1283,6 +1296,8 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 <span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
 <span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Lobby created or joined successfully! Lobby Id: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">await</span><span class="w"> </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span>
 
 <span class="hll"><span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">leave_lobby</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_left_lobby</span><span class="p">)</span>
 </span><span class="w">    </span><span class="k">else</span><span class="p">:</span>
@@ -1343,7 +1358,10 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
 
 
 <span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
@@ -1374,7 +1392,10 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 <span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Lobby created or joined successfully! Lobby Id: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">)</span>
 
 <span class="hll"><span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">send_lobby_message</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_lobby_message</span><span class="p">)</span>
-</span><span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">leave_lobby</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_left_lobby</span><span class="p">)</span>
+</span>
+<span class="w">        </span><span class="n">await</span><span class="w"> </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span>
+
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">leave_lobby</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_left_lobby</span><span class="p">)</span>
 <span class="w">    </span><span class="k">else</span><span class="p">:</span>
 <span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Lobby creation/join failed&quot;</span><span class="p">)</span>
 
@@ -1393,6 +1414,120 @@ They are <strong>not</strong> the text/voice channels that you see in your Disco
 <span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Leaving lobby failed&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="receive-message">Receive Message</h2>
+<p>Exactly the same for receving direct messages:  </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_message_created_callback</span><span class="p">(</span><span class="n">_on_message_created</span><span class="p">)</span>
+</span><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_log</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">] </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">enum_str</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">])</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Lobby created or joined successfully! Lobby Id: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">await</span><span class="w"> </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span>
+
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">leave_lobby</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_left_lobby</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Lobby creation/join failed&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_left_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Left lobby successfully!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Leaving lobby failed&quot;</span><span class="p">)</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_message_created</span><span class="p">(</span><span class="n">message_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_message_handle</span><span class="p">(</span><span class="n">message_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordMessageHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📨 New message received: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">())</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="message-history">Message History</h2>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-lobbies">Creating and Managing Lobbies</a></li>

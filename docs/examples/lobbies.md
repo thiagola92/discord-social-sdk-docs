@@ -21,7 +21,7 @@ They are **not** the text/voice channels that you see in your Discord server.
     - Channel is a **permanent** group to be used for communication with people that you may know  
         - Represents a place to hangout with your friends/community
 
-## Create or Join
+## Create/Join
 It will create the lobby if doesn't exist and join if it does.  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="24 27-31"
@@ -61,7 +61,7 @@ func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
 ## Leave
 Is highly recommended to leave the lobby after using (it will delete itself after some minutes without nobody using).  
 
-```gdscript title="GDScript" linenums="1" hl_lines="31 36-40"
+```gdscript title="GDScript" linenums="1" hl_lines="33 38-42"
 extends Node
 
 
@@ -92,6 +92,8 @@ func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
 	if result.successful():
 		print("🎮 Lobby created or joined successfully! Lobby Id: %s" % lobby_id)
 		
+		await get_tree().create_timer(60).timeout
+		
 		client.leave_lobby(lobby_id, _on_left_lobby)
 	else:
 		print("❌ Lobby creation/join failed")
@@ -105,7 +107,7 @@ func _on_left_lobby(result: DiscordClientResult) -> void:
 ```
 
 ## Send Message
-```gdscript title="GDScript" linenums="1" hl_lines="31 37-41"
+```gdscript title="GDScript" linenums="1" hl_lines="31 40-44"
 extends Node
 
 
@@ -137,6 +139,9 @@ func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
 		print("🎮 Lobby created or joined successfully! Lobby Id: %s" % lobby_id)
 		
 		client.send_lobby_message(lobby_id, "Hello", _on_lobby_message)
+		
+		await get_tree().create_timer(60).timeout
+
 		client.leave_lobby(lobby_id, _on_left_lobby)
 	else:
 		print("❌ Lobby creation/join failed")
@@ -157,6 +162,68 @@ func _on_left_lobby(result: DiscordClientResult) -> void:
 ```
 
 ## Receive Message
+Exactly the same for receving direct messages:  
+
+```gdscript title="GDScript" linenums="1" hl_lines="11 52-56"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
+func _ready() -> void:
+	client.set_application_id(application_id)
+	client.set_message_created_callback(_on_message_created)
+	client.set_status_changed_callback(_on_status_changed)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
+
+
+func _on_log(message: String, severity: DiscordLoggingSeverity.Enum) -> void:
+	var enum_str: String = Discord.enum_to_string(severity, DiscordLoggingSeverity.id)
+	
+	print("[%s] %s" % [enum_str, message])
+
+
+func _on_status_changed(status: DiscordClientStatus.Enum, _error: DiscordClientError.Enum, _error_detail: int) -> void:
+	var enum_str: String = Discord.enum_to_string(status, DiscordClientStatus.id)
+	
+	print("Status changed to %s" % enum_str)
+	
+	if status == DiscordClientStatus.READY:
+		client.create_or_join_lobby("your-unique-lobby-secret", _on_joined_lobby)
+
+
+func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
+	if result.successful():
+		print("🎮 Lobby created or joined successfully! Lobby Id: %s" % lobby_id)
+		
+		await get_tree().create_timer(60).timeout
+		
+		client.leave_lobby(lobby_id, _on_left_lobby)
+	else:
+		print("❌ Lobby creation/join failed")
+
+
+func _on_left_lobby(result: DiscordClientResult) -> void:
+	if result.successful():
+		print("🎮 Left lobby successfully!")
+	else:
+		print("❌ Leaving lobby failed")
+
+
+func _on_message_created(message_id: int) -> void:
+	var message = client.get_message_handle(message_id)
+	
+	if message is DiscordMessageHandle:
+		print("📨 New message received: " % message.content())
+```
+
+## Message History
 
 ## References
 - [Creating and Managing Lobbies](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-lobbies)
