@@ -4,7 +4,7 @@ icon: lucide/mail
 
 # Game Invites
 
-## Sending
+## Send
 !!! warning
 	Prerequisites:
 
@@ -59,7 +59,7 @@ The other user will receive a direct message inviting to play.
 
 ![](assets/game_invites_00.png)  
 
-## Receiving
+## Receive
 You can configure for your game to be notified when the user receives an invite:  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18-24"
@@ -127,7 +127,7 @@ func _on_activity_invite_accepted(result: DiscordClientResult, join_secret: Stri
 		print("❌ Activity Invite accept failed")
 ```
 
-## Joining
+## Joined
 You can be notified whenever the user joined a party.  
 
 The advantage of configuring this, is that you will be notified whenever the user accept through the SDK (e.g. `client.accept_activity_invite()`) or Discord client (e.g. direct message).  

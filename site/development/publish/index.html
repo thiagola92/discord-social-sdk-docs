@@ -1079,7 +1079,10 @@
 
 <h1 id="publish">Publish</h1>
 <h2 id="steps">Steps</h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Generate ZIP file for the Asset Library.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate remove previous ZIP file.</span>
+rm<span class="w"> </span>discord_social_sdk.zip
+
+<span class="c1"># Generate ZIP file for the Asset Library.</span>
 zip<span class="w"> </span>-r<span class="w"> </span>discord_social_sdk.zip<span class="w"> </span>demo/addons/discord_social_sdk/**
 </code></pre></div>
 <p><a href="https://github.com/thiagola92/discord-social-sdk/releases">Manually add as assets in Github release</a><br />

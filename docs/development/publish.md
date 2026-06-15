@@ -6,6 +6,9 @@ icon: lucide/package
 
 ## Steps
 ```bash
+# Generate remove previous ZIP file.
+rm discord_social_sdk.zip
+
 # Generate ZIP file for the Asset Library.
 zip -r discord_social_sdk.zip demo/addons/discord_social_sdk/**
 ```
