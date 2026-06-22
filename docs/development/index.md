@@ -43,6 +43,4 @@ For example, when you pass a [`String`](https://docs.godotengine.org/en/stable/c
     └── GDExtension source codes and headers
 ```
 
-All the important code is written in Python (inside `scripts`) and this code is responsible for generating the GDExtension code (inside `src`). So let me be very clear...  
-
-!!! failure "No code should be manually added to `src` directory!"  
+From the directories above, only two are edited manually: `demo` and `scripts`.  

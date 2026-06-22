@@ -68,6 +68,7 @@ nav = [
         {"Setup" = "development/setup.md"},
         {"CD" = "development/cd.md"},
         {"Publish" = "development/publish.md"},
+        {"Coding" = "development/coding.md"},
     ]},
     { "Donation" = "donation.md" },
 ]

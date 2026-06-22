@@ -786,6 +786,8 @@
       
         
       
+        
+      
     
     
     
@@ -918,6 +920,36 @@
     
   
     Publish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding
   
 
     
@@ -1196,7 +1228,7 @@ scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</
 <span class="nb">cd</span><span class="w"> </span>..
 
 <span class="c1"># Generate GDExtension source code.</span>
-python3<span class="w"> </span>scripts/main.py<span class="w"> </span>--code
+python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code
 
 <span class="c1"># Generate GDExtension library (run the ones that interest you).</span>
 scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>arm32
@@ -1216,7 +1248,7 @@ scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</
 godot<span class="w"> </span>./demo/project.godot
 
 <span class="c1"># Generate GDExtension documentations.</span>
-python3<span class="w"> </span>scripts/main.py<span class="w"> </span>--docs
+python<span class="w"> </span>scripts/main.py<span class="w"> </span>--docs
 
 <span class="c1"># Link documentation to GDExtension library (run the ones that interest you).</span>
 scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>arm32

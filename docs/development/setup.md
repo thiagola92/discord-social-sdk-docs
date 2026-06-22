@@ -94,7 +94,7 @@ scons platform=linux custom_api_file=extension_api.json
 cd ..
 
 # Generate GDExtension source code.
-python3 scripts/main.py --code
+python scripts/main.py --code
 
 # Generate GDExtension library (run the ones that interest you).
 scons platform=android target=template_debug   arch=arm32
@@ -114,7 +114,7 @@ scons platform=windows target=template_release arch=x86_64
 godot ./demo/project.godot
 
 # Generate GDExtension documentations.
-python3 scripts/main.py --docs
+python scripts/main.py --docs
 
 # Link documentation to GDExtension library (run the ones that interest you).
 scons platform=android target=template_debug   arch=arm32

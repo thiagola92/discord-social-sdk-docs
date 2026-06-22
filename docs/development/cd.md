@@ -9,7 +9,7 @@ Repeat these steps every modification.
 
 ```bash
 # Generate GDExtension source code and documentations.
-python3 scripts/main.py --code --docs
+python scripts/main.py --code --docs
 
 # Generate GDExtension library (run the ones that interest you).
 scons platform=android target=template_debug   arch=arm32
