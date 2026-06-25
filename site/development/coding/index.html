@@ -1044,10 +1044,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#executing" class="md-nav__link">
+  <a href="#entry-point" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Executing
+        Entry Point
       
     </span>
   </a>
@@ -1062,6 +1062,56 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Reading Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code_gen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📂 code_gen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docs_gen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📂 docs_gen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📂 templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📂 utility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1137,22 +1187,21 @@
 <p class="admonition-title">Warning</p>
 <p>Modifying files in <code>src</code>/<code>doc_classes</code> is a waste of time because they are recreated every time that we run the Python script.  </p>
 </div>
-<p>The directory follows this structure:  </p>
 <h2 id="project-tree">Project Tree</h2>
 <div class="highlight"><pre><span></span><code>.
-├── code_gen
+├── 📂 code_gen
 │   └── Generator for GDExtension code (C++)
-├── docs_gen
+├── 📂 docs_gen
 │   └── Generator for GDExtension docs (XML)
-├── templates
-│   └── Functions to generate specific strings
-├── utility
+├── 📂 templates
+│   └── Functions to generate strings
+├── 📂 utility
 │   └── Code to help both generators
-└── main.py
+└── 📄 main.py
     └── Entry point
 </code></pre></div>
-<h2 id="executing">Executing</h2>
-<p>The entry point (<code>main.py</code>) accept the following arguments: <code>--code</code> or <code>--docs</code>.  </p>
+<h2 id="entry-point">Entry Point</h2>
+<p>The <code>main.py</code> accept the following arguments: <code>--code</code> or <code>--docs</code>.  </p>
 <p>Which means that you can execute in one of the following ways:  </p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Generate GDExtension code.</span>
 python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code
@@ -1187,6 +1236,76 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
 
     flows --&gt; templates
     flows --&gt; utility</code></pre>
+<h3 id="code_gen">📂 code_gen</h3>
+<ul>
+<li><code>builder.py</code>: Create <code>.cpp</code> and <code>.h</code> files</li>
+<li><code>forger.py</code>: Create code snippets</li>
+</ul>
+<h3 id="docs_gen">📂 docs_gen</h3>
+<ul>
+<li><code>refiner.py</code>: Update <code>.xml</code> files</li>
+<li><code>update.py</code>: Update elements content</li>
+<li><code>bbcode.py</code>: Adapt documentation text to bbcode</li>
+</ul>
+<h3 id="templates">📂 templates</h3>
+<p>Simple functions to return specific strings for code/docs/file.  </p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_xxx</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<details class="example">
+<summary>Example</summary>
+<p>Template for <code>register_types.cpp</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_register_types_cpp</span><span class="p">(</span><span class="n">register_abstracts</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">register_runtimes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &quot;register_types.h&quot;</span>
+<span class="s2">#include &quot;discord_classes.h&quot;</span>
+<span class="s2">#include &quot;discord_enum.h&quot;</span>
+<span class="s2">#include &quot;gdextension_interface.h&quot;</span>
+<span class="s2">#include &quot;godot_cpp/core/class_db.hpp&quot;</span>
+<span class="s2">#include &quot;godot_cpp/core/defs.hpp&quot;</span>
+<span class="s2">#include &quot;godot_cpp/godot.hpp&quot;</span>
+
+<span class="s2">using namespace godot;</span>
+
+<span class="s2">void initialize_module(ModuleInitializationLevel p_level) </span><span class="se">{{</span>
+<span class="s2">    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) </span><span class="se">{{</span>
+<span class="s2">        return;</span>
+<span class="s2">    </span><span class="se">}}</span>
+
+<span class="s2">    // Abstracts.</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">register_abstracts</span><span class="si">}</span>
+
+<span class="s2">    // Runtimes.</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">register_runtimes</span><span class="si">}</span>
+<span class="se">}}</span>
+
+<span class="s2">void uninitialize_module(ModuleInitializationLevel p_level) </span><span class="se">{{</span>
+<span class="s2">    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) </span><span class="se">{{</span>
+<span class="s2">        return;</span>
+<span class="s2">    </span><span class="se">}}</span>
+<span class="se">}}</span>
+
+<span class="s2">extern &quot;C&quot; </span><span class="se">{{</span>
+<span class="s2">// Initialization.</span>
+<span class="s2">GDExtensionBool GDE_EXPORT</span>
+<span class="s2">initialize_extension(GDExtensionInterfaceGetProcAddress p_get_proc_address,</span>
+<span class="s2">        const GDExtensionClassLibraryPtr p_library,</span>
+<span class="s2">        GDExtensionInitialization *r_initialization) </span><span class="se">{{</span>
+<span class="s2">    godot::GDExtensionBinding::InitObject init_obj(p_get_proc_address, p_library,</span>
+<span class="s2">            r_initialization);</span>
+
+<span class="s2">    init_obj.register_initializer(initialize_module);</span>
+<span class="s2">    init_obj.register_terminator(uninitialize_module);</span>
+<span class="s2">    init_obj.set_minimum_library_initialization_level(</span>
+<span class="s2">            MODULE_INITIALIZATION_LEVEL_SCENE);</span>
+
+<span class="s2">    return init_obj.init();</span>
+<span class="se">}}</span>
+<span class="se">}}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+</details>
+<h3 id="utility">📂 utility</h3>
+<p>This directory is very complex because attempt to solve multiple problems that happened during the main flows.  </p>
 
 
 
