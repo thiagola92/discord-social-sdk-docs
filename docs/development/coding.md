@@ -8,19 +8,33 @@ All the important code is written in Python (inside `scripts`) and this code is 
 !!! warning
     Modifying files in `src`/`doc_classes` is a waste of time because they are recreated every time that we run the Python script.  
 
-## Project Tree
+## Main Logic
+We use [Doyxgen](https://www.doxygen.nl/) to generate a XML documentation of the Discord code, which we read to obtain information about how to build our GDExtension code... That's it!  
+
+```mermaid
+flowchart TD
+    discord_cpp[Discord C++ files]
+    discord_xml[Discord XML docs]
+    gdextension_cpp[GDExtension C++ files]
+
+    discord_cpp --"doxygen"--> discord_xml
+    discord_xml --<b>we build</b>--> gdextension_cpp
 ```
-.
-├── 📂 code_gen
-│   └── Generator for GDExtension code (C++)
-├── 📂 docs_gen
-│   └── Generator for GDExtension docs (XML)
-├── 📂 templates
-│   └── Functions to generate strings
-├── 📂 utility
-│   └── Code to help both generators
-└── 📄 main.py
-    └── Entry point
+
+Now we need to create the GDExtension documentation!  
+
+For this we use Godot [`--doctool`](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html#command-line-reference) command, which generate the base documentation for all GDExtension classes. Then we improve the documentation using information collected from Discord code.  
+
+```mermaid
+flowchart TD
+    discord_cpp[Discord C++ files]
+    discord_xml[Discord XML docs]
+    gdextension_cpp[GDExtension C++ files]
+    gdextension_xml[GDExtension XML docs]
+
+    discord_cpp --"doxygen"--> discord_xml
+    gdextension_cpp --"godot --doctool"--> gdextension_xml
+    discord_xml --<b>we improve</b>--> gdextension_xml
 ```
 
 ## Entry Point
@@ -49,14 +63,14 @@ graph LR
         main[main.py]
         builder[builder.py]
         forge[forge.py]
-        refiner[refiner.py]
+        improver[improver.py]
         update[update.py]
         bbcode[bbcode.py]
 
         main --📂 code_gen--> builder
-        main --📂 docs_gen--> refiner
+        main --📂 docs_gen--> improver
         builder --> forge
-        refiner --> update
+        improver --> update
         update --> bbcode
     end
 
@@ -68,16 +82,20 @@ graph LR
 ```
 
 ### 📂 code_gen
+Responsible for generating GDExtension code (C++).  
+
 - `builder.py`: Create `.cpp` and `.h` files
 - `forger.py`: Create code snippets
 
 ### 📂 docs_gen
-- `refiner.py`: Update `.xml` files
+Responsible for generating GDExtension docs (XML).  
+
+- `improver.py`: Update `.xml` files
 - `update.py`: Update elements content
 - `bbcode.py`: Adapt documentation text to bbcode
 
 ### 📂 templates
-Simple functions to return specific strings for code/docs/file.  
+Functions that return specific strings for code/docs/file.  
 
 ```python
 def get_xxx(a: str, b: str, ...) -> str
@@ -139,4 +157,4 @@ def get_xxx(a: str, b: str, ...) -> str
     ```
 
 ### 📂 utility
-This directory is very complex because attempt to solve multiple problems that happened during the main flows.  
+Code to help both generators.  

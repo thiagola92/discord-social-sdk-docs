@@ -1033,10 +1033,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-tree" class="md-nav__link">
+  <a href="#main-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project Tree
+        Main Logic
       
     </span>
   </a>
@@ -1187,19 +1187,26 @@
 <p class="admonition-title">Warning</p>
 <p>Modifying files in <code>src</code>/<code>doc_classes</code> is a waste of time because they are recreated every time that we run the Python script.  </p>
 </div>
-<h2 id="project-tree">Project Tree</h2>
-<div class="highlight"><pre><span></span><code>.
-├── 📂 code_gen
-│   └── Generator for GDExtension code (C++)
-├── 📂 docs_gen
-│   └── Generator for GDExtension docs (XML)
-├── 📂 templates
-│   └── Functions to generate strings
-├── 📂 utility
-│   └── Code to help both generators
-└── 📄 main.py
-    └── Entry point
-</code></pre></div>
+<h2 id="main-logic">Main Logic</h2>
+<p>We use <a href="https://www.doxygen.nl/">Doyxgen</a> to generate a XML documentation of the Discord code, which we read to obtain information about how to build our GDExtension code... That's it!  </p>
+<pre class="mermaid"><code>flowchart TD
+    discord_cpp[Discord C++ files]
+    discord_xml[Discord XML docs]
+    gdextension_cpp[GDExtension C++ files]
+
+    discord_cpp --"doxygen"--&gt; discord_xml
+    discord_xml --&lt;b&gt;we build&lt;/b&gt;--&gt; gdextension_cpp</code></pre>
+<p>Now we need to create the GDExtension documentation!  </p>
+<p>For this we use Godot <a href="https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html#command-line-reference"><code>--doctool</code></a> command, which generate the base documentation for all GDExtension classes. Then we improve the documentation using information collected from Discord code.  </p>
+<pre class="mermaid"><code>flowchart TD
+    discord_cpp[Discord C++ files]
+    discord_xml[Discord XML docs]
+    gdextension_cpp[GDExtension C++ files]
+    gdextension_xml[GDExtension XML docs]
+
+    discord_cpp --"doxygen"--&gt; discord_xml
+    gdextension_cpp --"godot --doctool"--&gt; gdextension_xml
+    discord_xml --&lt;b&gt;we improve&lt;/b&gt;--&gt; gdextension_xml</code></pre>
 <h2 id="entry-point">Entry Point</h2>
 <p>The <code>main.py</code> accept the following arguments: <code>--code</code> or <code>--docs</code>.  </p>
 <p>Which means that you can execute in one of the following ways:  </p>
@@ -1220,14 +1227,14 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
         main[main.py]
         builder[builder.py]
         forge[forge.py]
-        refiner[refiner.py]
+        improver[improver.py]
         update[update.py]
         bbcode[bbcode.py]
 
         main --📂 code_gen--&gt; builder
-        main --📂 docs_gen--&gt; refiner
+        main --📂 docs_gen--&gt; improver
         builder --&gt; forge
-        refiner --&gt; update
+        improver --&gt; update
         update --&gt; bbcode
     end
 
@@ -1237,18 +1244,20 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
     flows --&gt; templates
     flows --&gt; utility</code></pre>
 <h3 id="code_gen">📂 code_gen</h3>
+<p>Responsible for generating GDExtension code (C++).  </p>
 <ul>
 <li><code>builder.py</code>: Create <code>.cpp</code> and <code>.h</code> files</li>
 <li><code>forger.py</code>: Create code snippets</li>
 </ul>
 <h3 id="docs_gen">📂 docs_gen</h3>
+<p>Responsible for generating GDExtension docs (XML).  </p>
 <ul>
-<li><code>refiner.py</code>: Update <code>.xml</code> files</li>
+<li><code>improver.py</code>: Update <code>.xml</code> files</li>
 <li><code>update.py</code>: Update elements content</li>
 <li><code>bbcode.py</code>: Adapt documentation text to bbcode</li>
 </ul>
 <h3 id="templates">📂 templates</h3>
-<p>Simple functions to return specific strings for code/docs/file.  </p>
+<p>Functions that return specific strings for code/docs/file.  </p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_xxx</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 <details class="example">
@@ -1305,7 +1314,7 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
 </code></pre></div>
 </details>
 <h3 id="utility">📂 utility</h3>
-<p>This directory is very complex because attempt to solve multiple problems that happened during the main flows.  </p>
+<p>Code to help both generators.  </p>
 
 
 
