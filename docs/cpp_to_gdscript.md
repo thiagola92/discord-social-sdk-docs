@@ -4,69 +4,25 @@ icon: lucide/arrow-right-left
 
 # `C++` to `GDScript`
 
-## Basics
+## Namespace
+|                  | C++                          | GDScript                                     |
+| ---------------- | ---------------------------- | -------------------------------------------- |
+| Functions        | `discordpp::MethodExample()` | `Discord.method_example()`                   |
+| Classes          | `discordpp::ClassExample`    | `DiscordClassExample`                        |
 
+??? note "GDScript doesn't have namespace concept"
+
+    To avoid any naming conflict with others classes, my solution was to:
+
+    - Put the static functions into `Discord` class
+    - Create a class with "Discord" prefix for each class
+
+## Names
 |                  | C++                        | GDScript                                     |
 | ---------------- | -------------------------- | -------------------------------------------- |
-| Parameter Name   | `paramExample`             | `param_example`                              |
+| Class Name       | `ClassExample`             | `DiscordClassExample`                        |
 | Method Name      | `MethodExample`            | `method_example` or <br> `method_example_discord` |
-| Bool             | `bool`                     | `bool`                                       |
-| Float            | `float`                    | `float`                                      |
-| String           | `std::string`              | `String`                                     |
-| Vector           | `std::vector<T>`           | `Array[T]`                                   |
-| Map              | `std::unordered_map<K, T>` | `Dictionary[K, T]`                           |
-| Auto             | `auto`                     | `Variant` or remove it                       |
-
-## Namespace Function
-```c++ title="C++"
-discordpp::RunCallbacks()
-```
-
-```gdscript title="GDScript"
-Discord.run_callbacks()
-```
-
-1. Transform function call
-    - `::RunCallbacks()` => `.run_callbacks()`
-2. Transform namespace
-    - `discordpp` => `Discord`
-
-## Class
-```c++ title="C++"
-discordpp::Client
-```
-
-```gdscript title="GDScript"
-DiscordClient
-```
-
-1. Transform class
-    - `::Client` => `Client`
-2. Transform namespace
-    - `discordpp` => `Discord`
-
-## Method Call
-```c++ title="C++"
-client->AddLogCallback()
-```
-
-```gdscript title="GDScript"
-client.add_log_callback()
-```
-
-1. Transform method call
-    - `->AddLogCallback()` => `.add_log_callback()`
-
-```c++ title="C++"
-args.SetClientId()
-```
-
-```gdscript title="GDScript"
-args.set_client_id()
-```
-
-1. Transform method call
-    - `.SetClientId()` => `.set_client_id()`
+| Parameter Name   | `paramExample`             | `param_example`                              |
 
 ??? warning "Conflict with existing names"
 
@@ -84,53 +40,23 @@ args.set_client_id()
 	DiscordClient.disconnect_discord()
 	```
 
-??? warning "Function overloading"
+## Types
+|                  | C++                         | GDScript                                     |
+| ---------------- | --------------------------- | -------------------------------------------- |
+| Bool             | `bool`                      | `bool`                                       |
+| Float            | `float`                     | `float`                                      |
+| String           | `std::string`               | `String`                                     |
+| Vector           | `std::vector<T>`            | `Array[T]`                                   |
+| Map              | `std::unordered_map<K, T>`  | `Dictionary[K, T]`                           |
+| Auto             | `auto`                      | `Variant`                                    |
 
-    In case you didn't know, there is more than 20 functions `discordpp::EnumToString()` in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  
+## Enum
+|                  | C++                                | GDScript                                     |
+| ---------------- | ---------------------------------- | -------------------------------------------- |
+| Enum Type        | `discordpp::Class::Example`        | `DiscordClassExample.Enum`                   |
+| Enum Value       | `discordpp::Class::Example::Value` | `DiscordClassExample.VALUE`                  |
 
-    ```c++ title="C++"
-    discordpp::EnumToString(discordpp::ActivityActionTypes value)
-    discordpp::EnumToString(discordpp::ActivityGamePlatforms value)
-    discordpp::EnumToString(discordpp::ActivityPartyPrivacy value)
-    discordpp::EnumToString(discordpp::ActivityTypes value)
-    ```
-
-    GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  
-
-    My [gambiarra](https://pt.wikipedia.org/wiki/Gambiarra) to solve the problem was to add an extra parameter that identifies the type of the first parameter.  
-
-    ```gdscript title="GDScript"
-    Discord.enum_to_string(value: int, enum_id: int)
-    ```
-
-    Every single enum has this identifier:  
-
-    ```gdscript title="GDScript"
-    DiscordActivityActionTypes.id
-    DiscordActivityGamePlatforms.id
-    DiscordActivityPartyPrivacy.id
-    DiscordActivityTypes.id
-    ```
-
-    Note how `id` is not UPPER_CASE, this prevents conflicting with true constants.  
-
-## Enum Type
-```c++ title="C++"
-discordpp::Client::Status
-```
-
-```gdscript title="GDScript"
-DiscordClientStatus.Enum
-```
-
-1. Transform enum type
-    - `::Status` => `Status.Enum`
-2. Transform class
-    - `::Client` => `Client`
-3. Transform namespace
-    - `discordpp` => `Discord`
-
-??? note "Why not `DiscordClient.Status`?"
+??? note "Why not `DiscordClass.Example`?"
 
     Each enum has it own class, this happened because the **Godot C++** doesn't let me use the same name in different enums.  
 
@@ -186,6 +112,50 @@ DiscordClientStatus.Enum
     ```
 
     Reference: [godot-cpp/issues/1910](https://github.com/godotengine/godot-cpp/issues/1910)  
+
+## Method Call
+|                  | C++                        | GDScript                                     |
+| ---------------- | -------------------------- | -------------------------------------------- |
+| Default          | `variable.Example()` or <br> `variable->Example()` | `variable.example()`                      |
+
+??? warning "Function overloading"
+
+    In case you didn't know, there is more than 20 functions `discordpp::EnumToString()` in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  
+
+    ```c++ title="C++"
+    discordpp::EnumToString(discordpp::ActivityActionTypes value)
+    discordpp::EnumToString(discordpp::ActivityGamePlatforms value)
+    discordpp::EnumToString(discordpp::ActivityPartyPrivacy value)
+    discordpp::EnumToString(discordpp::ActivityTypes value)
+    ```
+
+    GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  
+
+    My [gambiarra](https://pt.wikipedia.org/wiki/Gambiarra) to solve the problem was to add an extra parameter that identifies the type of the first parameter.  
+
+    ```gdscript title="GDScript"
+    Discord.enum_to_string(value: int, enum_id: int)
+    ```
+
+    Every single enum has this identifier:  
+
+    ```gdscript title="GDScript"
+    DiscordActivityActionTypes.id
+    DiscordActivityGamePlatforms.id
+    DiscordActivityPartyPrivacy.id
+    DiscordActivityTypes.id
+    ```
+
+    Note how `id` is not UPPER_CASE, this prevents conflicting with true constants.  
+
+## Enum Type
+```c++ title="C++"
+discordpp::Client::Status
+```
+
+```gdscript title="GDScript"
+DiscordClientStatus.Enum
+```
 
 
 ## Enum Value

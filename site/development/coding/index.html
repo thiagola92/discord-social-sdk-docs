@@ -1070,7 +1070,7 @@
   <a href="#code_gen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 code_gen
+        code_gen
       
     </span>
   </a>
@@ -1081,7 +1081,7 @@
   <a href="#docs_gen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 docs_gen
+        docs_gen
       
     </span>
   </a>
@@ -1092,7 +1092,7 @@
   <a href="#templates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 templates
+        templates
       
     </span>
   </a>
@@ -1103,7 +1103,7 @@
   <a href="#utility" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 utility
+        utility
       
     </span>
   </a>
@@ -1243,26 +1243,26 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
 
     flows --&gt; templates
     flows --&gt; utility</code></pre>
-<h3 id="code_gen">📂 code_gen</h3>
+<h3 id="code_gen">code_gen</h3>
 <p>Responsible for generating GDExtension code (C++).  </p>
 <ul>
 <li><code>builder.py</code>: Create <code>.cpp</code> and <code>.h</code> files</li>
 <li><code>forger.py</code>: Create code snippets</li>
 </ul>
-<h3 id="docs_gen">📂 docs_gen</h3>
+<h3 id="docs_gen">docs_gen</h3>
 <p>Responsible for generating GDExtension docs (XML).  </p>
 <ul>
 <li><code>improver.py</code>: Update <code>.xml</code> files</li>
 <li><code>update.py</code>: Update elements content</li>
 <li><code>bbcode.py</code>: Adapt documentation text to bbcode</li>
 </ul>
-<h3 id="templates">📂 templates</h3>
+<h3 id="templates">templates</h3>
 <p>Functions that return specific strings for code/docs/file.  </p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_xxx</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_xxx</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 <details class="example">
 <summary>Example</summary>
-<p>Template for <code>register_types.cpp</code></p>
+<p>Function to help creating <code>register_types.cpp</code>:  </p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_register_types_cpp</span><span class="p">(</span><span class="n">register_abstracts</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">register_runtimes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">#include &quot;register_types.h&quot;</span>
@@ -1313,8 +1313,8 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span
 <span class="s2">&quot;&quot;&quot;</span>
 </code></pre></div>
 </details>
-<h3 id="utility">📂 utility</h3>
-<p>Code to help both generators.  </p>
+<h3 id="utility">utility</h3>
+<p>Code to help code and docs generation, which make this the most complex directory because you need to know the context of the code.</p>
 
 
 

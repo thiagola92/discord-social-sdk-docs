@@ -1031,10 +1031,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basics" class="md-nav__link">
+  <a href="#namespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basics
+        Namespace
       
     </span>
   </a>
@@ -1042,10 +1042,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#namespace-function" class="md-nav__link">
+  <a href="#names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Namespace Function
+        Names
       
     </span>
   </a>
@@ -1053,10 +1053,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#class" class="md-nav__link">
+  <a href="#types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Class
+        Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum
       
     </span>
   </a>
@@ -1178,7 +1189,7 @@
 
 
 <h1 id="c-to-gdscript"><code>C++</code> to <code>GDScript</code></h1>
-<h2 id="basics">Basics</h2>
+<h2 id="namespace">Namespace</h2>
 <table>
 <thead>
 <tr>
@@ -1189,15 +1200,73 @@
 </thead>
 <tbody>
 <tr>
-<td>Parameter Name</td>
-<td><code>paramExample</code></td>
-<td><code>param_example</code></td>
+<td>Functions</td>
+<td><code>discordpp::MethodExample()</code></td>
+<td><code>Discord.method_example()</code></td>
+</tr>
+<tr>
+<td>Classes</td>
+<td><code>discordpp::ClassExample</code></td>
+<td><code>DiscordClassExample</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>GDScript doesn't have namespace concept</summary>
+<p>To avoid any naming conflict with others classes, my solution was to:</p>
+<ul>
+<li>Put the static functions into <code>Discord</code> class</li>
+<li>Create a class with "Discord" prefix for each class</li>
+</ul>
+</details>
+<h2 id="names">Names</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class Name</td>
+<td><code>ClassExample</code></td>
+<td><code>DiscordClassExample</code></td>
 </tr>
 <tr>
 <td>Method Name</td>
 <td><code>MethodExample</code></td>
 <td><code>method_example</code> or <br> <code>method_example_discord</code></td>
 </tr>
+<tr>
+<td>Parameter Name</td>
+<td><code>paramExample</code></td>
+<td><code>param_example</code></td>
+</tr>
+</tbody>
+</table>
+<details class="warning">
+<summary>Conflict with existing names</summary>
+<p>There is cases where the method name is already being used by Godot <a href="https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-connect">Object</a>:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Connect</span><span class="p">()</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Disconnect</span><span class="p">()</span>
+</code></pre></div>
+<p>In this cases, my solution was to add the suffix <code>_discord()</code> to their name:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">DiscordClient</span><span class="p">.</span><span class="n">connect_discord</span><span class="p">()</span>
+<span class="n">DiscordClient</span><span class="p">.</span><span class="n">disconnect_discord</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h2 id="types">Types</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Bool</td>
 <td><code>bool</code></td>
@@ -1226,113 +1295,34 @@
 <tr>
 <td>Auto</td>
 <td><code>auto</code></td>
-<td><code>Variant</code> or remove it</td>
+<td><code>Variant</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="namespace-function">Namespace Function</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">RunCallbacks</span><span class="p">()</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
-</code></pre></div>
-<ol>
-<li>Transform function call<ul>
-<li><code>::RunCallbacks()</code> =&gt; <code>.run_callbacks()</code></li>
-</ul>
-</li>
-<li>Transform namespace<ul>
-<li><code>discordpp</code> =&gt; <code>Discord</code></li>
-</ul>
-</li>
-</ol>
-<h2 id="class">Class</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClient</span>
-</code></pre></div>
-<ol>
-<li>Transform class<ul>
-<li><code>::Client</code> =&gt; <code>Client</code></li>
-</ul>
-</li>
-<li>Transform namespace<ul>
-<li><code>discordpp</code> =&gt; <code>Discord</code></li>
-</ul>
-</li>
-</ol>
-<h2 id="method-call">Method Call</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">client</span><span class="o">-&gt;</span><span class="n">AddLogCallback</span><span class="p">()</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">add_log_callback</span><span class="p">()</span>
-</code></pre></div>
-<ol>
-<li>Transform method call<ul>
-<li><code>-&gt;AddLogCallback()</code> =&gt; <code>.add_log_callback()</code></li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">args</span><span class="p">.</span><span class="n">SetClientId</span><span class="p">()</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">args</span><span class="o">.</span><span class="n">set_client_id</span><span class="p">()</span>
-</code></pre></div>
-<ol>
-<li>Transform method call<ul>
-<li><code>.SetClientId()</code> =&gt; <code>.set_client_id()</code></li>
-</ul>
-</li>
-</ol>
-<details class="warning">
-<summary>Conflict with existing names</summary>
-<p>There is cases where the method name is already being used by Godot <a href="https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-connect">Object</a>:  </p>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Connect</span><span class="p">()</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Disconnect</span><span class="p">()</span>
-</code></pre></div>
-<p>In this cases, my solution was to add the suffix <code>_discord()</code> to their name:  </p>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">DiscordClient</span><span class="p">.</span><span class="n">connect_discord</span><span class="p">()</span>
-<span class="n">DiscordClient</span><span class="p">.</span><span class="n">disconnect_discord</span><span class="p">()</span>
-</code></pre></div>
-</details>
-<details class="warning">
-<summary>Function overloading</summary>
-<p>In case you didn't know, there is more than 20 functions <code>discordpp::EnumToString()</code> in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  </p>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityActionTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityGamePlatforms</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityPartyPrivacy</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
-<p>GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  </p>
-<p>My <a href="https://pt.wikipedia.org/wiki/Gambiarra">gambiarra</a> to solve the problem was to add an extra parameter that identifies the type of the first parameter.  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">enum_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span>
-</code></pre></div>
-<p>Every single enum has this identifier:  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordActivityActionTypes</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityGamePlatforms</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityPartyPrivacy</span><span class="o">.</span><span class="n">id</span>
-<span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">id</span>
-</code></pre></div>
-<p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
-</details>
-<h2 id="enum-type">Enum Type</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span>
-</code></pre></div>
-<ol>
-<li>Transform enum type<ul>
-<li><code>::Status</code> =&gt; <code>Status.Enum</code></li>
-</ul>
-</li>
-<li>Transform class<ul>
-<li><code>::Client</code> =&gt; <code>Client</code></li>
-</ul>
-</li>
-<li>Transform namespace<ul>
-<li><code>discordpp</code> =&gt; <code>Discord</code></li>
-</ul>
-</li>
-</ol>
+<h2 id="enum">Enum</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enum Type</td>
+<td><code>discordpp::Class::Example</code></td>
+<td><code>DiscordClassExample.Enum</code></td>
+</tr>
+<tr>
+<td>Enum Value</td>
+<td><code>discordpp::Class::Example::Value</code></td>
+<td><code>DiscordClassExample.VALUE</code></td>
+</tr>
+</tbody>
+</table>
 <details class="note">
-<summary>Why not <code>DiscordClient.Status</code>?</summary>
+<summary>Why not <code>DiscordClass.Example</code>?</summary>
 <p>Each enum has it own class, this happened because the <strong>Godot C++</strong> doesn't let me use the same name in different enums.  </p>
 <p>Let's look at <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a28fc5199b9211c24124c06f30c1d0cbb"><code>discordpp::RelationshipType</code></a> and <a href="https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a12b04d48d8ea98ec007270a10e0c88ba"><code>discordpp::HttpStatusCode</code></a>, they have an enum called <code>None</code>. So I could represent they in GDScript like:  </p>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">class_name</span><span class="w"> </span><span class="n">Discord</span>
@@ -1375,6 +1365,48 @@
 </code></pre></div>
 <p>Reference: <a href="https://github.com/godotengine/godot-cpp/issues/1910">godot-cpp/issues/1910</a>  </p>
 </details>
+<h2 id="method-call">Method Call</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td><code>variable.Example()</code> or <br> <code>variable-&gt;Example()</code></td>
+<td><code>variable.example()</code></td>
+</tr>
+</tbody>
+</table>
+<details class="warning">
+<summary>Function overloading</summary>
+<p>In case you didn't know, there is more than 20 functions <code>discordpp::EnumToString()</code> in the C++ code. This can exist because C++ support function overloading, so during the compilation is able to look at yours parameters type and link to the correct function.  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityActionTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityGamePlatforms</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityPartyPrivacy</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="n">discordpp</span><span class="o">::</span><span class="n">EnumToString</span><span class="p">(</span><span class="n">discordpp</span><span class="o">::</span><span class="n">ActivityTypes</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p>GDScript doesn't have function overloading because it is a runtime language, so making it discover the correct function during execution would drop performance.  </p>
+<p>My <a href="https://pt.wikipedia.org/wiki/Gambiarra">gambiarra</a> to solve the problem was to add an extra parameter that identifies the type of the first parameter.  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">enum_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span>
+</code></pre></div>
+<p>Every single enum has this identifier:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordActivityActionTypes</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityGamePlatforms</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityPartyPrivacy</span><span class="o">.</span><span class="n">id</span>
+<span class="n">DiscordActivityTypes</span><span class="o">.</span><span class="n">id</span>
+</code></pre></div>
+<p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
+</details>
+<h2 id="enum-type">Enum Type</h2>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span>
+</code></pre></div>
 <h2 id="enum-value">Enum Value</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="n">Ready</span>
 </code></pre></div>

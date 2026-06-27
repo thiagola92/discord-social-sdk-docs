@@ -81,29 +81,29 @@ graph LR
     flows --> utility
 ```
 
-### 📂 code_gen
+### code_gen
 Responsible for generating GDExtension code (C++).  
 
 - `builder.py`: Create `.cpp` and `.h` files
 - `forger.py`: Create code snippets
 
-### 📂 docs_gen
+### docs_gen
 Responsible for generating GDExtension docs (XML).  
 
 - `improver.py`: Update `.xml` files
 - `update.py`: Update elements content
 - `bbcode.py`: Adapt documentation text to bbcode
 
-### 📂 templates
+### templates
 Functions that return specific strings for code/docs/file.  
 
 ```python
-def get_xxx(a: str, b: str, ...) -> str
+def get_xxx(...) -> str
 ```
 
 ??? example
 
-    Template for `register_types.cpp`
+    Function to help creating `register_types.cpp`:  
 
     ```python
     def get_register_types_cpp(register_abstracts: str, register_runtimes: str) -> str:
@@ -156,5 +156,5 @@ def get_xxx(a: str, b: str, ...) -> str
     """
     ```
 
-### 📂 utility
-Code to help both generators.  
+### utility
+Code to help code and docs generation, which make this the most complex directory because you need to know the context of the code.
