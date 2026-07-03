@@ -1141,20 +1141,10 @@
 
 <span class="c1"># Environment variables for binary directories.</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">ANDROID_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/Android/Sdk<span class="w"> </span><span class="c1"># Only needed when compiling to Android.</span>
-
-<span class="c1"># Environment variables for Godot SCons.</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux
-<span class="nb">export</span><span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug
-<span class="nb">export</span><span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-<span class="nb">export</span><span class="w"> </span><span class="nv">precision</span><span class="o">=</span>single
-<span class="nb">export</span><span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<ul>
-<li>Adapt it to your use case (binary paths, platform, target, ...)</li>
-<li>Save to an <code>.env</code> file so you can always load with <code>source .env</code></li>
-</ul>
+<p>Save to an <code>.env</code> file so you can always load with <code>source .env</code></p>
 </div>
 <h2 id="setup-repository">Setup Repository</h2>
 <p>These are only neede once:  </p>
@@ -1179,14 +1169,14 @@ rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/discord_social_sdk
 <span class="c1"># Generate GDExtension API files.</span>
 <span class="nb">cd</span><span class="w"> </span>godot-cpp
 <span class="nv">$GODOT</span><span class="w"> </span>--dump-extension-api
-scons
+scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>extension_api.json
 <span class="nb">cd</span><span class="w"> </span>..
 
 <span class="c1"># Generate GDExtension source code.</span>
 python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code
 
 <span class="c1"># Generate GDExtension library.</span>
-scons
+scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 
 <span class="c1"># Open project, at least once, to be able to generate GDExtension documentation.</span>
 <span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot
@@ -1195,7 +1185,7 @@ scons
 python<span class="w"> </span>scripts/main.py<span class="w"> </span>--docs
 
 <span class="c1"># Link documentation to GDExtension library.</span>
-scons
+scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 
 <span class="c1"># Open project (may need to open two times).</span>
 <span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot
@@ -1207,7 +1197,7 @@ scons
 <h2 id="rebuild">Rebuild</h2>
 <p>Run these steps every time that you modify the python code:  </p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span class="w"> </span>--docs
-scons
+scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 <span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot
 </code></pre></div>
 

@@ -1091,20 +1091,16 @@
 
 
 <h1 id="publish">Publish</h1>
-<p>These steps are only for GDExtension owner:  </p>
+<p>These steps are only for the GDExtension owner:  </p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Build for many platforms.</span>
-scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-<span class="c1">#scons platform=android  target=template_debug   arch=arm32</span>
-<span class="c1">#scons platform=android  target=template_debug   arch=arm64</span>
-<span class="c1">#scons platform=android  target=template_debug   arch=x86_32</span>
-<span class="c1">#scons platform=android  target=template_debug   arch=x86_64</span>
-<span class="c1">#scons platform=android  target=template_release arch=arm32</span>
-<span class="c1">#scons platform=android  target=template_release arch=arm64</span>
-<span class="c1">#scons platform=android  target=template_release arch=x86_32</span>
-<span class="c1">#scons platform=android  target=template_release arch=x86_64</span>
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">precision</span><span class="o">=</span>double
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w">    </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">precision</span><span class="o">=</span>double
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w">   </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">precision</span><span class="o">=</span>double
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w">  </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">precision</span><span class="o">=</span>double
 
 <span class="c1"># Remove any old ZIP file.</span>
 rm<span class="w"> </span>discord_social_sdk.zip

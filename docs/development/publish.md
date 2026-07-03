@@ -3,22 +3,18 @@ icon: lucide/package
 ---
 
 # Publish
-These steps are only for GDExtension owner:  
+These steps are only for the GDExtension owner:  
 
 ```bash
 # Build for many platforms.
-scons platform=linux    target=template_debug   arch=x86_64
-scons platform=linux    target=template_release arch=x86_64
-scons platform=windows  target=template_debug   arch=x86_64
-scons platform=windows  target=template_release arch=x86_64
-#scons platform=android  target=template_debug   arch=arm32
-#scons platform=android  target=template_debug   arch=arm64
-#scons platform=android  target=template_debug   arch=x86_32
-#scons platform=android  target=template_debug   arch=x86_64
-#scons platform=android  target=template_release arch=arm32
-#scons platform=android  target=template_release arch=arm64
-#scons platform=android  target=template_release arch=x86_32
-#scons platform=android  target=template_release arch=x86_64
+scons platform=linux    target=template_debug   arch=x86_64 custom_api_file=godot-cpp/extension_api.json
+scons platform=linux    target=template_release arch=x86_64 custom_api_file=godot-cpp/extension_api.json
+scons platform=linux    target=template_debug   arch=x86_64 custom_api_file=godot-cpp/extension_api.json precision=double
+scons platform=linux    target=template_release arch=x86_64 custom_api_file=godot-cpp/extension_api.json precision=double
+scons platform=windows  target=template_debug   arch=x86_64 custom_api_file=godot-cpp/extension_api.json
+scons platform=windows  target=template_release arch=x86_64 custom_api_file=godot-cpp/extension_api.json
+scons platform=windows  target=template_debug   arch=x86_64 custom_api_file=godot-cpp/extension_api.json precision=double
+scons platform=windows  target=template_release arch=x86_64 custom_api_file=godot-cpp/extension_api.json precision=double
 
 # Remove any old ZIP file.
 rm discord_social_sdk.zip

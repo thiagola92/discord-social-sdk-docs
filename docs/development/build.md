@@ -15,18 +15,10 @@ export GODOT=godot
 
 # Environment variables for binary directories.
 export ANDROID_HOME=$HOME/Android/Sdk # Only needed when compiling to Android.
-
-# Environment variables for Godot SCons.
-export platform=linux
-export target=template_debug
-export arch=x86_64
-export precision=single
-export custom_api_file=godot-cpp/extension_api.json
 ```
 
 !!! tip
-    - Adapt it to your use case (binary paths, platform, target, ...)
-    - Save to an `.env` file so you can always load with `source .env`
+    Save to an `.env` file so you can always load with `source .env`
 
 ## Setup Repository
 These are only neede once:  
@@ -53,14 +45,14 @@ rm -rf /tmp/discord_social_sdk
 # Generate GDExtension API files.
 cd godot-cpp
 $GODOT --dump-extension-api
-scons
+scons custom_api_file=extension_api.json
 cd ..
 
 # Generate GDExtension source code.
 python scripts/main.py --code
 
 # Generate GDExtension library.
-scons
+scons custom_api_file=godot-cpp/extension_api.json
 
 # Open project, at least once, to be able to generate GDExtension documentation.
 $GODOT ./demo/project.godot
@@ -69,7 +61,7 @@ $GODOT ./demo/project.godot
 python scripts/main.py --docs
 
 # Link documentation to GDExtension library.
-scons
+scons custom_api_file=godot-cpp/extension_api.json
 
 # Open project (may need to open two times).
 $GODOT ./demo/project.godot
@@ -83,6 +75,6 @@ Run these steps every time that you modify the python code:
 
 ```bash
 python scripts/main.py --code --docs
-scons
+scons custom_api_file=godot-cpp/extension_api.json
 $GODOT ./demo/project.godot
 ```
