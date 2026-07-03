@@ -11,10 +11,10 @@
       
       
       
-        <link rel="prev" href="../setup/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../publish/">
+        <link rel="next" href="../build/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Continous Development - Discord Social SDK</title>
+        <title>Prerequisites - Discord Social SDK</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#continous-development" class="md-skip">
+        <a href="#prerequisites" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Continous Development
+              Prerequisites
             
           </span>
         </div>
@@ -843,36 +843,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../setup/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lamp-desk" viewBox="0 0 24 24"><path d="M10.293 2.293a1 1 0 0 1 1.414 0l2.5 2.5 5.994 1.227a1 1 0 0 1 .506 1.687l-7 7a1 1 0 0 1-1.687-.506l-1.227-5.994-2.5-2.5a1 1 0 0 1 0-1.414zM14.207 4.793l-3.414 3.414M3 20a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="m9.086 6.5-4.793 4.793a1 1 0 0 0-.18 1.17L7 18"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-    Setup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -883,12 +853,12 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-infinity" viewBox="0 0 24 24"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lamp-desk" viewBox="0 0 24 24"><path d="M10.293 2.293a1 1 0 0 1 1.414 0l2.5 2.5 5.994 1.227a1 1 0 0 1 .506 1.687l-7 7a1 1 0 0 1-1.687-.506l-1.227-5.994-2.5-2.5a1 1 0 0 1 0-1.414zM14.207 4.793l-3.414 3.414M3 20a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="m9.086 6.5-4.793 4.793a1 1 0 0 0-.18 1.17L7 18"/></svg>
   
   <span class="md-ellipsis">
     
   
-    CD
+    Prerequisite
   
 
     
@@ -898,6 +868,36 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-hammer" viewBox="0 0 24 24"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15l4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Build
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1033,10 +1033,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
+  <a href="#fedora-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Steps
+        Fedora Script
       
     </span>
   </a>
@@ -1109,31 +1109,67 @@
   
 
 
-<h1 id="continous-development">Continous Development</h1>
-<h2 id="steps">Steps</h2>
-<p>Repeat these steps every modification.  </p>
+<h1 id="prerequisites">Prerequisites</h1>
+<p>The following tools were used in the project, this doesn't mean that you need every single one:</p>
+<ul>
+<li><a href="https://godotengine.org/">Godot</a></li>
+<li><a href="https://scons.org/">SCons</a></li>
+<li><a href="https://www.python.org/">Python</a> <em>(&gt;= 3.12)</em></li>
+<li><a href="https://clang.llvm.org/">Clang</a></li>
+<li><a href="https://clang.llvm.org/docs/ClangFormat.html">Clang format</a><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">VSCode extension</a></li>
+</ul>
+</li>
+<li><a href="https://www.doxygen.nl/">Doxygen</a></li>
+<li><a href="https://www.mingw-w64.org/">Mingw64</a> <em>(cross compile for windows)</em></li>
+<li><a href="https://openjdk.org/">OpenJDK</a> <em>(export for android)</em></li>
+<li><a href="https://developer.android.com/tools/sdkmanager">Android SDK</a> <em>(cross compile for android)</em><ul>
+<li><a href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.html#download-the-android-sdk">Godot instructions</a></li>
+</ul>
+</li>
+<li><a href="https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++#step-4-download-the-discord-sdk-for-c++">Discord SDK for C++</a></li>
+</ul>
+<h2 id="fedora-script">Fedora Script</h2>
 <div class="admonition warning">
-<p class="admonition-title">If your Godot uses <code>double</code>, add <code>precision=double</code> to all scons commands</p>
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Adapt it to your operating system</li>
+</ul>
 </div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Generate GDExtension source code and documentations.</span>
-python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span class="w"> </span>--docs
+<div class="highlight"><pre><span></span><code><span class="c1"># Scons.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>python3-scons<span class="p">;</span>
 
-<span class="c1"># Generate GDExtension library (run the ones that interest you).</span>
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linux<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
-scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>windows<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
+<span class="c1"># Provide GNU static libraries (Fedora doesn&#39;t come with it).</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>libstdc++-static<span class="p">;</span>
 
-<span class="c1"># Open project.</span>
-godot<span class="w"> </span>./demo/project.godot
+<span class="c1"># Clang.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>clang<span class="p">;</span>
+
+<span class="c1"># Clang-format.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>clang-tools-extra<span class="p">;</span>
+
+<span class="c1"># Doxygen.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>doxygen<span class="p">;</span>
+
+<span class="c1"># Mingw64.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>mingw64-gcc-c++<span class="p">;</span>
+
+<span class="c1"># OpenJDK.</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>java-latest-openjdk-devel<span class="p">;</span>
+
+<span class="c1"># Android SDK.</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk<span class="p">;</span>
+curl<span class="w"> </span>-fl<span class="w"> </span>https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip<span class="w"> </span>-o<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
+unzip<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
+mv<span class="w"> </span>cmdline-tools<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk<span class="p">;</span>
+mkdir<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest
+mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/bin<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
+mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/lib<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
+mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/NOTICE.txt<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
+mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/source.properties<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PATH=\&quot;\$HOME/Android/SDK/cmdline-tools/latest/bin:\$PATH\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$HOME</span>/.bashrc<span class="p">;</span>
+sdkmanager<span class="w"> </span>--sdk_root<span class="o">=</span><span class="nv">$HOME</span>/Android/Sdk<span class="w"> </span><span class="s2">&quot;platform-tools&quot;</span><span class="w"> </span><span class="s2">&quot;build-tools;35.0.1&quot;</span><span class="w"> </span><span class="s2">&quot;platforms;android-35&quot;</span><span class="w"> </span><span class="s2">&quot;cmdline-tools;latest&quot;</span><span class="w"> </span><span class="s2">&quot;cmake;3.10.2.4988404&quot;</span><span class="w"> </span><span class="s2">&quot;ndk;28.1.13356709&quot;</span>
+rm<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
 </code></pre></div>
 
 
@@ -1177,7 +1213,7 @@ godot<span class="w"> </span>./demo/project.godot
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setup">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Development">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
@@ -1187,20 +1223,20 @@ godot<span class="w"> </span>./demo/project.godot
                 Previous
               </span>
               <div class="md-ellipsis">
-                Setup
+                Development
               </div>
             </div>
           </a>
         
         
           
-          <a href="../publish/" class="md-footer__link md-footer__link--next" aria-label="Next: Publish">
+          <a href="../build/" class="md-footer__link md-footer__link--next" aria-label="Next: Build">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Publish
+                Build
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -65,8 +65,8 @@ nav = [
     { "Security" = "security.md" },
     { "Development" = [
         "development/index.md",
-        {"Setup" = "development/setup.md"},
-        {"CD" = "development/cd.md"},
+        {"Prerequisite" = "development/prerequisite.md"},
+        {"Build" = "development/build.md"},
         {"Publish" = "development/publish.md"},
         {"Coding" = "development/coding.md"},
     ]},
