@@ -7,23 +7,25 @@ icon: lucide/infinity
 ## Steps
 Repeat these steps every modification.  
 
+!!! warning "If your Godot uses `double`, add `precision=double` to all scons commands"
+
 ```bash
 # Generate GDExtension source code and documentations.
 python scripts/main.py --code --docs
 
 # Generate GDExtension library (run the ones that interest you).
-scons platform=android target=template_debug   arch=arm32
-scons platform=android target=template_debug   arch=arm64
-scons platform=android target=template_debug   arch=x86_32
-scons platform=android target=template_debug   arch=x86_64
-scons platform=linux   target=template_debug   arch=x86_64
-scons platform=windows target=template_debug   arch=x86_64
-scons platform=android target=template_release arch=arm32
-scons platform=android target=template_release arch=arm64
-scons platform=android target=template_release arch=x86_32
-scons platform=android target=template_release arch=x86_64
-scons platform=linux   target=template_release arch=x86_64
-scons platform=windows target=template_release arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=android arch=arm32
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=android arch=arm64
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=android arch=x86_32
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=android arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=linux arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_debug platform=windows arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=android arch=arm32
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=android arch=arm64
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=android arch=x86_32
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=android arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=linux arch=x86_64
+scons custom_api_file=godot-cpp/extension_api.json target=template_release platform=windows arch=x86_64
 
 # Open project.
 godot ./demo/project.godot
