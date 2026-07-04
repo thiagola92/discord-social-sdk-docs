@@ -4,7 +4,7 @@ icon: lucide/hammer
 
 # Build
 
-These instructions show how to build the GDExtension for Godot version `4.4`.  
+These instructions show how to build the GDExtension for Godot version `4.4` on Linux.  
 
 !!! note "Version compatibility"
     GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it.  
@@ -32,7 +32,8 @@ export GODOT=godot
 !!! warning
     Do not use relative paths because we use execute `$GODOT` from different directories.
 
-!!! tip "Linux tip"
+
+!!! tip
     Save to an `.env` file so you can always load with `source .env`.
 
 ## Setup Repository
