@@ -29,6 +29,9 @@ export DOXYGEN=doxygen
 export GODOT=godot
 ```
 
+!!! warning
+    Do not use relative paths because we use execute `$GODOT` from different directories.
+
 !!! tip "Linux tip"
     Save to an `.env` file so you can always load with `source .env`.
 
