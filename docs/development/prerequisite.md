@@ -21,7 +21,7 @@ The following tools were used in the project, this doesn't mean that you need ev
 ## Fedora Script
 
 !!! warning
-    - Adapt it to your operating system
+    Adapt it to your operating system
 
 ```bash
 # Scons.

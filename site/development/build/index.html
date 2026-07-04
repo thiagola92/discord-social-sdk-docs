@@ -1132,22 +1132,26 @@
 
 
 <h1 id="build">Build</h1>
+<p>These instructions show how to build the GDExtension for Godot version <code>4.4</code>.  </p>
+<div class="admonition note">
+<p class="admonition-title">Version compatibility</p>
+<p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any version above it (the opposite is not guaranteed). </p>
+<blockquote>
+<p>Version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>, which means that building with versions &gt;= <code>4.7</code> will fail.  </p>
+</blockquote>
+</div>
 <h2 id="environment-variables">Environment variables</h2>
-<p>These environment variables are used during the build/development:  </p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Environment variables for binary paths.</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">CLANG_FORMAT</span><span class="o">=</span>clang-format
+<p>The Python script expect that any tool can be accessed by it name alone, but you can also indicates the correct location throught environment variables:  </p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CLANG_FORMAT</span><span class="o">=</span>clang-format
 <span class="nb">export</span><span class="w"> </span><span class="nv">DOXYGEN</span><span class="o">=</span>doxygen
 <span class="nb">export</span><span class="w"> </span><span class="nv">GODOT</span><span class="o">=</span>godot
-
-<span class="c1"># Environment variables for binary directories.</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">ANDROID_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/Android/Sdk<span class="w"> </span><span class="c1"># Only needed when compiling to Android.</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Save to an <code>.env</code> file so you can always load with <code>source .env</code></p>
+<p class="admonition-title">Linux tip</p>
+<p>Save to an <code>.env</code> file so you can always load with <code>source .env</code>.</p>
 </div>
 <h2 id="setup-repository">Setup Repository</h2>
-<p>These are only neede once:  </p>
+<p>These will build for your current operating system (adapt it to your use case):  </p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Clone repository, submodules and only file needed.</span>
 git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>--filter<span class="o">=</span>blob:none<span class="w"> </span>https://github.com/thiagola92/discord-social-sdk.git
 <span class="nb">cd</span><span class="w"> </span>discord-social-sdk
@@ -1195,7 +1199,7 @@ scons<span class="w"> </span><span class="nv">custom_api_file</span><span class=
 <p>Make sure that Godot version match with <code>godot-cpp</code> repository</p>
 </div>
 <h2 id="rebuild">Rebuild</h2>
-<p>Run these steps every time that you modify the python code:  </p>
+<p>Run these steps every time that you modify the Python code:  </p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code<span class="w"> </span>--docs
 scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 <span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot

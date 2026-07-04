@@ -4,24 +4,27 @@ icon: lucide/hammer
 
 # Build
 
+These instructions show how to build the GDExtension for Godot version `4.4`.  
+
+!!! note "Version compatibility"
+    GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it (the opposite is not guaranteed). 
+
+    > Version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965), which means that building with versions >= `4.7` will fail.  
+
 ## Environment variables
-These environment variables are used during the build/development:  
+The Python script expect that any tool can be accessed by it name alone, but you can also indicates the correct location throught environment variables:  
 
 ```bash
-# Environment variables for binary paths.
 export CLANG_FORMAT=clang-format
 export DOXYGEN=doxygen
 export GODOT=godot
-
-# Environment variables for binary directories.
-export ANDROID_HOME=$HOME/Android/Sdk # Only needed when compiling to Android.
 ```
 
-!!! tip
-    Save to an `.env` file so you can always load with `source .env`
+!!! tip "Linux tip"
+    Save to an `.env` file so you can always load with `source .env`.
 
 ## Setup Repository
-These are only neede once:  
+These will build for your current operating system (adapt it to your use case):  
 
 ```bash
 # Clone repository, submodules and only file needed.
@@ -71,7 +74,7 @@ $GODOT ./demo/project.godot
     Make sure that Godot version match with `godot-cpp` repository
 
 ## Rebuild
-Run these steps every time that you modify the python code:  
+Run these steps every time that you modify the Python code:  
 
 ```bash
 python scripts/main.py --code --docs
