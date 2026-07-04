@@ -29,12 +29,9 @@ export DOXYGEN=doxygen
 export GODOT=godot
 ```
 
-!!! warning
-    Do not use relative paths because we use execute `$GODOT` from different directories.
-
-
-!!! tip
-    Save to an `.env` file so you can always load with `source .env`.
+!!! note
+    - Do not use relative paths because we use execute `$GODOT` from different directories.
+    - Save to an `.env` file so you can always load with `source .env`.
 
 ## Setup Repository
 These will build for your current operating system (adapt it to your use case):  
@@ -83,8 +80,9 @@ scons custom_api_file=godot-cpp/extension_api.json
 $GODOT ./demo/project.godot
 ```
 
-!!! warning
-    Make sure that Godot version match with `godot-cpp` repository
+!!! note
+    - Make sure that Godot version match with `godot-cpp` repository
+    - Custom builds should add their extra arguments to all `scons` calls (e.g. `precision=double`)
 
 ## Rebuild
 Run these steps every time that you modify the Python code:  
