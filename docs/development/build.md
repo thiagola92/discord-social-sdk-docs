@@ -7,9 +7,11 @@ icon: lucide/hammer
 These instructions show how to build the GDExtension for Godot version `4.4`.  
 
 !!! note "Version compatibility"
-    GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it (the opposite is not guaranteed). 
+    GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it.  
 
-    > Version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965), which means that building with versions >= `4.7` will fail.  
+    The opposite is not guaranteed. For example:  
+    
+    > Version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965), which means that C++ code generated from our Python scripts will fail for versions >= `4.7`.  
 
 ## Environment variables
 The Python script expect that any tool can be accessed by it name alone, but you can also indicates the correct location throught environment variables:  

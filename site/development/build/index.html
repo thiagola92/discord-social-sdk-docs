@@ -1135,9 +1135,10 @@
 <p>These instructions show how to build the GDExtension for Godot version <code>4.4</code>.  </p>
 <div class="admonition note">
 <p class="admonition-title">Version compatibility</p>
-<p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any version above it (the opposite is not guaranteed). </p>
+<p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any version above it.  </p>
+<p>The opposite is not guaranteed. For example:  </p>
 <blockquote>
-<p>Version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>, which means that building with versions &gt;= <code>4.7</code> will fail.  </p>
+<p>Version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>, which means that C++ code generated from our Python scripts will fail for versions &gt;= <code>4.7</code>.  </p>
 </blockquote>
 </div>
 <h2 id="environment-variables">Environment variables</h2>
