@@ -1136,10 +1136,23 @@
 <div class="admonition note">
 <p class="admonition-title">Version compatibility</p>
 <p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any version above it.  </p>
-<p>The opposite is not guaranteed. For example:  </p>
-<blockquote>
-<p>Version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>, which means that C++ code generated from our Python scripts will fail for versions &gt;= <code>4.7</code>.  </p>
-</blockquote>
+<p>The opposite is not guaranteed. For example, version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>.  </p>
+<p>This means that our Python script generate an invalid C++ code for versions &gt;= <code>4.7</code>, which block us from building the GDExtension with newer versions.  </p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DiscordObject *obj</code></td>
+<td><code>Ref&lt;DiscordObject&gt; obj</code></td>
+</tr>
+</tbody>
+</table>
+<p>Making our Python script generate different code for specifics version would add a lot of complexity. So the recomentation is to built with old version because it will work in the newer.  </p>
 </div>
 <h2 id="environment-variables">Environment variables</h2>
 <p>The Python script expect that any tool can be accessed by it name alone, but you can also indicates the correct location throught environment variables:  </p>

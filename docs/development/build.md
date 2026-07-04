@@ -9,9 +9,16 @@ These instructions show how to build the GDExtension for Godot version `4.4`.
 !!! note "Version compatibility"
     GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it.  
 
-    The opposite is not guaranteed. For example:  
+    The opposite is not guaranteed. For example, version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965).  
+
+    This means that our Python script generate an invalid C++ code for versions >= `4.7`, which block us from building the GDExtension with newer versions.  
     
-    > Version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965), which means that C++ code generated from our Python scripts will fail for versions >= `4.7`.  
+    | Before | After |
+    | ------ | ----- |
+    | `DiscordObject *obj` | `Ref<DiscordObject> obj` |
+    
+    Making our Python script generate different code for specifics version would add a lot of complexity. So the recomentation is to built with old version because it will work in the newer.  
+    
 
 ## Environment variables
 The Python script expect that any tool can be accessed by it name alone, but you can also indicates the correct location throught environment variables:  
