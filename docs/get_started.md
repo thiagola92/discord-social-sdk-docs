@@ -9,7 +9,8 @@ icon: lucide/rocket
 
     - Step 1: Create a Discord Developer Team.  
     - Step 2: Create a Discord Application.  
-    - Step 3: Enable Discord Social SDK for Your App.  
+    - Step 3: Enable Discord Social SDK for Your App.
+    - Step 4: Add `http://127.0.0.1/callback` redirect uri in OAuth2 section
 
     That's it, you don't need any other step to start using the GDExtension in GDScript.  
 
