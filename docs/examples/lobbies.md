@@ -224,6 +224,78 @@ func _on_message_created(message_id: int) -> void:
 ```
 
 ## Message History
+Retrive recent messages from the lobby:  
+
+```gdscript title="GDScript" linenums="1" hl_lines="38 47-54"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
+func _ready() -> void:
+	client.set_application_id(application_id)
+	client.set_message_created_callback(_on_message_created)
+	client.set_status_changed_callback(_on_status_changed)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
+
+
+func _on_log(message: String, severity: DiscordLoggingSeverity.Enum) -> void:
+	var enum_str: String = Discord.enum_to_string(severity, DiscordLoggingSeverity.id)
+	
+	print("[%s] %s" % [enum_str, message])
+
+
+func _on_status_changed(status: DiscordClientStatus.Enum, _error: DiscordClientError.Enum, _error_detail: int) -> void:
+	var enum_str: String = Discord.enum_to_string(status, DiscordClientStatus.id)
+	
+	print("Status changed to %s" % enum_str)
+	
+	if status == DiscordClientStatus.READY:
+		client.create_or_join_lobby("your-unique-lobby-secret", _on_joined_lobby)
+
+
+func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
+	if result.successful():
+		print("🎮 Lobby created or joined successfully! Lobby Id: %s" % lobby_id)
+		
+		client.get_lobby_messages_with_limit(lobby_id, 50, _on_lobby_history)
+		
+		await get_tree().create_timer(60).timeout
+		
+		client.leave_lobby(lobby_id, _on_left_lobby)
+	else:
+		print("❌ Lobby creation/join failed")
+
+
+func _on_lobby_history(result: DiscordClientResult, messages: Array[DiscordMessageHandle]) -> void:
+	if result.successful():
+		print("🕰 Retrieved %s messages from lobby chat history!" % messages.size())
+		
+		for message in messages:
+			print("Message: %s" % message.content())
+	else:
+		print("❌ Failed to retrieve lobby chat history")
+
+
+func _on_left_lobby(result: DiscordClientResult) -> void:
+	if result.successful():
+		print("🎮 Left lobby successfully!")
+	else:
+		print("❌ Leaving lobby failed")
+
+
+func _on_message_created(message_id: int) -> void:
+	var message = client.get_message_handle(message_id)
+	
+	if message is DiscordMessageHandle:
+		print("📨 New message received: " % message.content())
+```
 
 ## References
 - [Creating and Managing Lobbies](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-lobbies)

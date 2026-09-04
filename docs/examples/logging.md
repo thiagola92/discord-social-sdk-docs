@@ -31,6 +31,3 @@ func _on_log(message: String, severity: DiscordLoggingSeverity.Enum) -> void:
 
 ## References
 - [Debug & Log](https://docs.discord.com/developers/discord-social-sdk/how-to/debug-log)
-- SDK Documentation
-    - [client.add_log_callback()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#af78996cff24a40f5dc7066beed16692c)
-    - [Discord.enum_to_string()](https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#a0fd967a23d2d106ced3d6669b9a810ad)

@@ -149,6 +149,3 @@ func _on_relationship_updated(user_id: int) -> void:
 
 ## References
 - [Creating a Unified Friends List](https://docs.discord.com/developers/discord-social-sdk/development-guides/creating-a-unified-friends-list)
-- SDK Documentation
-	- [client.get_relationships_by_group()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a9f7898d3f3d1ec92b06c662df70746d5)
-	- [client.set_relationship_groups_updated_callback()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#af12441ef091298f968075b7190851098)

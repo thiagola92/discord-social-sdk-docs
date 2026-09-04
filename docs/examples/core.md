@@ -29,7 +29,4 @@ Every step is very important:
 - [x] Run pending callbacks every frame
 
 ## References
-- SDK Documentation
-	- [`DiscordClient`](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html)
-	- [`client.set_application_id()`](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#ad452335c06b28be0406dab824acccc49)
-	- [`Discord.run_callbacks()`](https://discord.com/developers/docs/social-sdk/namespacediscordpp.html#ab5dd8cf274f581ee1885de5816be3c29)  
+- [Run Callbacks](https://docs.discord.com/developers/discord-social-sdk/getting-started/using-c++#step-7-run-callbacks)

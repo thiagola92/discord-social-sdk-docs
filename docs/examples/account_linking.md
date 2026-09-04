@@ -317,10 +317,3 @@ func _on_token_received(
 
 ## References
 - [Account Linking from Your Game](https://docs.discord.com/developers/discord-social-sdk/development-guides/account-linking-with-discord)
-- SDK Documentation
-	- [DiscordAuthorizationCodeVerifier](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1AuthorizationCodeVerifier.html)
-	- [DiscordAuthorizationArgs](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1AuthorizationArgs.html)
-	- [client.authorize()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#ace94a58e27545a933d79db32b387a468)
-	- [client.get_token()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#aaee636f91fb1ea3465157c20313b702c)
-	- [client.update_token()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a606b32cef7796f7fb91c2497bc31afc4)
-	- [client.connect_discord()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a873a844c7c4c72e9e693419bb3e290aa)

@@ -37,6 +37,4 @@ func _on_status_changed(status: DiscordClientStatus.Enum, _error: DiscordClientE
 ```
 
 # References
-- SDK Documentation
-    - [client.set_status_changed_callback()](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a9d0e8824570b93149d5d1c65bb3fb97f)
-    - [DiscordClientStatus.Enum](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Client.html#a6f714c5d6aebefa91c1ff8ba97bcce22)
+- [Monitoring Connection Status](https://docs.discord.com/developers/discord-social-sdk/getting-started/using-c++#monitoring-connection-status)
