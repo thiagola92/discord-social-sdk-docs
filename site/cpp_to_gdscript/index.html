@@ -1085,10 +1085,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#types" class="md-nav__link">
+  <a href="#basic-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Types
+        Basic Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complex-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complex Types
       
     </span>
   </a>
@@ -1111,72 +1122,6 @@
     <span class="md-ellipsis">
       
         Method Call
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-type" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enum Type
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-value" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enum Value
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#signed-32-bit-integer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Signed 32-bit Integer
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unsigned-32-bit-integer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Unsigned 32-bit Integer
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unsigned-64-bit-integer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Unsigned 64-bit Integer
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optional
       
     </span>
   </a>
@@ -1269,7 +1214,7 @@
 <tr>
 <td>Method Name</td>
 <td><code>MethodExample</code></td>
-<td><code>method_example</code> or <br> <code>method_example_discord</code></td>
+<td><code>method_example</code> <br> <code>method_example_discord</code></td>
 </tr>
 <tr>
 <td>Parameter Name</td>
@@ -1289,7 +1234,7 @@
 <span class="n">DiscordClient</span><span class="p">.</span><span class="n">disconnect_discord</span><span class="p">()</span>
 </code></pre></div>
 </details>
-<h2 id="types">Types</h2>
+<h2 id="basic-types">Basic Types</h2>
 <table>
 <thead>
 <tr>
@@ -1305,6 +1250,11 @@
 <td><code>bool</code></td>
 </tr>
 <tr>
+<td>Integer</td>
+<td><code>int8_t</code><br><code>uint8_t</code><br><code>int16_t</code><br><code>uint16_t</code><br><code>int32_t</code><br><code>uint32_t</code><br><code>int64_t</code><br><code>uint64_t</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
 <td>Float</td>
 <td><code>float</code></td>
 <td><code>float</code></td>
@@ -1314,6 +1264,92 @@
 <td><code>std::string</code></td>
 <td><code>String</code></td>
 </tr>
+</tbody>
+</table>
+<details class="danger">
+<summary>Operating over integers is dangerous</summary>
+<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
+<p>For example, these both have the same bits:  </p>
+<table>
+<thead>
+<tr>
+<th><code>int64_t</code></th>
+<th><code>uint64_t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<p>Adding 1 to them would reflect in different values:    </p>
+<table>
+<thead>
+<tr>
+<th><code>int64_t</code></th>
+<th><code>uint64_t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>18446744073709551616</td>
+</tr>
+</tbody>
+</table>
+<p>When sending back to the SDK it would receive 0 instead of the expected value.  </p>
+<p><strong>Note</strong>: It's not a problem if you didn't operate over the value because it will be just copying the bits without changing them (reference: <a href="https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346">godot-proposals/issues/9740</a>).  </p>
+<details class="tip">
+<summary>Tip</summary>
+<p>Converting a bigger type to a smaller type means truncating until match the smallest size. For example:  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>uint16_t</code></th>
+<th><code>uint8_t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decimal</td>
+<td>32896</td>
+<td>128</td>
+</tr>
+<tr>
+<td>Binary</td>
+<td>1000 0000 1000 0000</td>
+<td>1000 0000</td>
+</tr>
+</tbody>
+</table>
+<p>In this case, we lost information during conversion because a number bigger than <code>uint8_t</code> limit was converted to a number smaller than it limit.  </p>
+<p>You can reduce your problem by clamping the value so at least we know if reached minimum or maximum values. For example:  </p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="c1"># For unsigned types.</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">UINT8_MAX</span><span class="p">)</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">UINT16_MAX</span><span class="p">)</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">)</span>
+
+<span class="c1"># For signed types.</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">INT8_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">INT8_MAX</span><span class="p">)</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">INT16_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">INT16_MAX</span><span class="p">)</span>
+<span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MAX</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Note</strong>: This doesn't prevent you from corrupting data when operating over it.  </p>
+</details>
+</details>
+<h2 id="complex-types">Complex Types</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Vector</td>
 <td><code>std::vector&lt;T&gt;</code></td>
@@ -1325,12 +1361,70 @@
 <td><code>Dictionary[K, T]</code></td>
 </tr>
 <tr>
-<td>Auto</td>
-<td><code>auto</code></td>
+<td>Optional</td>
+<td><code>std::optional&lt;T&gt;</code></td>
 <td><code>Variant</code></td>
 </tr>
 </tbody>
 </table>
+<details class="warning">
+<summary><code>Variant</code> problem</summary>
+<p>As counterpart of C++ <a href="https://en.cppreference.com/w/cpp/utility/optional"><code>std::optional&lt;T&gt;</code></a>, we used GDScript <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html"><code>Variant</code></a>. The idea was:  </p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>std::optional&lt;T&gt;</code></td>
+<td><code>T</code> or <code>std::nullopt</code></td>
+</tr>
+<tr>
+<td><code>Variant</code></td>
+<td><code>T</code> or <code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>This design has a problem... What if <code>T</code> is actually a pointer? For example:  </p>
+<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now we can't see the difference between "the value is null" and "there is no value".  </p>
+<table>
+<thead>
+<tr>
+<th>Return</th>
+<th>Converted to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>std::nullopt</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>nullptr</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td><code>T</code></td>
+</tr>
+</tbody>
+</table>
+<p>To solve this I would need to create a class to represent <code>std::optional&lt;T&gt;</code>.  </p>
+</details>
 <h2 id="enum">Enum</h2>
 <table>
 <thead>
@@ -1434,194 +1528,6 @@
 </code></pre></div>
 <p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
 </details>
-<h2 id="enum-type">Enum Type</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span>
-</code></pre></div>
-<h2 id="enum-value">Enum Value</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">discordpp</span><span class="o">::</span><span class="n">Client</span><span class="o">::</span><span class="n">Status</span><span class="o">::</span><span class="n">Ready</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span>
-</code></pre></div>
-<ol>
-<li>Transform enum value<ul>
-<li><code>::Ready</code> =&gt; <code>.READY</code></li>
-</ul>
-</li>
-<li>Transform enum name<ul>
-<li><code>::Status</code> =&gt; <code>Status</code></li>
-</ul>
-</li>
-<li>Transform class<ul>
-<li><code>::Client</code> =&gt; <code>Client</code></li>
-</ul>
-</li>
-<li>Transform namespace<ul>
-<li><code>discordpp</code> =&gt; <code>Discord</code></li>
-</ul>
-</li>
-</ol>
-<h2 id="signed-32-bit-integer">Signed 32-bit Integer</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">int32_t</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
-</code></pre></div>
-<ol>
-<li>Transform signed 32-bit integer<ul>
-<li><code>int32_t</code> =&gt; <code>int</code></li>
-</ul>
-</li>
-</ol>
-<details class="danger">
-<summary>Read if you intend to operating over it</summary>
-<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
-<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
-<hr />
-<p>Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds <strong>32-bit integer</strong> range.  </p>
-<p>To make sure that it's between the range, you can clamp it:  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">INT32_MAX</span><span class="p">)</span>
-</code></pre></div>
-</details>
-<h2 id="unsigned-32-bit-integer">Unsigned 32-bit Integer</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">uint32_t</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
-</code></pre></div>
-<ol>
-<li>Transform unsigned 32-bit integer<ul>
-<li><code>uint32_t</code> =&gt; <code>int</code></li>
-</ul>
-</li>
-</ol>
-<details class="danger">
-<summary>Read if you intend to operating over it</summary>
-<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
-<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
-<hr />
-<p>Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds <strong>32-bit unsigned integer</strong> range.  </p>
-<p>To make sure that it's between the range, you can clamp it:  </p>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clampi</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">)</span>
-</code></pre></div>
-</details>
-<h2 id="unsigned-64-bit-integer">Unsigned 64-bit Integer</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="kt">uint64_t</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="nb nb-Type">int</span>
-</code></pre></div>
-<ol>
-<li>Transform unsigned 64-bit integer<ul>
-<li><code>uint64_t</code> =&gt; <code>int</code></li>
-</ul>
-</li>
-</ol>
-<details class="danger">
-<summary>Read if you intend to operating over it</summary>
-<p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
-<p>It's not a problem if <strong>didn't</strong> operate the data because you are just copying the bits without changing them.  </p>
-<hr />
-<p><strong>You should study which operations can corrupt your data.</strong>  </p>
-<p>For example, these both have the same bits:  </p>
-<table>
-<thead>
-<tr>
-<th><code>int64_t</code></th>
-<th><code>uint64_t</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-1</td>
-<td>18446744073709551615</td>
-</tr>
-</tbody>
-</table>
-<p>Adding 1 to them would reflect in different values:    </p>
-<table>
-<thead>
-<tr>
-<th><code>int64_t</code></th>
-<th><code>uint64_t</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>18446744073709551616</td>
-</tr>
-</tbody>
-</table>
-<p>Reference: <a href="https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346">godot-proposals/issues/9740</a>  </p>
-</details>
-<h2 id="optional">Optional</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="n">Variant</span>
-</code></pre></div>
-<ol>
-<li>Transform optional<ul>
-<li><code>std::optional&lt;T&gt;</code> =&gt; <code>Variant</code></li>
-</ul>
-</li>
-</ol>
-<details class="warning">
-<summary>Rework needed</summary>
-<p>As counterpart of C++ <a href="https://en.cppreference.com/w/cpp/utility/optional"><code>std::optional&lt;T&gt;</code></a>, we use GDScript <a href="https://docs.godotengine.org/en/stable/classes/class_variant.html"><code>Variant</code></a>. The idea was:  </p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Possible Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>std::optional&lt;T&gt;</code></td>
-<td><code>T</code> or <code>std::nullopt</code></td>
-</tr>
-<tr>
-<td><code>Variant</code></td>
-<td><code>T</code> or <code>null</code></td>
-</tr>
-</tbody>
-</table>
-<p>This design has a problem... What if <code>T</code> is actually a pointer? For example:  </p>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Now we can't see the difference between "the value is null" and "there is no value".  </p>
-<table>
-<thead>
-<tr>
-<th>Return</th>
-<th>Converted to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>std::nullopt</code></td>
-<td><code>null</code></td>
-</tr>
-<tr>
-<td><code>nullptr</code></td>
-<td><code>null</code></td>
-</tr>
-<tr>
-<td><code>T</code></td>
-<td><code>T</code></td>
-</tr>
-</tbody>
-</table>
-<p>To solve this I would need to create another class, to actually represent <code>std::optional&lt;T&gt;</code>.  </p>
-</details>
 <h2 id="lambda-function">Lambda Function</h2>
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">//</span>
@@ -1630,21 +1536,7 @@
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">):</span>
 <span class="w">    </span><span class="k">pass</span>
 </code></pre></div>
-<ol>
-<li>Transform scope block<ul>
-<li><code>{}</code> =&gt; <code>\t</code></li>
-</ul>
-</li>
-<li>Transform variables<ul>
-<li><code>auto message</code> =&gt; <code>message</code></li>
-<li><code>auto severity</code> =&gt; <code>severity</code></li>
-</ul>
-</li>
-<li>Transform function declaration<ul>
-<li><code>[](...)</code> =&gt; <code>func(...)</code></li>
-</ul>
-</li>
-</ol>
+<hr />
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">discordpp</span><span class="o">::</span><span class="n">LoggingSeverity</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">//</span>
 <span class="p">}</span>
@@ -1652,21 +1544,7 @@
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="k">pass</span>
 </code></pre></div>
-<ol>
-<li>Transform scope block<ul>
-<li><code>{}</code> =&gt; <code>\t</code></li>
-</ul>
-</li>
-<li>Transform variables<ul>
-<li><code>std::string message</code> =&gt; <code>message: String</code></li>
-<li><code>discordpp::LoggingSeverity severity</code> =&gt; <code>severity: DiscordLoggingSeverity.Enum</code></li>
-</ul>
-</li>
-<li>Transform function declaration<ul>
-<li><code>[](...)</code> =&gt; <code>func(...)</code></li>
-</ul>
-</li>
-</ol>
+<hr />
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">//</span>
 <span class="p">}</span>
@@ -1675,21 +1553,6 @@
 <span class="w">    </span><span class="k">pass</span>
 <span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div>
-<ol>
-<li>Transform scope block<ul>
-<li><code>{}</code> =&gt; <code>\t</code></li>
-</ul>
-</li>
-<li>Transform variables<ul>
-<li><code>auto message</code> =&gt; <code>message</code></li>
-<li><code>auto severity</code> =&gt; <code>severity</code></li>
-</ul>
-</li>
-<li>Transform function declaration with capture<ul>
-<li><code>[...](...)</code> =&gt; <code>(func(...)).bind(...)</code></li>
-</ul>
-</li>
-</ol>
 
 
 

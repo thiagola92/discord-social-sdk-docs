@@ -21,7 +21,7 @@ icon: lucide/arrow-right-left
 |                  | C++                        | GDScript                                     |
 | ---------------- | -------------------------- | -------------------------------------------- |
 | Class Name       | `ClassExample`             | `DiscordClassExample`                        |
-| Method Name      | `MethodExample`            | `method_example` or <br> `method_example_discord` |
+| Method Name      | `MethodExample`            | `method_example` <br> `method_example_discord` |
 | Parameter Name   | `paramExample`             | `param_example`                              |
 
 ??? warning "Conflict with existing names"
@@ -40,15 +40,102 @@ icon: lucide/arrow-right-left
 	DiscordClient.disconnect_discord()
 	```
 
-## Types
+## Basic Types
 |                  | C++                         | GDScript                                     |
 | ---------------- | --------------------------- | -------------------------------------------- |
 | Bool             | `bool`                      | `bool`                                       |
+| Integer          | `int8_t`<br>`uint8_t`<br>`int16_t`<br>`uint16_t`<br>`int32_t`<br>`uint32_t`<br>`int64_t`<br>`uint64_t` | `int` |
 | Float            | `float`                     | `float`                                      |
 | String           | `std::string`               | `String`                                     |
+
+??? danger "Operating over integers is dangerous"
+
+    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
+    
+    For example, these both have the same bits:  
+
+    | `int64_t` | `uint64_t`           |
+    | --------- | -------------------- |
+    | -1        | 18446744073709551615 |
+
+    Adding 1 to them would reflect in different values:    
+
+    | `int64_t` | `uint64_t`           |
+    | --------- | -------------------- |
+    | 0         | 18446744073709551616 |
+
+    When sending back to the SDK it would receive 0 instead of the expected value.  
+
+    **Note**: It's not a problem if you didn't operate over the value because it will be just copying the bits without changing them (reference: [godot-proposals/issues/9740](https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346)).  
+
+    ??? tip "Tip"
+
+        Converting a bigger type to a smaller type means truncating until match the smallest size. For example:  
+
+        |         | `uint16_t`          | `uint8_t` |
+        | ------- | ------------------- | --------- |
+        | Decimal | 32896               | 128       |
+        | Binary  | 1000 0000 1000 0000 | 1000 0000 |
+
+        In this case, we lost information during conversion because a number bigger than `uint8_t` limit was converted to a number smaller than it limit.  
+
+        You can reduce your problem by clamping the value so at least we know if reached minimum or maximum values. For example:  
+        
+        ```gdscript title="GDScript"
+        # For unsigned types.
+        value = clampi(value, 0, UINT8_MAX)
+        value = clampi(value, 0, UINT16_MAX)
+        value = clampi(value, 0, UINT32_MAX)
+
+        # For signed types.
+        value = clampi(value, INT8_MIN, INT8_MAX)
+        value = clampi(value, INT16_MIN, INT16_MAX)
+        value = clampi(value, INT32_MIN, INT32_MAX)
+        ```
+
+        **Note**: This doesn't prevent you from corrupting data when operating over it.  
+
+## Complex Types
+|                  | C++                         | GDScript                                     |
+| ---------------- | --------------------------- | -------------------------------------------- |
 | Vector           | `std::vector<T>`            | `Array[T]`                                   |
 | Map              | `std::unordered_map<K, T>`  | `Dictionary[K, T]`                           |
-| Auto             | `auto`                      | `Variant`                                    |
+| Optional         | `std::optional<T>`          | `Variant`                                    |
+
+??? warning "`Variant` problem"
+
+    As counterpart of C++ [`std::optional<T>`](https://en.cppreference.com/w/cpp/utility/optional), we used GDScript [`Variant`](https://docs.godotengine.org/en/stable/classes/class_variant.html). The idea was:  
+
+    | Type               | Possible Values       |
+    | ------------------ | --------------------- |
+    | `std::optional<T>` | `T` or `std::nullopt` |
+    | `Variant`          | `T` or `null`         |
+
+    This design has a problem... What if `T` is actually a pointer? For example:  
+
+    ```c++ title="C++"
+    std::optional<int*> f(int mode) {
+        if (mode == 0)
+            return std::nullopt;
+
+        if (mode == 1)
+            return nullptr;
+
+        static int x = 42;
+        return &x;
+    }
+    ```
+
+    Now we can't see the difference between "the value is null" and "there is no value".  
+
+    | Return             | Converted to          |
+    | ------------------ | --------------------- |
+    | `std::nullopt`     | `null`                |
+    | `nullptr`          | `null`                |
+    | `T`                | `T`                   |
+
+    
+    To solve this I would need to create a class to represent `std::optional<T>`.  
 
 ## Enum
 |                  | C++                                | GDScript                                     |
@@ -148,173 +235,6 @@ icon: lucide/arrow-right-left
 
     Note how `id` is not UPPER_CASE, this prevents conflicting with true constants.  
 
-## Enum Type
-```c++ title="C++"
-discordpp::Client::Status
-```
-
-```gdscript title="GDScript"
-DiscordClientStatus.Enum
-```
-
-
-## Enum Value
-```c++ title="C++"
-discordpp::Client::Status::Ready
-```
-
-```gdscript title="GDScript"
-DiscordClientStatus.READY
-```
-
-1. Transform enum value
-    - `::Ready` => `.READY`
-2. Transform enum name
-    - `::Status` => `Status`
-3. Transform class
-    - `::Client` => `Client`
-4. Transform namespace
-    - `discordpp` => `Discord`
-
-## Signed 32-bit Integer
-```c++ title="C++"
-int32_t
-```
-
-```gdscript title="GDScript"
-int
-```
-
-1. Transform signed 32-bit integer
-    - `int32_t` => `int`
-
-??? danger "Read if you intend to operating over it"
-
-    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
-
-    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
-
-    ---
-
-    Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds **32-bit integer** range.  
-
-    To make sure that it's between the range, you can clamp it:  
-    
-    ```gdscript title="GDScript"
-    value = clampi(value, INT32_MIN, INT32_MAX)
-    ```
-
-## Unsigned 32-bit Integer
-```c++ title="C++"
-uint32_t
-```
-
-```gdscript title="GDScript"
-int
-```
-
-1. Transform unsigned 32-bit integer
-    - `uint32_t` => `int`
-
-??? danger "Read if you intend to operating over it"
-
-    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
-
-    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
-
-    ---
-
-    Your integer will be truncated to get the lower 32 bits, this means that you lose any bits that exceeds **32-bit unsigned integer** range.  
-
-    To make sure that it's between the range, you can clamp it:  
-    
-    ```gdscript title="GDScript"
-    value = clampi(value, 0, UINT32_MAX)
-    ```
-
-## Unsigned 64-bit Integer
-```c++ title="C++"
-uint64_t
-```
-
-```gdscript title="GDScript"
-int
-```
-
-1. Transform unsigned 64-bit integer
-    - `uint64_t` => `int`
-
-??? danger "Read if you intend to operating over it"
-
-    Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
-
-    It's not a problem if **didn't** operate the data because you are just copying the bits without changing them.  
-
-    ---
-
-    **You should study which operations can corrupt your data.**  
-    
-    For example, these both have the same bits:  
-
-    | `int64_t` | `uint64_t`           |
-    | --------- | -------------------- |
-    | -1        | 18446744073709551615 |
-
-    Adding 1 to them would reflect in different values:    
-
-    | `int64_t` | `uint64_t`           |
-    | --------- | -------------------- |
-    | 0         | 18446744073709551616 |
-
-    Reference: [godot-proposals/issues/9740](https://github.com/godotengine/godot-proposals/issues/9740#issuecomment-2484959346)  
-
-## Optional
-```c++ title="C++"
-std::optional<T>
-```
-
-```gdscript title="GDScript"
-Variant
-```
-
-1. Transform optional
-    - `std::optional<T>` => `Variant`
-
-??? warning "Rework needed"
-
-    As counterpart of C++ [`std::optional<T>`](https://en.cppreference.com/w/cpp/utility/optional), we use GDScript [`Variant`](https://docs.godotengine.org/en/stable/classes/class_variant.html). The idea was:  
-
-    | Type               | Possible Values       |
-    | ------------------ | --------------------- |
-    | `std::optional<T>` | `T` or `std::nullopt` |
-    | `Variant`          | `T` or `null`         |
-
-    This design has a problem... What if `T` is actually a pointer? For example:  
-
-    ```c++ title="C++"
-    std::optional<int*> f(int mode) {
-        if (mode == 0)
-            return std::nullopt;
-
-        if (mode == 1)
-            return nullptr;
-
-        static int x = 42;
-        return &x;
-    }
-    ```
-
-    Now we can't see the difference between "the value is null" and "there is no value".  
-
-    | Return             | Converted to          |
-    | ------------------ | --------------------- |
-    | `std::nullopt`     | `null`                |
-    | `nullptr`          | `null`                |
-    | `T`                | `T`                   |
-
-    
-    To solve this I would need to create another class, to actually represent `std::optional<T>`.  
-
 ## Lambda Function
 ```c++ title="C++"
 [](auto message, auto severity) {
@@ -327,13 +247,7 @@ func(message, severity):
     pass
 ```
 
-1. Transform scope block
-    - `{}` => `\t`
-2. Transform variables
-    - `auto message` => `message`
-    - `auto severity` => `severity`
-3. Transform function declaration
-    - `[](...)` => `func(...)`
+---
 
 ```c++ title="C++"
 [](std::string message, discordpp::LoggingSeverity severity) {
@@ -346,13 +260,7 @@ func(message: String, severity: DiscordLoggingSeverity.Enum):
     pass
 ```
 
-1. Transform scope block
-    - `{}` => `\t`
-2. Transform variables
-    - `std::string message` => `message: String`
-    - `discordpp::LoggingSeverity severity` => `severity: DiscordLoggingSeverity.Enum`
-3. Transform function declaration
-    - `[](...)` => `func(...)`
+---
 
 ```c++ title="C++"
 [client](auto message, auto severity) {
@@ -365,11 +273,3 @@ func(message: String, severity: DiscordLoggingSeverity.Enum):
     pass
 ).bind(client)
 ```
-
-1. Transform scope block
-    - `{}` => `\t`
-2. Transform variables
-    - `auto message` => `message`
-    - `auto severity` => `severity`
-3. Transform function declaration with capture
-    - `[...](...)` => `(func(...)).bind(...)`
