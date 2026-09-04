@@ -1,5 +1,5 @@
 ---
-icon: lucide/mic-vocal
+icon: lucide/party-popper
 ---
 
 # Lobbies
