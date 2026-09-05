@@ -3,6 +3,13 @@ icon: lucide/scroll
 ---
 
 # Logging
+!!! warning
+	Prerequisites:
+
+	- [Core](core.md)
+
+	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
+
 One of the first things you should do is add a log callback, otherwise you will never know when something goes wrong with your client.  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18-21"

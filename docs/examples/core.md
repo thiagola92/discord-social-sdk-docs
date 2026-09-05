@@ -3,6 +3,12 @@ icon: lucide/cpu
 ---
 
 # Core
+!!! warning
+	Prerequisites:
+
+	- [Access](../access.md)
+	- [Installation](../installation.md)
+
 This is the minimum that you will need for every single example:  
 
 ```gdscript title="GDScript"
@@ -24,9 +30,9 @@ func _process(_delta: float) -> void:
 
 Every step is very important:  
 
-- [x] Create client to interact with Discord
-- [x] Identifying yourself to the client
-- [x] Run pending callbacks every frame
+- Create client to interact with Discord
+- Identifying yourself to the client
+- Run pending callbacks every frame
 
 ## References
 - [Run Callbacks](https://docs.discord.com/developers/discord-social-sdk/getting-started/using-c++#step-7-run-callbacks)

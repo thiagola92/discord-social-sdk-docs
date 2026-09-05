@@ -4,14 +4,10 @@ icon: lucide/rocket
 
 # Get Started
 !!! warning
+	Prerequisites:
 
-    Before starting, you need to follow 3 steps from [*Getting Started with C++*](https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++):  
-
-    - Step 1: Create a Discord Developer Team.  
-    - Step 2: Create a Discord Application.  
-    - Step 3: Enable Discord Social SDK for Your App.  
-
-    That's it, you don't need any other step to start using the GDExtension in GDScript.  
+	- [Access](../access.md)
+	- [Installation](../installation.md)
 
 ## Usage
 This GDExtension is a wrapper around the C++ SDK, which means that each GDScript method it's just calling the C++ counterpart.  
@@ -240,5 +236,4 @@ Discord understand their methods better than me so instead of giving you a `Ctrl
 
     --- 
 
-    We attempt to follow [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html), so you can probably guess the names of methods, properties, enums, methods, params...  
-
+    We attempt to follow [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html), so you can probably guess the names of methods, properties, enums, methods, params...

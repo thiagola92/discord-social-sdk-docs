@@ -4,11 +4,11 @@ icon: lucide/link
 
 # Account Linking
 !!! warning
+	Prerequisites:
 
-	I highly recommend you to setup [Logging](logging.md) and [Status](status.md) before linking.  
-	
-	- Logging will notify you about problems
-	- Status will notify when the websocket is ready
+	- [Core](core.md)
+
+	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
 ## From your game
 Linking the user account to your application require the user permission, so we will need to provide details when requesting permission. We will use `DiscordAuthorizationArgs` for this.  

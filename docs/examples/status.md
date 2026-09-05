@@ -4,9 +4,15 @@ icon: lucide/ethernet-port
 
 # Status
 !!! warning
+	Prerequisites:
 
-    This refers to the status of the internal websocket that the SDK uses to communicate with Discord.  
-    Do not confuse this with the user status (online, offline, busy, ...).   
+	- [Core](core.md)
+
+	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
+
+!!! note
+	This refers to the status of the internal websocket that the SDK uses to communicate with Discord.  
+	Do not confuse this with the user status (online, offline, busy, ...).   
 
 Monitoring the status of your connection with the Discord is important because some Discord methods only works when the status is `READY`.  
 
