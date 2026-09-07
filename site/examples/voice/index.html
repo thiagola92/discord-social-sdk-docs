@@ -1094,6 +1094,184 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#createjoin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create/Join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Controls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specific-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Specific Call
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All Calls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audio-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audio Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leave
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specific-call_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Specific Call
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-calls_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All Calls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#participant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Participant
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Settings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Import Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fetch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changes-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changes Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1175,11 +1353,962 @@
 <p class="admonition-title">Warning</p>
 <p>Prerequisites:</p>
 <ul>
-<li><a href="../status/">Status</a></li>
 <li><a href="../lobbies/">Lobbies</a></li>
 </ul>
 <p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
 </div>
+<h2 id="createjoin">Create/Join</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+</span><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once you join, you are officially in a voice chat!  </p>
+<p>Unless you mute, your microphone input will be captured and sent to others.  </p>
+</div>
+<h2 id="controls">Controls</h2>
+<p>We can manipulate the voice settings for a specific call or for all calls.  </p>
+<h3 id="specific-call">Specific Call</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="hll"><span class="k">var</span><span class="w"> </span><span class="n">target_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654323109876543</span>
+</span>
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">        </span><span class="c1"># Let&#39;s give a second to simulate interacting from anywhere in your code.</span>
+</span><span class="hll"><span class="w">        </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">_on_call_started</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">))</span>
+</span><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_call_started</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_mute</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_deaf</span><span class="p">(</span><span class="bp">false</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_participant_volume</span><span class="p">(</span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_vad_threshold</span><span class="p">(</span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">30.0</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="all-calls">All Calls</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">target_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654323109876543</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># Let&#39;s give a second to simulate interacting from anywhere in your code.</span>
+<span class="w">        </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">_on_call_started</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">))</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_call_started</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_mute</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_deaf</span><span class="p">(</span><span class="bp">false</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_participant_volume</span><span class="p">(</span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_vad_threshold</span><span class="p">(</span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">30.0</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_self_mute_all</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_input_volume</span><span class="p">(</span><span class="mf">75.0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_output_volume</span><span class="p">(</span><span class="mf">120.0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_threshold</span><span class="p">(</span><span class="o">-</span><span class="mf">60.0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_callback</span><span class="p">(</span><span class="n">_on_audio_crossing_threshold</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_suppression</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_echo_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_automatic_gain_control</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll">
+</span><span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_crossing_threshold</span><span class="p">(</span><span class="n">input_detected</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">input_detected</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔈 Mic appears to be silent — check your device settings.&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔊 Mic is receiving audio again&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="audio-processing">Audio Processing</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While the SDK provide ways to manipulate audio when received, the GDExtension still doesn't support it.  </p>
+<p>Changing the values of the variables has no effect in the audio.  </p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">target_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654323109876543</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call_with_audio_callbacks</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_audio_received</span><span class="p">,</span><span class="w"> </span><span class="n">_on_audio_captured</span><span class="p">)</span>
+</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_received</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">],</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">out_should_mute</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="c1"># Changing &quot;data&quot; doesn&#39;t reflect into SDK.</span>
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">():</span>
+</span><span class="hll"><span class="w">        </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">0.5</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="c1"># Changing &quot;out_should_mute&quot; doesn&#39;t reflect into SDK.</span>
+</span><span class="hll"><span class="w">    </span><span class="n">out_should_mute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">true</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">total_num_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">channels</span>
+</span><span class="hll">
+</span><span class="hll">
+</span><span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_captured</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">],</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="leave">Leave</h2>
+<h3 id="specific-call_1">Specific Call</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">target_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654323109876543</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># Let&#39;s give a second to simulate interacting from anywhere in your code.</span>
+<span class="w">        </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">_on_call_started</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">))</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_call_started</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_mute</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_deaf</span><span class="p">(</span><span class="bp">false</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_participant_volume</span><span class="p">(</span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_vad_threshold</span><span class="p">(</span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">30.0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_self_mute_all</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_input_volume</span><span class="p">(</span><span class="mf">75.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_output_volume</span><span class="p">(</span><span class="mf">120.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_threshold</span><span class="p">(</span><span class="o">-</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_callback</span><span class="p">(</span><span class="n">_on_audio_crossing_threshold</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_suppression</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_echo_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_automatic_gain_control</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">end_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">,</span><span class="w"> </span><span class="n">_on_call_ended</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_audio_crossing_threshold</span><span class="p">(</span><span class="n">input_detected</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">input_detected</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔈 Mic appears to be silent — check your device settings.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔊 Mic is receiving audio again&quot;</span><span class="p">)</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_call_ended</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔇 Call ended successfully&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="all-calls_1">All Calls</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">target_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654323109876543</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">start_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎤 Voice call operation initiated...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ℹ️ Already in this voice channel&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># Let&#39;s give a second to simulate interacting from anywhere in your code.</span>
+<span class="w">        </span><span class="n">get_tree</span><span class="p">()</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">_on_call_started</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">))</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_call_started</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_call</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">call</span><span class="p">:</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_mute</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_self_deaf</span><span class="p">(</span><span class="bp">false</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_participant_volume</span><span class="p">(</span><span class="n">target_id</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="o">.</span><span class="n">set_vad_threshold</span><span class="p">(</span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">30.0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_self_mute_all</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_input_volume</span><span class="p">(</span><span class="mf">75.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_output_volume</span><span class="p">(</span><span class="mf">120.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_threshold</span><span class="p">(</span><span class="o">-</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_no_audio_input_callback</span><span class="p">(</span><span class="n">_on_audio_crossing_threshold</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_suppression</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_echo_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_automatic_gain_control</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_noise_cancellation</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
+
+<span class="hll"><span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">end_calls</span><span class="p">(</span><span class="n">_on_calls_ended</span><span class="p">)</span>
+</span>
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_audio_crossing_threshold</span><span class="p">(</span><span class="n">input_detected</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">input_detected</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔈 Mic appears to be silent — check your device settings.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔊 Mic is receiving audio again&quot;</span><span class="p">)</span>
+
+
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_calls_ended</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔇 All calls ended successfully&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="check">Check</h2>
+<h3 id="call">Call</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">lobby</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_lobby_handle</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">lobby</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordLobbyHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">call_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lobby</span><span class="o">.</span><span class="n">get_call_info_handle</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">call_info</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordCallInfoHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">participants</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call_info</span><span class="o">.</span><span class="n">get_participants</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Active call with </span><span class="si">%s</span><span class="s2"> participants&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">participants</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</span><span class="hll"><span class="w">            </span><span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No active voice call in this lobby&quot;</span><span class="p">)</span>
+</span><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="participant">Participant</h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DiscordClient</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_application_id</span><span class="p">(</span><span class="n">application_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">client</span><span class="o">.</span><span class="n">set_status_changed_callback</span><span class="p">(</span><span class="n">_on_status_changed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Discord</span><span class="o">.</span><span class="n">run_callbacks</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_status_changed</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientError</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span><span class="w"> </span><span class="n">_error_detail</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enum_str</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Discord</span><span class="o">.</span><span class="n">enum_to_string</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status changed to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">enum_str</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DiscordClientStatus</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">client</span><span class="o">.</span><span class="n">create_or_join_lobby</span><span class="p">(</span><span class="s2">&quot;your-unique-lobby-secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="n">_on_joined_lobby</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordClientResult</span><span class="p">,</span><span class="w"> </span><span class="n">lobby_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">successful</span><span class="p">():</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎮 Successfully joined lobby!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">lobby</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">get_lobby_handle</span><span class="p">(</span><span class="n">lobby_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">lobby</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordLobbyHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">call_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lobby</span><span class="o">.</span><span class="n">get_call_info_handle</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">call_info</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordCallInfoHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">participants</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call_info</span><span class="o">.</span><span class="n">get_participants</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">participant_id</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">participants</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                    </span><span class="k">var</span><span class="w"> </span><span class="n">voice_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call_info</span><span class="o">.</span><span class="n">get_voice_state_handle</span><span class="p">(</span><span class="n">participant_id</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="n">voice_state</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DiscordVoiceStateHandle</span><span class="p">:</span>
+</span><span class="hll"><span class="w">                        </span><span class="k">var</span><span class="w"> </span><span class="n">is_muted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">voice_state</span><span class="o">.</span><span class="n">self_mute</span><span class="p">()</span>
+</span><span class="hll"><span class="w">                        </span><span class="k">var</span><span class="w"> </span><span class="n">is_deafened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">voice_state</span><span class="o">.</span><span class="n">self_deaf</span><span class="p">()</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">                        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Participant </span><span class="si">%s</span><span class="s2"> - Muted: </span><span class="si">%s</span><span class="s2">, Deafened: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span>
+</span><span class="hll"><span class="w">                            </span><span class="n">participant_id</span><span class="p">,</span>
+</span><span class="hll"><span class="w">                            </span><span class="s2">&quot;Yes&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_muted</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;No&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">                            </span><span class="s2">&quot;Yes&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_deafened</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;No&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">                        </span><span class="p">])</span>
+</span><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="import-settings">Import Settings</h2>
+<p>Instead of choosing a default voice settings or making the user adjust, we can import the user voice settings from the Discord client.  </p>
+<h3 id="fetch">Fetch</h3>
+<h3 id="changes-notification">Changes Notification</h3>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-voice-chat">Managing Voice Chat</a></li>

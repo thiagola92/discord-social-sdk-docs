@@ -11,7 +11,7 @@ icon: lucide/users
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
-## Get all relationships
+## Get all
 The best way to get all relationships is to listen for status changes and wait for the status `READY`.  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="24 27-86"
@@ -103,7 +103,7 @@ func _on_status_ready() -> void:
 			print(display_str)
 ```
 
-## Get relationship changes
+## Get changes
 If you already got all the relationships once, there is no reason to get everything again so it's better just to listen for changes.  
 
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18-38"

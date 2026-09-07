@@ -127,8 +127,8 @@ func _on_activity_invite_accepted(result: DiscordClientResult, join_secret: Stri
 		print("❌ Activity Invite accept failed")
 ```
 
-## Joined
-You can be notified whenever the user joined a party.  
+## Joined Notification
+Your game can be notified whenever the user joined a party.  
 
 The advantage of configuring this, is that you will be notified whenever the user accept through the SDK (e.g. `client.accept_activity_invite()`) or Discord client (e.g. direct message).  
 

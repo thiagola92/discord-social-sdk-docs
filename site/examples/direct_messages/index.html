@@ -1094,22 +1094,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#sending" class="md-nav__link">
+  <a href="#send" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sending
+        Send
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sending">
+    <nav class="md-nav" aria-label="Send">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supressing-double-notifications" class="md-nav__link">
+  <a href="#supress-double-notification" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supressing double notifications
+        Supress Double Notification
       
     </span>
   </a>
@@ -1122,10 +1122,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#receiving" class="md-nav__link">
+  <a href="#receive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Receiving
+        Receive
       
     </span>
   </a>
@@ -1222,7 +1222,7 @@
 </ul>
 <p>Any code from the prerequisites can be <strong>omitted</strong> to make it easier to read. If you do want the complete code, look at the <a href="https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples">repository examples</a>.  </p>
 </div>
-<h2 id="sending">Sending</h2>
+<h2 id="send">Send</h2>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1293,11 +1293,11 @@
 </span><span class="hll"><span class="w">    </span><span class="k">else</span><span class="p">:</span>
 </span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to send message: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
 </span></code></pre></div></td></tr></table></div>
-<h3 id="supressing-double-notifications">Supressing double notifications</h3>
+<h3 id="supress-double-notification">Supress Double Notification</h3>
 <p>Tell Discord client that you are already showing the chat so it shouldn't notificate the user about new messages (don't forget to turn off when not showing chat anymore):  </p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">set_showing_chat</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="receiving">Receiving</h2>
+<h2 id="receive">Receive</h2>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>

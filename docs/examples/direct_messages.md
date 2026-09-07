@@ -12,7 +12,7 @@ icon: lucide/message-circle-more
 
 	Any code from the prerequisites can be **omitted** to make it easier to read. If you do want the complete code, look at the [repository examples](https://github.com/thiagola92/discord-social-sdk/tree/main/demo/examples).  
 
-## Sending
+## Send
 ```gdscript title="GDScript" linenums="1" hl_lines="6 26-28 31-35"
 extends Node
 
@@ -51,14 +51,14 @@ func _on_message_sent(result: DiscordClientResult, message_id: int) -> void:
 		print("❌ Failed to send message: %s" % result.error())
 ```
 
-### Supressing double notifications
+### Supress Double Notification
 Tell Discord client that you are already showing the chat so it shouldn't notificate the user about new messages (don't forget to turn off when not showing chat anymore):  
 
 ```gdscript linenums="1"
 client.set_showing_chat(true)
 ```
 
-## Receiving
+## Receive
 ```gdscript title="GDScript" linenums="1" hl_lines="11 18-22"
 extends Node
 
