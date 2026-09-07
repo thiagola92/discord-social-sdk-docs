@@ -52,7 +52,7 @@ cp -r /tmp/discord_social_sdk/lib/release/*.dylib lib/macos/
 cp -r /tmp/discord_social_sdk/bin/release/*.dll lib/windows/
 cp -r /tmp/discord_social_sdk/lib/release/*.lib lib/windows/
 cp -r /tmp/discord_social_sdk/include/* include/
-unzip lib/android/discord_partner_sdk.aar -d lib/android/aar
+unzip -o lib/android/discord_partner_sdk.aar -d lib/android/aar
 rm -rf /tmp/discord_social_sdk
 
 # Generate GDExtension API files.
