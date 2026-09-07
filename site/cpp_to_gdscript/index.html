@@ -1558,30 +1558,17 @@
 <p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
 </details>
 <h2 id="lambda-function">Lambda Function</h2>
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">//</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">):</span>
-<span class="w">    </span><span class="k">pass</span>
-</code></pre></div>
-<hr />
-<div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">discordpp</span><span class="o">::</span><span class="n">LoggingSeverity</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">//</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordLoggingSeverity</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="k">pass</span>
-</code></pre></div>
-<hr />
+<p>This is a lambda function in C++:<br />
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">//</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
+<p>In GDScript it would be something like:<br />
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="p">(</span><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">client</span><span class="p">):</span>
 <span class="w">    </span><span class="k">pass</span>
 <span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></p>
+<p>In ours examples, <code>client</code> is a class property so the binding is unnecessary.  </p>
 
 
 

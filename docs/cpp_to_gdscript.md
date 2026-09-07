@@ -236,40 +236,18 @@ icon: lucide/arrow-right-left
     Note how `id` is not UPPER_CASE, this prevents conflicting with true constants.  
 
 ## Lambda Function
-```c++ title="C++"
-[](auto message, auto severity) {
-  //
-}
-```
-
-```gdscript title="GDScript"
-func(message, severity):
-    pass
-```
-
----
-
-```c++ title="C++"
-[](std::string message, discordpp::LoggingSeverity severity) {
-  //
-}
-```
-
-```gdscript title="GDScript"
-func(message: String, severity: DiscordLoggingSeverity.Enum):
-    pass
-```
-
----
-
+This is a lambda function in C++:  
 ```c++ title="C++"
 [client](auto message, auto severity) {
   //
 }
 ```
 
+In GDScript it would be something like:  
 ```gdscript title="GDScript"
 (func(message, severity, client):
     pass
 ).bind(client)
 ```
+
+In ours examples, `client` is a class property so the binding is unnecessary.  
