@@ -526,8 +526,63 @@ func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
 Instead of choosing a default voice settings or making the user adjust, we can import the user voice settings from the Discord client.  
 
 ### Fetch
+```gdscript title="GDScript" linenums="1" hl_lines="11 18-32"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
+func _ready() -> void:
+	client.set_application_id(application_id)
+	client.get_voice_settings(_on_voice_settings)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
+
+
+func _on_voice_settings(result: DiscordClientResult, settings: DiscordVoiceSettings) -> void:
+	if not result.successful():
+		print("❌ Failed to fetch voice settings: %s" % result.error())
+		return
+
+	print("Self mute: %s" % settings.self_mute())
+	print("Self deaf: %s" % settings.self_deaf())
+	print("Input volume: %s" % settings.input_volume()) # 0-100
+	print("Output volume: %s" % settings.output_volume()) # 0-200
+
+	# input_mode() is either DiscordVoiceInputModeType.VOICE_ACTIVITY or
+	# DiscordVoiceInputModeType.PUSH_TO_TALK
+	if settings.input_mode() == DiscordVoiceInputModeType.PUSH_TO_TALK:
+		# ptt_key() is a display string, e.g. "SHIFT + F", empty if unbound
+		print("Push-to-talk key: %s" % settings.ptt_key())
+```
 
 ### Changes Notification
+```gdscript title="GDScript" linenums="1" hl_lines="11 18-19"
+extends Node
+
+
+var application_id: int = 123456789012345678
+
+var client := DiscordClient.new()
+
+
+func _ready() -> void:
+	client.set_application_id(application_id)
+	client.set_voice_settings_updated_callback(_on_voice_settings_updated)
+
+
+func _process(_delta: float) -> void:
+	Discord.run_callbacks()
+
+
+func _on_voice_settings_updated(settings: DiscordVoiceSettings) -> void:
+	print("🔄 Voice settings updated - self mute: %s" % settings.self_mute())
+```
 
 ## References
 - [Managing Voice Chat](https://docs.discord.com/developers/discord-social-sdk/development-guides/managing-voice-chat)
