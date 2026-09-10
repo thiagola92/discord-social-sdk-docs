@@ -13,7 +13,7 @@ icon: lucide/link
 ## From your game
 Linking the user account to your application require the user permission, so we will need to provide details when requesting permission. We will use `DiscordAuthorizationArgs` for this.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="10 12-14"
+```gdscript title="GDScript" linenums="1" hl_lines="10 12-13"
 extends Node
 
 
@@ -27,7 +27,6 @@ func _ready() -> void:
 	
 	args.set_client_id(application_id)
 	args.set_scopes(DiscordClient.get_default_presence_scopes())
-	args.set_code_challenge(code_verifier.challenge())
 
 
 func _process(_delta: float) -> void:
@@ -44,7 +43,7 @@ func _process(_delta: float) -> void:
 
 I will not cover security details, so you just need to know that later we will use `DiscordAuthorizationCodeVerifier` to verify the response from Discord.  
 
-```gdscript title="GDScript" linenums="1" hl_lines="8 13"
+```gdscript title="GDScript" linenums="1" hl_lines="8 13 17"
 extends Node
 
 
