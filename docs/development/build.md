@@ -7,7 +7,7 @@ icon: lucide/hammer
 These instructions show how to build the GDExtension for Godot version `4.4` on Linux.  
 
 !!! note "Version compatibility"
-    GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any version above it.  
+    GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for `4.4` should work in any minor version above it (`4.5`, `4.6`, `4.7`, ...).  
 
     The opposite is not guaranteed. For example, version `4.7` changed how to use [`memnew(RefCounted)`](https://github.com/godotengine/godot/pull/111965).  
 
@@ -57,7 +57,7 @@ rm -rf /tmp/discord_social_sdk
 
 # Generate GDExtension API files.
 cd godot-cpp
-$GODOT --dump-extension-api
+$GODOT --headless --dump-extension-api
 scons custom_api_file=extension_api.json
 cd ..
 
@@ -68,7 +68,7 @@ python scripts/main.py --code
 scons custom_api_file=godot-cpp/extension_api.json
 
 # Open project, at least once, to be able to generate GDExtension documentation.
-$GODOT ./demo/project.godot
+$GODOT --headless --quit ./demo/project.godot
 
 # Generate GDExtension documentations.
 python scripts/main.py --docs

@@ -1196,7 +1196,7 @@
 <p>These instructions show how to build the GDExtension for Godot version <code>4.4</code> on Linux.  </p>
 <div class="admonition note">
 <p class="admonition-title">Version compatibility</p>
-<p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any version above it.  </p>
+<p>GDExtensions targeting an earlier version of Godot should work in later minor versions, so GDExtension for <code>4.4</code> should work in any minor version above it (<code>4.5</code>, <code>4.6</code>, <code>4.7</code>, ...).  </p>
 <p>The opposite is not guaranteed. For example, version <code>4.7</code> changed how to use <a href="https://github.com/godotengine/godot/pull/111965"><code>memnew(RefCounted)</code></a>.  </p>
 <p>This means that our Python script generate an invalid C++ code for versions &gt;= <code>4.7</code>, which block us from building the GDExtension with newer versions.  </p>
 <table>
@@ -1250,7 +1250,7 @@ rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/discord_social_sdk
 
 <span class="c1"># Generate GDExtension API files.</span>
 <span class="nb">cd</span><span class="w"> </span>godot-cpp
-<span class="nv">$GODOT</span><span class="w"> </span>--dump-extension-api
+<span class="nv">$GODOT</span><span class="w"> </span>--headless<span class="w"> </span>--dump-extension-api
 scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>extension_api.json
 <span class="nb">cd</span><span class="w"> </span>..
 
@@ -1261,7 +1261,7 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--code
 scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 
 <span class="c1"># Open project, at least once, to be able to generate GDExtension documentation.</span>
-<span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot
+<span class="nv">$GODOT</span><span class="w"> </span>--headless<span class="w"> </span>--quit<span class="w"> </span>./demo/project.godot
 
 <span class="c1"># Generate GDExtension documentations.</span>
 python<span class="w"> </span>scripts/main.py<span class="w"> </span>--docs
