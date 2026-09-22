@@ -1212,23 +1212,6 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> <
 
 <span class="c1"># Mingw64.</span>
 sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>mingw64-gcc-c++<span class="p">;</span>
-
-<span class="c1"># OpenJDK.</span>
-sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>java-latest-openjdk-devel<span class="p">;</span>
-
-<span class="c1"># Android SDK.</span>
-mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk<span class="p">;</span>
-curl<span class="w"> </span>-fl<span class="w"> </span>https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip<span class="w"> </span>-o<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
-unzip<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
-mv<span class="w"> </span>cmdline-tools<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk<span class="p">;</span>
-mkdir<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest
-mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/bin<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
-mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/lib<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
-mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/NOTICE.txt<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
-mv<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/source.properties<span class="w"> </span><span class="nv">$HOME</span>/Android/Sdk/comdline-tools/latest<span class="p">;</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PATH=\&quot;\$HOME/Android/SDK/cmdline-tools/latest/bin:\$PATH\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$HOME</span>/.bashrc<span class="p">;</span>
-sdkmanager<span class="w"> </span>--sdk_root<span class="o">=</span><span class="nv">$HOME</span>/Android/Sdk<span class="w"> </span><span class="s2">&quot;platform-tools&quot;</span><span class="w"> </span><span class="s2">&quot;build-tools;35.0.1&quot;</span><span class="w"> </span><span class="s2">&quot;platforms;android-35&quot;</span><span class="w"> </span><span class="s2">&quot;cmdline-tools;latest&quot;</span><span class="w"> </span><span class="s2">&quot;cmake;3.10.2.4988404&quot;</span><span class="w"> </span><span class="s2">&quot;ndk;28.1.13356709&quot;</span>
-rm<span class="w"> </span>commandlinetools.zip<span class="p">;</span>
 </code></pre></div>
 
 

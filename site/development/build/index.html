@@ -1238,14 +1238,7 @@ git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<spa
 
 <span class="c1"># Unzip libraries and headers to correct directories.</span>
 unzip<span class="w"> </span>DiscordSocialSdk*.zip<span class="w"> </span>-d<span class="w"> </span>/tmp/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/lib/release/*.aar<span class="w"> </span>lib/android/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/lib/release/*.xcframework<span class="w"> </span>lib/ios/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/lib/release/*.so<span class="w"> </span>lib/linux/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/lib/release/*.dylib<span class="w"> </span>lib/macos/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/bin/release/*.dll<span class="w"> </span>lib/windows/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/lib/release/*.lib<span class="w"> </span>lib/windows/
-cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/include/*<span class="w"> </span>include/
-unzip<span class="w"> </span>-o<span class="w"> </span>lib/android/discord_partner_sdk.aar<span class="w"> </span>-d<span class="w"> </span>lib/android/aar
+cp<span class="w"> </span>-r<span class="w"> </span>/tmp/discord_social_sdk/*<span class="w"> </span>sdk/
 rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/discord_social_sdk
 
 <span class="c1"># Generate GDExtension API files.</span>
@@ -1269,7 +1262,7 @@ python<span class="w"> </span>scripts/main.py<span class="w"> </span>--docs
 <span class="c1"># Link documentation to GDExtension library.</span>
 scons<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>godot-cpp/extension_api.json
 
-<span class="c1"># Open project (may need to open two times).</span>
+<span class="c1"># Open project (may need to open two times for the documentation to load).</span>
 <span class="nv">$GODOT</span><span class="w"> </span>./demo/project.godot
 </code></pre></div>
 <div class="admonition note">

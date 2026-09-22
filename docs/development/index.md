@@ -33,10 +33,8 @@ For example, when you pass a [`String`](https://docs.godotengine.org/en/stable/c
 │   └── Project classes documentation
 ├── godot-cpp/
 │   └── C++ bindings for GDExtension API
-├── include/
-│   └── Discord headers
-├── lib/
-│   └── Discord libs
+├── sdk/
+│   └── Discord SDK files
 ├── scripts/
 │   └── Python scripts
 └── src/

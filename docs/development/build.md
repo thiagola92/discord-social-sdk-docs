@@ -45,14 +45,7 @@ cd discord-social-sdk
 
 # Unzip libraries and headers to correct directories.
 unzip DiscordSocialSdk*.zip -d /tmp/
-cp -r /tmp/discord_social_sdk/lib/release/*.aar lib/android/
-cp -r /tmp/discord_social_sdk/lib/release/*.xcframework lib/ios/
-cp -r /tmp/discord_social_sdk/lib/release/*.so lib/linux/
-cp -r /tmp/discord_social_sdk/lib/release/*.dylib lib/macos/
-cp -r /tmp/discord_social_sdk/bin/release/*.dll lib/windows/
-cp -r /tmp/discord_social_sdk/lib/release/*.lib lib/windows/
-cp -r /tmp/discord_social_sdk/include/* include/
-unzip -o lib/android/discord_partner_sdk.aar -d lib/android/aar
+cp -r /tmp/discord_social_sdk/* sdk/
 rm -rf /tmp/discord_social_sdk
 
 # Generate GDExtension API files.
@@ -76,7 +69,7 @@ python scripts/main.py --docs
 # Link documentation to GDExtension library.
 scons custom_api_file=godot-cpp/extension_api.json
 
-# Open project (may need to open two times).
+# Open project (may need to open two times for the documentation to load).
 $GODOT ./demo/project.godot
 ```
 
