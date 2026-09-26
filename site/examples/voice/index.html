@@ -1690,11 +1690,6 @@
 </span><span class="hll"><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔊 Mic is receiving audio again&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="audio-processing">Audio Processing</h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>While the SDK provide ways to manipulate audio when received, the GDExtension still doesn't support it.  </p>
-<p>Changing the values of the variables has no effect in the audio.  </p>
-</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GDScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1749,7 +1744,15 @@
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
 
 
 <span class="k">var</span><span class="w"> </span><span class="n">application_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456789012345678</span>
@@ -1791,18 +1794,26 @@
 <span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Failed to join lobby: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">())</span>
 
 
-<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_received</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">],</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">out_should_mute</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-</span><span class="hll"><span class="w">    </span><span class="c1"># Changing &quot;data&quot; doesn&#39;t reflect into SDK.</span>
+<span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_received</span><span class="p">(</span>
+</span><span class="hll"><span class="w">    </span><span class="n">user_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordInt16Array</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">out_should_mute</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordBoolRef</span>
+</span><span class="hll"><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">():</span>
-</span><span class="hll"><span class="w">        </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">0.5</span>
+</span><span class="hll"><span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
 </span><span class="hll">
-</span><span class="hll"><span class="w">    </span><span class="c1"># Changing &quot;out_should_mute&quot; doesn&#39;t reflect into SDK.</span>
-</span><span class="hll"><span class="w">    </span><span class="n">out_should_mute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">true</span>
-</span><span class="hll">
-</span><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">total_num_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">channels</span>
+</span><span class="hll"><span class="w">    </span><span class="n">out_should_mute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">false</span><span class="p">)</span>
 </span><span class="hll">
 </span><span class="hll">
-</span><span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_captured</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">],</span><span class="w"> </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span class="hll"><span class="k">func</span><span class="w"> </span><span class="n">_on_audio_captured</span><span class="p">(</span>
+</span><span class="hll"><span class="w">    </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">DiscordInt16Array</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">samples_per_channel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">sample_rate</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="n">channels</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span>
+</span><span class="hll"><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="leave">Leave</h2>

@@ -46,9 +46,9 @@ icon: lucide/arrow-right-left
 | Bool             | `bool`                      | `bool`                                       |
 | Integer          | `int8_t`<br>`uint8_t`<br>`int16_t`<br>`uint16_t`<br>`int32_t`<br>`uint32_t`<br>`int64_t`<br>`uint64_t` | `int` |
 | Float            | `float`                     | `float`                                      |
-| String           | `std::string`               | `String`                                     |
+| String           | `char *`<br>`std::string`   | `String`                                     |
 
-??? danger "Operating over integers is dangerous"
+??? danger "Is dangerous operating over integers"
 
     Godot only works with **signed 64-bit integer**, so we always convert integers to `int64_t` when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems **if** you operated over the integer.  
     
@@ -95,7 +95,7 @@ icon: lucide/arrow-right-left
 
         **Note**: This doesn't prevent you from corrupting data when operating over it.  
 
-## Complex Types
+## Template Types
 |                  | C++                         | GDScript                                     |
 | ---------------- | --------------------------- | -------------------------------------------- |
 | Vector           | `std::vector<T>`            | `Array[T]`                                   |
@@ -136,6 +136,12 @@ icon: lucide/arrow-right-left
 
     
     To solve this I would need to create a class to represent `std::optional<T>`.  
+
+## Indirect Types
+|                  | C++                         | GDScript                                     |
+| ---------------- | --------------------------- | -------------------------------------------- |
+| Array            | `int16_t *`                 | `DiscordInt16Array`                          |
+| Reference        | `bool &`                    | `DiscordBoolRef`                             |
 
 ## Enum
 |                  | C++                                | GDScript                                     |
@@ -236,18 +242,16 @@ icon: lucide/arrow-right-left
     Note how `id` is not UPPER_CASE, this prevents conflicting with true constants.  
 
 ## Lambda Function
-This is a lambda function in C++:  
 ```c++ title="C++"
 [client](auto message, auto severity) {
   //
 }
 ```
 
-In GDScript it would be something like:  
 ```gdscript title="GDScript"
 (func(message, severity, client):
     pass
 ).bind(client)
 ```
 
-In ours examples, `client` is a class property so the binding is unnecessary.  
+In ours documentation examples, `client` is a class property so the binding is unnecessary.  

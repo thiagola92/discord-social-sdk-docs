@@ -9,10 +9,10 @@ icon: lucide/rocket
 	- [Access](../access.md)
 	- [Installation](../installation.md)
 
-## Usage
+## How it works
 This GDExtension is a wrapper around the C++ SDK, which means that each GDScript method it's just calling the C++ counterpart.  
 
-All that you need to do is read the official C++ documentation and convert the code to GDScript. For example, I was able to convert their conclusion code from [*Getting Started with C++*](https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++) to GDScript:  
+This means that you could read the official C++ documentation and convert the code to GDScript. For example, this is their conclusion code from [*Getting Started with C++*](https://discord.com/developers/docs/discord-social-sdk/getting-started/using-c++) converted to GDScript:  
 
 === "C++"
 
@@ -118,8 +118,8 @@ All that you need to do is read the official C++ documentation and convert the c
 
         // Keep application running to allow SDK to receive events and callbacks
         while (running) {
-        discordpp::RunCallbacks();
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            discordpp::RunCallbacks();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
 
         return 0;
@@ -214,15 +214,9 @@ All that you need to do is read the official C++ documentation and convert the c
             client.connect_discord()
     ```
 
-## That's it!
-- Read the official documentation
-- Convert the C++ examples for GDScript
+The advantage of reading their official documentation and converting C++ to GDScript is that they explain in details their SDK.  
 
-At first it may sound confuse when I tell you to "convert" C++ to GDSCript, but get easier once you see the [examples](examples/index.md). When in doubt, you can even look at section [`C++` to `GDScript`](cpp_to_gdscript.md).  
-
-> Why don't you write a good "Get Started"?
-
-Discord understand their methods better than me so instead of giving you a `Ctrl+C` or a worst explanation, I'm just going to point you to the right information.  
+Doing the convertion can be annoying, so this documentation includes a bunch of GDScript [examples](./examples/core/) to help you skip this part!  
 
 !!! tip
 

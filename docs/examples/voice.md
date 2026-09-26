@@ -192,12 +192,7 @@ func _on_audio_crossing_threshold(input_detected: bool) -> void:
 ```
 
 ## Audio Processing
-!!! warning
-	While the SDK provide ways to manipulate audio when received, the GDExtension still doesn't support it.  
-
-	Changing the values of the variables has no effect in the audio.  
-
-```gdscript title="GDScript" linenums="1" hl_lines="33 43-55"
+```gdscript title="GDScript" linenums="1" hl_lines="33 43-63"
 extends Node
 
 
@@ -240,18 +235,26 @@ func _on_joined_lobby(result: DiscordClientResult, lobby_id: int) -> void:
 		print("❌ Failed to join lobby: %s" % result.error())
 
 
-func _on_audio_received(user_id: int, data: Array[int], samples_per_channel: int, sample_rate: int, channels: int, out_should_mute: bool) -> void:
-	# Changing "data" doesn't reflect into SDK.
+func _on_audio_received(
+	user_id: int,
+	data: DiscordInt16Array,
+	samples_per_channel: int,
+	sample_rate: int,
+	channels: int,
+	out_should_mute: DiscordBoolRef
+) -> void:
 	for i in data.size():
-		data[i] *= 0.5
+		data.set_value(i, data.get_value(i) * 0.5)
 	
-	# Changing "out_should_mute" doesn't reflect into SDK.
-	out_should_mute = true
-	
-	var total_num_samples = samples_per_channel * channels
+	out_should_mute.set_value(false)
 
 
-func _on_audio_captured(data: Array[int], samples_per_channel: int, sample_rate: int, channels: int) -> void:
+func _on_audio_captured(
+	data: DiscordInt16Array,
+	samples_per_channel: int,
+	sample_rate: int,
+	channels: int
+) -> void:
 	pass
 ```
 

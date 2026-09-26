@@ -1125,10 +1125,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#complex-types" class="md-nav__link">
+  <a href="#template-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Complex Types
+        Template Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indirect-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indirect Types
       
     </span>
   </a>
@@ -1290,13 +1301,13 @@
 </tr>
 <tr>
 <td>String</td>
-<td><code>std::string</code></td>
+<td><code>char *</code><br><code>std::string</code></td>
 <td><code>String</code></td>
 </tr>
 </tbody>
 </table>
 <details class="danger">
-<summary>Operating over integers is dangerous</summary>
+<summary>Is dangerous operating over integers</summary>
 <p>Godot only works with <strong>signed 64-bit integer</strong>, so we always convert integers to <code>int64_t</code> when receiving from SDK. But when sending back to the SDK we have to convert it to the original type again, this can cause problems <strong>if</strong> you operated over the integer.  </p>
 <p>For example, these both have the same bits:  </p>
 <table>
@@ -1369,7 +1380,7 @@
 <p><strong>Note</strong>: This doesn't prevent you from corrupting data when operating over it.  </p>
 </details>
 </details>
-<h2 id="complex-types">Complex Types</h2>
+<h2 id="template-types">Template Types</h2>
 <table>
 <thead>
 <tr>
@@ -1454,6 +1465,28 @@
 </table>
 <p>To solve this I would need to create a class to represent <code>std::optional&lt;T&gt;</code>.  </p>
 </details>
+<h2 id="indirect-types">Indirect Types</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>C++</th>
+<th>GDScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Array</td>
+<td><code>int16_t *</code></td>
+<td><code>DiscordInt16Array</code></td>
+</tr>
+<tr>
+<td>Reference</td>
+<td><code>bool &amp;</code></td>
+<td><code>DiscordBoolRef</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="enum">Enum</h2>
 <table>
 <thead>
@@ -1558,17 +1591,15 @@
 <p>Note how <code>id</code> is not UPPER_CASE, this prevents conflicting with true constants.  </p>
 </details>
 <h2 id="lambda-function">Lambda Function</h2>
-<p>This is a lambda function in C++:<br />
 <div class="highlight"><span class="filename">C++</span><pre><span></span><code><span class="p">[</span><span class="n">client</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">severity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">//</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p>In GDScript it would be something like:<br />
+</code></pre></div>
 <div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><span class="p">(</span><span class="k">func</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">severity</span><span class="p">,</span><span class="w"> </span><span class="n">client</span><span class="p">):</span>
 <span class="w">    </span><span class="k">pass</span>
 <span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
-</code></pre></div></p>
-<p>In ours examples, <code>client</code> is a class property so the binding is unnecessary.  </p>
+</code></pre></div>
+<p>In ours documentation examples, <code>client</code> is a class property so the binding is unnecessary.  </p>
 
 
 
