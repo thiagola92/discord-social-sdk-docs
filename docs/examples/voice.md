@@ -1,5 +1,5 @@
 ---
-icon: lucide/mic-vocal
+icon: lucide/mic
 ---
 
 # Voice
